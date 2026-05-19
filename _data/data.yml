@@ -1,108 +1,92 @@
-name: John Doe
+name: Thanh Pham Cong
 support_dark_mode: true
 fork: true
 
 # Sidebar
 contact:
-  email: info@johndoe.com
-  github: johndoe
-  linkedin: johndoe
-  phone: 
-  gitlab: 
-  twitter: 
+  email: contact@peterpham.info.vn
+  github: Ranma-2000
+  linkedin: # Thêm link LinkedIn của bạn vào đây
+  phone: +84 328 214 469
+  website: peterpham.info.vn
 
 languages:
-  - idiom: English
-  - idiom: Russian
-  - idiom: French
+  - idiom: Vietnamese (Native)
+  - idiom: English (Fluent)
 
 education:
-  - degree: MSc in Informatics
-    time: 2014-2016
-    university: Ionian University
-
-  - degree: BSc in Computer Science
-    time: 2010-2014
-    university: Ionian University
+  - degree: BSc in Mechatronic Engineering
+    time: 2018-2023
+    university: University of Technology and Education
 
 skills:
-  - category: Backend
+  - category: AI & Development
     skill: 
-      - Go
-      - Rust
-  - category: Frontend
+      - Python
+      - Computer Vision
+      - Model Deployment
+      - C++
+  - category: Hardware & Mechatronics
     skill:
-      - React
-      - Typescript
-  - category: DevOps
+      - Edge Devices (Jetson Nano, RPi)
+      - Prototyping
+      - Inspection Systems
+      - 3D Printing
+  - category: Education & Management
     skill:
-      - Docker
-      - Kubernetes 
+      - STEM Curriculum Design
+      - Team Mentoring
+      - Operations Management
+      - Classroom Management
 
 # Profile
 profile: |
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-  fugiat nulla pariatur.
+  AI Engineer & Educator with a deep passion for bridging complex AI/Robotics concepts 
+  into accessible, high-impact learning experiences. Proven track record in 
+  solo-developing industrial mechatronics (9.0/9.0 Thesis) and designing 
+  effective STEM curricula. Committed to driving EdTech innovation.
 
 # Experience
 experience:
-  - role: Software Engineer
-    time: 2020-Present
-    company: Google
+  - role: Robotics Program Manager / Instructor
+    time: 2024-Present
+    company: Stars Academy
     details: |
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-      fugiat nulla pariatur.
+      - Orchestrated operations for 15 club-based classes with 600+ elementary students.
+      - Supervised and mentored 10+ instructors to ensure pedagogical and technical standards.
+      - Served as lead technical advisor for school robotics teams, leading them to municipal competitions with 80% contribution to the technical framework.
+      - Independently managed high-engagement workshops without teaching assistants.
     technologies_used: | 
-      Go, Angular, Typescript, C++
+      Robotics Kits, LEGO Education, STEM Curriculum Design
   
-  - role: Researcher
-    time: 2016-2020
-    company: Microsoft
+  - role: AI Engineer
+    time: 2022-2023
+    company: Greystone Datasystem
     details: |
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-      fugiat nulla pariatur.
+      - Re-engineered lighting systems company-wide, improving inspection accuracy from 60% to 80%.
+      - Served as a technical bridge between AI, Hardware, Software, and Assembly teams.
+      - Conducted end-to-end quality control and pre-shipment product testing.
     technologies_used: | 
-      Python, Tensorflow, Keras, Matlab
-
-publications:
-  - title: Random title of paper. An interesting one.
-    link: "#"
-    authors: John E. Doe
-    conference: Some conference, 2016
-
-  - title: Second title of paper. An interesting one too.
-    link: "#"
-    authors: John E. Doe
-    conference: Some conference again, 2018
+      Computer Vision, Hardware Validation, Quality Assurance, Python
 
 projects:
-  - title: Cool Project 
-    link: #
+  - title: Delta Robot for Product Classification
+    link: https://github.com/Ranma-2000/DT13_KLTN_UTE_2023
     details: |
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-      tempor incididunt ut labore et dolore magna aliqua.
+      Graduation project (9.3/10.0). Calculated forward/inverse kinematics and 
+      simulated PID controller using GA algorithm on MATLAB.
 
-  - title: Cool Project 
-    link: #
+  - title: IoT ECG Classification & Monitoring
+    link: https://github.com/Ranma-2000/DT77_FYP_UTE_2023
     details: |
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-      tempor incididunt ut labore et dolore magna aliqua.
+      Developed an AI-powered ECG monitoring system (9.0/10.0). Created a real-time
+      dashboard and automated workflow tracking using Jira.
 
 # Volunteering
 volunteering:
-  - time: 2020-Present
-    role: PR Manager
-    company: Some random organization
+  - time: 2023-2024
+    role: IT Instructor (IC3)
+    company: Tin hoc Dai Duong
     details: |
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+      Instructed IC3 international standard computing skills for public school students, 
+      achieving a 100% certification rate.
