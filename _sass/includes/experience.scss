@@ -23,3 +23,26 @@
         }
     }
 }
+
+.experience-item {
+    margin-bottom: 20px;
+    
+    .details {
+        list-style-type: disc;      /* Tạo gạch đầu dòng */
+        padding-left: 20px;         /* Thụt lề vào trong */
+        margin: 5px 0;
+        
+        li {
+            word-wrap: break-word;      /* Chống vỡ layout */
+            overflow-wrap: break-word;
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+    }
+    
+    .technologies {
+        font-size: 0.9em;
+        font-style: italic;
+        word-wrap: break-word;      /* Đảm bảo tên công nghệ dài cũng xuống dòng */
+    }
+}
