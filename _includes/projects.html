@@ -6,11 +6,7 @@
         <div class="project">
             <a class="project-link" href="{{p.link}}">{{p.title}}</a>
             {% if p.details %}
-                <ul class="project-details">
-                    {% for detail in p.details %}
-                        <li>{{ detail }}</li>
-                    {% endfor %}
-                </ul>
+                <div class="project-details">{{ p.details | markdownify }}</div>
             {% endif %}
         </div>
     {% endfor %}

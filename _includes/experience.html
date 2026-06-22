@@ -9,13 +9,11 @@
             {{exp.company}} <span class="time">{{exp.time}}</span>
         </div> 
         
-        <ul class="details">
-            {% for detail in exp.details %}
-                <li>{{ detail }}</li>
-            {% endfor %}
-        </ul>
-        
-        <p class="technologies">Technologies: {{ exp.technologies_used | join: ", " }}</p>
+        <div class="details">{{ exp.details | markdownify }}</div>
+
+        {% if exp.technologies_used %}
+        <p class="technologies">Technologies: {{ exp.technologies_used }}</p>
+        {% endif %}
     </div>
     {% endfor %}
 </section>
