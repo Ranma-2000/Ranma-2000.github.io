@@ -1,23 +1,4290 @@
----
-layout: default
----
-<div class="container">
-  {% include header.html %}
-  <div class="container-block">
-    <div class="sidebar">
-      {% include contact.html %}
-      {% include languages.html %}
-      {% include education.html %}
-      {% include skills.html %}
-      {% include fork.html %}
-    </div>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phạm Công Thành - AI Learning Engineer Portfolio</title>
+  <meta name="description" content="Portfolio tương tác của Phạm Công Thành - AI Learning Engineer và Nhà thiết kế Trải nghiệm Học tập Sư phạm AI. Khám phá kỹ năng, dự án và kinh nghiệm của tôi.">
+  
+  <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- External Stylesheet -->
+  <style>
+/* --- CSS Reset & Variables --- */
+    :root {
+      --primary: #2563eb;          /* Royal Blue */
+      --primary-light: #eff6ff;    /* Light sky-blue background tint */
+      --primary-dark: #1d4ed8;     /* Deep primary blue */
+      --secondary: #0ea5e9;        /* Sky Blue */
+      --accent: #06b6d4;           /* Cyan Accent */
+      --success: #10b981;          /* Emerald Green */
+      --bg-page: #f8fafc;          /* Slate 50 base bg */
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --text-dark: #0f172a;        /* Slate 900 */
+      --text-muted: #475569;       /* Slate 600 */
+      --border-color: rgba(226, 232, 240, 0.8);
+      --card-border: rgba(255, 255, 255, 0.5);
+      --font-headings: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(37, 99, 235, 0.08), 0 4px 6px -4px rgba(37, 99, 235, 0.08);
+      --shadow-xl: 0 20px 25px -5px rgba(37, 99, 235, 0.12), 0 8px 10px -6px rgba(37, 99, 235, 0.12);
+      
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-    <div class="main">
-      {% include career-profile.html %}
-      {% include experience.html %}
-      {% include publications.html %}
-      {% include projects.html %}
-      {% include volunteering.html %}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background-color: var(--bg-page);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.25;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary);
+      transition: var(--transition-fast);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    /* --- Language Display Logic --- */
+    body[data-lang="vi"] [lang="en"],
+    body[data-lang="vi"] [lang="tw"] {
+      display: none !important;
+    }
+    body[data-lang="en"] [lang="vi"],
+    body[data-lang="en"] [lang="tw"] {
+      display: none !important;
+    }
+    body[data-lang="tw"] [lang="vi"],
+    body[data-lang="tw"] [lang="en"] {
+      display: none !important;
+    }
+
+    /* --- Common Layout & Section Styles --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* --- Buttons & UI Elements --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      font-family: var(--font-headings);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition-normal);
+      border: none;
+      outline: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+      color: white;
+    }
+
+    .btn-secondary {
+      background-color: white;
+      color: var(--primary);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* --- Glassmorphism Card Style --- */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition-normal);
+    }
+
+    /* --- Header & Navigation --- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(248, 250, 252, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition-fast);
+    }
+
+    header.scrolled {
+      padding: 0.5rem 0;
+      box-shadow: var(--shadow-md);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo {
+      font-family: var(--font-headings);
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      font-family: var(--font-headings);
+      color: var(--text-muted);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Language Switcher Styling */
+    .lang-switcher {
+      display: flex;
+      gap: 0.25rem;
+      background-color: rgba(226, 232, 240, 0.6);
+      padding: 0.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--font-headings);
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .lang-btn:hover {
+      color: var(--primary);
+    }
+
+    .lang-btn.active {
+      background-color: white;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-dark);
+    }
+
+    /* --- Hero Section --- */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 4rem;
+      background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+    }
+
+    .hero-wrapper {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      align-self: flex-start;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.5rem 1.25rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.35rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-family: var(--font-headings);
+    }
+
+    .hero-tagline {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      border-left: 4px solid var(--accent);
+      padding-left: 1.25rem;
+      font-style: italic;
+      line-height: 1.6;
+      background: linear-gradient(90deg, rgba(6, 182, 212, 0.05), transparent);
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Animated Avatar Frame */
+    .avatar-frame {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      padding: 8px;
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+    }
+
+    .avatar-frame::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
+      border-radius: 50%;
+      border: 2px dashed var(--accent);
+      animation: rotate-dashed 40s linear infinite;
+      opacity: 0.5;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: white;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .avatar-inner svg {
+      width: 90%;
+      height: 90%;
+    }
+
+    @keyframes rotate-dashed {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* --- About/Intro Section --- */
+    #about {
+      background-color: white;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-info-box {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .about-info-title {
+      font-size: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-info-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .about-info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .about-info-item i {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .about-text-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .about-text-p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      text-align: justify;
+    }
+
+    .highlight-card-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .highlight-card {
+      padding: 1.5rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    .highlight-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .highlight-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* --- Skills Section (Horizontal Card Grid) --- */
+    .skills-grid-horizontal {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .skill-card {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      border: 1px solid var(--border-color);
+      height: 100%;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .skill-card-header i {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .skill-card-header h3 {
+      font-size: 1.25rem;
+      color: var(--text-dark);
+    }
+
+    .skill-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      min-height: 4.5rem;
+    }
+
+    .skill-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: auto;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 1.25rem;
+    }
+
+    .skill-items-list li {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      position: relative;
+      padding-left: 1.25rem;
+      font-weight: 500;
+    }
+
+    .skill-items-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* --- Experience (Timeline) Section --- */
+    #experience {
+      background-color: white;
+    }
+
+    /* Timeline Legend / Annotations styling */
+    .timeline-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      background-color: var(--primary-light);
+      padding: 1rem 2rem;
+      border-radius: 16px;
+      border: 1px dashed rgba(37, 99, 235, 0.2);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      border-radius: 50%;
+      background-color: white;
+    }
+
+    .legend-dot.major {
+      width: 18px;
+      height: 18px;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    }
+
+    .legend-dot.minor {
+      width: 14px;
+      height: 14px;
+      border: 3px solid #94a3b8;
+      box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.15);
+      cursor: pointer;
+    }
+
+    .legend-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 32px;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 80px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 20px;
+      top: 24px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: white;
+      border: 4px solid var(--primary);
+      box-shadow: 0 0 0 6px var(--primary-light);
+      z-index: 2;
+      transition: var(--transition-normal);
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: var(--accent);
+      border-color: var(--primary-dark);
+      transform: scale(1.15);
+    }
+
+    /* Styles for Major Node Type (Always visible) */
+    .timeline-item:not(.minor-node) .timeline-card {
+      cursor: default;
+    }
+
+    .timeline-item:not(.minor-node) .timeline-details {
+      max-height: none;
+      opacity: 1;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border-color);
+      display: block;
+    }
+
+    /* --- Sub-timeline (Nested Minor Jobs) --- */
+    .sub-timeline {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .sub-timeline-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-headings);
+      cursor: pointer;
+      user-select: none;
+      transition: color var(--transition-fast);
+    }
+
+    .sub-timeline-title:hover {
+      color: var(--primary);
+    }
+
+    .sub-timeline-title i:first-child {
+      color: var(--primary);
+    }
+
+    .sub-timeline-toggle-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      font-size: 0.75rem;
+      transition: var(--transition-fast);
+      margin-left: 0.5rem;
+    }
+    
+    .sub-timeline-title:hover .sub-timeline-toggle-icon {
+      background-color: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .sub-timeline.expanded .sub-timeline-toggle-icon {
+      transform: rotate(180deg);
+    }
+    
+    .sub-timeline.expanded .sub-timeline-title:hover .sub-timeline-toggle-icon {
+      transform: rotate(180deg) scale(1.1);
+    }
+
+    /* Collapsible Sub-timeline content container */
+    .sub-timeline-content {
+      display: none;
+      animation: subSlideDownFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .sub-timeline.expanded .sub-timeline-content {
+      display: block;
+    }
+
+    .sub-timeline-track-container {
+      position: relative;
+      height: 45px;
+      margin: 1.5rem 0.5rem;
+      background-color: var(--primary-light);
+      border-radius: 20px;
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .sub-timeline-line {
+      position: absolute;
+      left: 1.5rem;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 4px;
+      background: #cbd5e1; /* slate 300 base line */
+      border-radius: 2px;
+      z-index: 1;
+    }
+
+    .sub-timeline-progress {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+      z-index: 2;
+      transition: width var(--transition-normal);
+    }
+
+    .sub-timeline-node {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #94a3b8;
+      cursor: pointer;
+      z-index: 5;
+      transition: var(--transition-normal);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sub-timeline-node:hover {
+      border-color: var(--primary);
+      background-color: var(--accent);
+      transform: translate(-50%, -50%) scale(1.25);
+    }
+
+    .sub-timeline-node.active {
+      border-color: var(--primary-dark);
+      background-color: var(--primary);
+      width: 16px;
+      height: 16px;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+    }
+
+    /* Sub-timeline Node Tooltip */
+    .sub-tooltip {
+      position: absolute;
+      bottom: 150%;
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background-color: var(--text-dark);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-md);
+      z-index: 10;
+      line-height: 1.35;
+    }
+
+    .sub-tooltip::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--text-dark) transparent transparent transparent;
+    }
+
+    .sub-timeline-node:hover .sub-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Sub-timeline details container */
+    .sub-job-card {
+      display: none;
+      background-color: white;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+      box-shadow: var(--shadow-sm);
+      animation: subSlideDownFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .sub-job-card.active {
+      display: block;
+    }
+
+    .sub-job-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .sub-job-card-title h4 {
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    .sub-job-card-company {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.15rem;
+    }
+
+    .sub-job-card-date {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background-color: var(--primary-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      white-space: nowrap;
+    }
+
+    .sub-job-card-details ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .sub-job-card-details li {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .sub-job-card-details li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* Label markers for start and end years on track */
+    .sub-timeline-label {
+      position: absolute;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      bottom: -22px;
+    }
+    .sub-timeline-label.start {
+      left: 0.5rem;
+    }
+    .sub-timeline-label.end {
+      right: 0.5rem;
+    }
+
+    @keyframes subSlideDownFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive queries for sub-timeline */
+    @media (max-width: 640px) {
+      .sub-timeline-track-container {
+        display: none !important; /* Hide track slider on mobile and use standard stacked layout list */
+      }
+      .sub-job-card {
+        display: block !important; /* Always show them stacked on mobile */
+        margin-bottom: 1rem;
+        background-color: var(--primary-light);
+      }
+    }
+
+    .timeline-card {
+      padding: 1.75rem;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .timeline-title h3 {
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-company {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-date {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      background-color: var(--primary-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 30px;
+      white-space: nowrap;
+      font-weight: 500;
+      border: 1px solid rgba(37, 99, 235, 0.1);
+    }
+
+    .timeline-details {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .timeline-details ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .timeline-details li {
+      position: relative;
+      padding-left: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: justify;
+    }
+
+    .timeline-details li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* --- Projects Section --- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .project-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary-dark);
+    }
+
+    .project-img-wrapper {
+      position: relative;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .project-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-img-placeholder svg {
+      width: 60%;
+      height: 60%;
+      opacity: 0.8;
+      transition: transform var(--transition-normal);
+    }
+
+    .project-card:hover .project-img-placeholder svg {
+      transform: scale(1.1) rotate(2deg);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex-grow: 1;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .project-card h3 {
+      font-size: 1.35rem;
+      color: var(--text-dark);
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .project-techs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+      padding-top: 0.75rem;
+    }
+
+    .tech-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* --- Modals for Project Detail & Chatbot --- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-container {
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 24px;
+      background: white;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--border-color);
+      transform: translateY(30px);
+      transition: transform var(--transition-normal);
+      display: none;
+    }
+
+    .modal-overlay.active .modal-container {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
+
+    .modal-title h3 {
+      font-size: 1.5rem;
+      color: var(--text-dark);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .modal-close:hover {
+      color: var(--text-dark);
+      transform: scale(1.1);
+    }
+
+    .modal-body {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .modal-showcase {
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1e3a8a, #0891b2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-showcase svg {
+      width: 45%;
+      height: 45%;
+    }
+
+    .modal-info-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    .modal-desc-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .modal-desc-col h4, .modal-meta-col h4 {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-desc-text {
+      color: var(--text-muted);
+      font-size: 0.975rem;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .modal-meta-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      background-color: var(--primary-light);
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      height: fit-content;
+    }
+
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .meta-item {
+      font-size: 0.875rem;
+    }
+
+    .meta-label {
+      font-weight: 700;
+      color: var(--text-dark);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .meta-value {
+      color: var(--text-muted);
+    }
+
+    /* --- Interactive Socratic Chatbot Demo --- */
+    .chatbot-demo-box {
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      height: 380px;
+      background-color: #f8fafc;
+    }
+
+    .chatbot-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .chatbot-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+    }
+
+    .chatbot-info h5 {
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .chatbot-info span {
+      font-size: 0.7rem;
+      opacity: 0.8;
+      display: block;
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      padding: 1.25rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background-color: #f1f5f9;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.75rem 1rem;
+      border-radius: 16px;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      position: relative;
+      animation: message-fade-in 0.3s ease forwards;
+    }
+
+    @keyframes message-fade-in {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-bubble.bot {
+      background-color: white;
+      color: var(--text-dark);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .chat-bubble.user {
+      background-color: var(--primary);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 1px 2px rgba(37,99,235,0.1);
+    }
+
+    .chat-options-container {
+      padding: 0.85rem 1.25rem;
+      background-color: white;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .chat-options-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .chat-options-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chat-opt-btn {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      border-radius: 30px;
+      padding: 0.45rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      text-align: left;
+    }
+
+    .chat-opt-btn:hover {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .chat-opt-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .chatbot-reset-btn {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .chatbot-reset-btn:hover {
+      color: var(--primary);
+    }
+
+    /* --- Contact Section --- */
+    #contact {
+      background: radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.04) 0%, transparent 40%);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: flex-start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-card {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-detail-row {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 6px rgba(37, 99, 235, 0.05);
+    }
+
+    .contact-content h4 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .contact-content p {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .contact-socials-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: white;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-normal);
+    }
+
+    .social-btn:hover {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .contact-form-card {
+      padding: 2.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .form-input {
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background-color: white;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition-fast);
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      padding: 3rem 0;
+      border-top: 1px solid #1e293b;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-headings);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: 1rem;
+    }
+
+    /* --- Toast Notification System --- */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .toast {
+      background: white;
+      border-left: 5px solid var(--success);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow-xl);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transform: translateX(120%);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      min-width: 300px;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast-icon {
+      color: var(--success);
+      font-size: 1.25rem;
+    }
+
+    .toast-message {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    /* --- Responsive Queries --- */
+    @media (max-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .skills-grid-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 4rem 0;
+      }
+      
+      .hero-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+
+      .hero-badge {
+        align-self: center;
+      }
+
+      .hero-title {
+        font-size: 2.75rem;
+      }
+
+      .hero-tagline {
+        border-left: none;
+        border-top: 4px solid var(--accent);
+        padding-left: 0;
+        padding-top: 1rem;
+      }
+
+      .hero-cta {
+        justify-content: center;
+      }
+
+      .avatar-frame {
+        width: 260px;
+        height: 260px;
+      }
+
+      .about-grid, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 0;
+        gap: 2.5rem;
+        box-shadow: var(--shadow-lg);
+        transition: var(--transition-normal);
+        z-index: 999;
+      }
+
+      .nav-menu.active {
+        left: 0;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .modal-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .modal-meta-col {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .skills-grid-horizontal {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .timeline::before {
+        left: 20px;
+      }
+      
+      .timeline-item {
+        padding-left: 50px;
+      }
+      
+      .timeline-dot {
+        left: 8px;
+        width: 20px;
+        height: 20px;
+        border-width: 3px;
+      }
+      
+      .hero-title {
+        font-size: 2.25rem;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+      }
+      
+      .highlight-card-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --- Print Stylesheet Configuration --- */
+    @media print {
+      header, 
+      footer, 
+      .hero-cta,
+      .timeline-trigger,
+      .modal-overlay,
+      .contact-form-card,
+      .contact-socials-group,
+      .toast-container,
+      .chatbot-demo-box,
+      .project-img-wrapper,
+      #contact,
+      .section-title::after,
+      .timeline-legend {
+        display: none !important;
+      }
+
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      section {
+        padding: 1.5rem 0 !important;
+        page-break-inside: avoid;
+      }
+
+      .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .section-title {
+        text-align: left !important;
+        margin-bottom: 1rem !important;
+      }
+
+      .section-title h2 {
+        font-size: 16pt !important;
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        color: #1e3a8a !important;
+        border-bottom: 2px solid #2563eb;
+        width: 100%;
+        display: block;
+        padding-bottom: 3px;
+      }
+
+      .section-title p {
+        display: none;
+      }
+
+      #hero {
+        min-height: auto !important;
+        padding-top: 0 !important;
+        padding-bottom: 1.5rem !important;
+        background: none !important;
+      }
+
+      .hero-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+
+      .hero-content {
+        gap: 0.5rem !important;
+      }
+
+      .hero-title {
+        font-size: 24pt !important;
+        margin-bottom: 2px;
+      }
+
+      .hero-subtitle {
+        font-size: 14pt !important;
+        color: #2563eb !important;
+      }
+
+      .hero-tagline {
+        font-size: 10pt !important;
+        border-left: 3px solid #000;
+        background: none !important;
+        padding: 0.25rem 0 0.25rem 0.75rem !important;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+
+      .about-info-box {
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+      }
+
+      .about-info-list {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.5rem !important;
+      }
+
+      .about-info-item {
+        font-size: 9pt !important;
+      }
+
+      .about-info-item i {
+        display: none !important;
+      }
+
+      .highlight-card-row {
+        display: none !important;
+      }
+
+      .skills-grid-horizontal {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+        display: grid !important;
+      }
+
+      .skill-card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        background: none !important;
+        padding: 1rem !important;
+        page-break-inside: avoid;
+      }
+
+      .skill-card-desc {
+        min-height: auto !important;
+      }
+
+      .timeline {
+        padding: 0 !important;
+      }
+
+      .timeline::before {
+        display: none !important;
+      }
+
+      /* On print, hide sub-timeline tracks and show all nested sub-job cards stacked */
+      .sub-timeline-track-container {
+        display: none !important;
+      }
+      .sub-job-card {
+        display: block !important;
+        opacity: 1 !important;
+        border: 1px solid #ccc !important;
+        margin-top: 0.5rem !important;
+        padding: 1rem !important;
+        page-break-inside: avoid;
+        background: none !important;
+        box-shadow: none !important;
+      }
+
+      .timeline-item {
+        padding-left: 0 !important;
+        margin-bottom: 1.5rem !important;
+        page-break-inside: avoid;
+      }
+
+      .timeline-dot {
+        display: none !important;
+      }
+
+      .timeline-card {
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+        box-shadow: none !important;
+      }
+
+      .timeline-details {
+        max-height: none !important;
+        opacity: 1 !important;
+        margin-top: 0.5rem !important;
+        padding-top: 0.5rem !important;
+        border-top: 1px solid #ddd !important;
+        display: block !important;
+      }
+
+      .timeline-details li {
+        font-size: 9pt !important;
+        color: #333 !important;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+
+      .project-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        page-break-inside: avoid;
+      }
+
+      .project-body {
+        padding: 0 !important;
+      }
+
+      .project-body h3 {
+        font-size: 11pt !important;
+        color: #1e3a8a;
+      }
+
+      .project-desc {
+        font-size: 9.5pt !important;
+        color: #333 !important;
+        margin-top: 0.25rem;
+      }
+
+      .project-techs {
+        margin-top: 0.25rem !important;
+        padding-top: 0 !important;
+      }
+
+      .tech-pill {
+        background: none !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+        padding: 1px 4px !important;
+        font-size: 8pt !important;
+      }
+    }
+</style>
+</head>
+<body data-lang="vi">
+
+  <!-- --- HEADER & NAVIGATION --- -->
+  <header id="header">
+    <div class="container nav-container">
+      <a href="#hero" class="logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Peter Pham</span>
+      </a>
+      
+      <div class="nav-right">
+        <nav class="nav-menu" id="navMenu">
+          <a href="#hero" class="nav-link active">
+            <span lang="vi">Giới thiệu</span>
+            <span lang="en">Intro</span>
+            <span lang="tw">介紹</span>
+          </a>
+          <a href="#about" class="nav-link">
+            <span lang="vi">Về tôi</span>
+            <span lang="en">About Me</span>
+            <span lang="tw">關於我</span>
+          </a>
+          <a href="#skills" class="nav-link">
+            <span lang="vi">Kỹ năng</span>
+            <span lang="en">Skills</span>
+            <span lang="tw">專業技能</span>
+          </a>
+          <a href="#experience" class="nav-link">
+            <span lang="vi">Kinh nghiệm</span>
+            <span lang="en">Experience</span>
+            <span lang="tw">工作經歷</span>
+          </a>
+          <a href="#projects" class="nav-link">
+            <span lang="vi">Dự án</span>
+            <span lang="en">Projects</span>
+            <span lang="tw">專案作品</span>
+          </a>
+          <a href="#contact" class="nav-link">
+            <span lang="vi">Liên hệ</span>
+            <span lang="en">Contact</span>
+            <span lang="tw">聯絡我</span>
+          </a>
+        </nav>
+        
+        <!-- Language Switcher Button Group -->
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang-trigger="vi" onclick="switchLanguage('vi')">VI</button>
+          <button class="lang-btn" data-lang-trigger="en" onclick="switchLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang-trigger="tw" onclick="switchLanguage('tw')">繁中</button>
+        </div>
+        
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- --- HERO SECTION --- -->
+  <section id="hero">
+    <div class="container hero-wrapper">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fa-solid fa-bolt"></i>
+          <span id="heroBadge">EdTech & AI Specialist</span>
+        </div>
+        <h1 class="hero-title" id="heroTitle">
+          <!-- Injected dynamically -->
+        </h1>
+        <p class="hero-subtitle" id="heroSubtitle">
+          <!-- Injected dynamically -->
+        </p>
+        <p class="hero-tagline" id="heroTagline">
+          <!-- Injected dynamically -->
+        </p>
+        
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">
+            <span lang="vi">Khám phá dự án</span>
+            <span lang="en">Explore Projects</span>
+            <span lang="tw">探索專案</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <button class="btn btn-secondary" onclick="window.print()">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span lang="vi">Tải CV PDF</span>
+            <span lang="en">Download CV PDF</span>
+            <span lang="tw">下載 PDF 履歷</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="avatar-frame">
+          <div class="avatar-inner">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="45" fill="url(#hero-gradient)" opacity="0.1"/>
+              <path d="M25 45 L40 30 M40 30 L55 35 M55 35 L75 40 M25 45 L35 60 M35 60 L60 65 M60 65 L75 40" stroke="#0ea5e9" stroke-width="0.75" stroke-dasharray="3 3"/>
+              <circle cx="25" cy="45" r="3" fill="#2563eb"/>
+              <circle cx="40" cy="30" r="4" fill="#0ea5e9"/>
+              <circle cx="55" cy="35" r="3" fill="#06b6d4"/>
+              <circle cx="75" cy="40" r="4.5" fill="#2563eb"/>
+              <circle cx="35" cy="60" r="3.5" fill="#0ea5e9"/>
+              <circle cx="60" cy="65" r="3" fill="#06b6d4"/>
+              
+              <path d="M50 25 C41 25 36 32 36 40 C36 46 41 49 43 52 C45 55 45 58 47 61 L53 61 C55 58 55 55 57 52 C59 49 64 46 64 40 C64 32 59 25 50 25 Z" fill="#ffffff" stroke="#2563eb" stroke-width="2.5"/>
+              <path d="M47 65 H53 V67 H47 Z M48 69 H52 V70 H48 Z" fill="#475569" stroke="#2563eb" stroke-width="1.5"/>
+              <path d="M50 32 V48 M42 40 H58" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="50" cy="40" r="8" fill="#eff6ff" stroke="#0ea5e9" stroke-width="1.5"/>
+              
+              <text x="47" y="44" font-family="'Outfit', sans-serif" font-size="11" font-weight="bold" fill="#2563eb">?</text>
+              <circle cx="75" cy="25" r="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1"/>
+              <text x="73.5" y="28" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" fill="#2563eb">AI</text>
+
+              <defs>
+                <linearGradient id="hero-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563eb"/>
+                  <stop offset="1" stop-color="#06b6d4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- ABOUT SECTION --- -->
+  <section id="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Về tôi</span>
+          <span lang="en">About Me</span>
+          <span lang="tw">關於我</span>
+        </h2>
+        <p>
+          <span lang="vi">Định hướng thiết kế công nghệ lấy người học làm trung tâm và thúc đẩy tư duy phản biện</span>
+          <span lang="en">Learner-centric tech design and fostering critical thinking</span>
+          <span lang="tw">以學習者為中心的科技設計，培養批判性思考</span>
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-info-box glass-card">
+          <div class="about-info-title">
+            <i class="fa-solid fa-address-card"></i>
+            <h3>
+              <span lang="vi">Thông tin liên hệ</span>
+              <span lang="en">Contact Details</span>
+              <span lang="tw">聯絡資訊</span>
+            </h3>
+          </div>
+          <div class="about-info-list" id="aboutContactDetails">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+        <div class="about-text-content">
+          <div id="aboutParagraphs">
+            <!-- Injected dynamically -->
+          </div>
+
+          <div class="highlight-card-row" id="aboutHighlights">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SKILLS SECTION --- -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Năng lực chuyên môn</span>
+          <span lang="en">Professional Expertise</span>
+          <span lang="tw">專業技能</span>
+        </h2>
+        <p>
+          <span lang="vi">Sự giao thoa giữa Khoa học Giáo dục và Kỹ thuật Trí tuệ Nhân tạo</span>
+          <span lang="en">The intersection of Cognitive Science and Artificial Intelligence</span>
+          <span lang="tw">教育科學與人工智慧技術的結合</span>
+        </p>
+      </div>
+
+      <div class="skills-grid-horizontal" id="skillsGrid">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- --- EXPERIENCE TIMELINE --- -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Hành trình nghề nghiệp</span>
+          <span lang="en">Professional Journey</span>
+          <span lang="tw">職涯經歷</span>
+        </h2>
+        <p>
+          <span lang="vi">Kinh nghiệm được xếp chồng theo niên đại. Nhấp chọn các node phụ để hiện thông tin chi tiết.</span>
+          <span lang="en">Milestones stacked chronologically. Click on minor nodes to reveal their detailed achievements.</span>
+          <span lang="tw">按時間順序堆疊職涯經歷。點擊次要節點以顯示詳細工作內容。</span>
+        </p>
+      </div>
+
+      <!-- Timeline Legend / Annotations -->
+      <div class="timeline-legend">
+        <div class="legend-item">
+          <span class="legend-dot major"></span>
+          <span class="legend-text">
+            <span lang="vi">Vai trò chính (Luôn hiển thị)</span>
+            <span lang="en">Primary Role (Always visible)</span>
+            <span lang="tw">主要職責 (持續顯示)</span>
+          </span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot minor"></span>
+          <span class="legend-text">
+            <span lang="vi">Dự án song hành (Nhấp để xem)</span>
+            <span lang="en">Concurrent project (Click to view)</span>
+            <span lang="tw">同期兼職專案 (點擊切換)</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="timeline" id="experienceTimeline">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- --- PROJECTS GRID --- -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Dự án nổi bật</span>
+          <span lang="en">Featured Projects</span>
+          <span lang="tw">專案作品</span>
+        </h2>
+        <p>
+          <span lang="vi">Các giải pháp công nghệ giáo dục sáng tạo đã được đưa vào ứng dụng thực tế</span>
+          <span lang="en">Innovative educational technology solutions deployed in real-world environments</span>
+          <span lang="tw">已投入實際應用且具創新性的教育科技解決方案</span>
+        </p>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- --- PROJECT DETAILED MODALS --- -->
+  <div class="modal-overlay" id="projectModalOverlay" onclick="closeProjectModal()">
+    <div class="modal-container" id="projectModalContainer" onclick="event.stopPropagation()">
+      <!-- Injected dynamically based on clicked project -->
     </div>
   </div>
-</div>
+
+  <!-- --- CONTACT & FOOTER --- -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Kết nối với tôi</span>
+          <span lang="en">Connect With Me</span>
+          <span lang="tw">與我聯絡</span>
+        </h2>
+        <p>
+          <span lang="vi">Bắt đầu trao đổi về các giải pháp học tập tích hợp công nghệ sáng tạo</span>
+          <span lang="en">Start discussing creative technology-integrated learning solutions</span>
+          <span lang="tw">開啟關於創新教育科技與教學設計的交流</span>
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-card glass-card">
+            <div class="contact-detail-row">
+              <div class="contact-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="contact-content">
+                <h4 lang="vi">Gửi email tại</h4>
+                <h4 lang="en">Email me at</h4>
+                <h4 lang="tw">電子郵件聯絡</h4>
+                <p id="contactEmailText">contact@peterpham.info.vn</p>
+              </div>
+            </div>
+
+            <div class="contact-detail-row">
+              <div class="contact-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="contact-content">
+                <h4 lang="vi">Địa điểm làm việc</h4>
+                <h4 lang="en">Work Location</h4>
+                <h4 lang="tw">工作地點</h4>
+                <p id="contactLocationText">
+                  <!-- Injected dynamically -->
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-detail-row" style="flex-direction: column; align-items: flex-start; gap: 0.75rem;">
+              <h4 style="margin-top: 0.5rem; text-transform: uppercase; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.05em; font-weight: 700;">
+                <span lang="vi">Tìm tôi trên mạng xã hội</span>
+                <span lang="en">Find me on social media</span>
+                <span lang="tw">社群媒體連結</span>
+              </h4>
+              <div class="contact-socials-group" id="contactSocialsGroup">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-card glass-card">
+          <form id="contactForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="formName" class="form-label">
+                  <span lang="vi">Họ và Tên *</span>
+                  <span lang="en">Full Name *</span>
+                  <span lang="tw">姓名 *</span>
+                </label>
+                <input type="text" id="formName" class="form-input" placeholder="Nguyễn Văn A" required>
+              </div>
+              <div class="form-group">
+                <label for="formEmail" class="form-label">
+                  <span lang="vi">Địa chỉ Email *</span>
+                  <span lang="en">Email Address *</span>
+                  <span lang="tw">電子郵件信箱 *</span>
+                </label>
+                <input type="email" id="formEmail" class="form-input" placeholder="email@viethoc.edu.vn" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="formSubject" class="form-label">
+                  <span lang="vi">Chủ đề thảo luận *</span>
+                  <span lang="en">Discussion Subject *</span>
+                  <span lang="tw">主題 *</span>
+                </label>
+                <input type="text" id="formSubject" class="form-input" placeholder="Hợp tác thiết kế bài giảng AI / STEM" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="formMessage" class="form-label">
+                  <span lang="vi">Nội dung chi tiết *</span>
+                  <span lang="en">Message Details *</span>
+                  <span lang="tw">訊息內容 *</span>
+                </label>
+                <textarea id="formMessage" class="form-input" placeholder="Xin chào Thành, mình quan tâm đến..." required></textarea>
+              </div>
+              <div class="form-group full-width" style="margin-top: 0.5rem;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  <i class="fa-solid fa-paper-plane"></i>
+                  <span lang="vi">Gửi tin nhắn liên hệ</span>
+                  <span lang="en">Send Message</span>
+                  <span lang="tw">送出訊息</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- FOOTER --- -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span id="footerLogoName">Phạm Công Thành</span>
+      </div>
+      <p class="footer-tagline" id="footerTagline">
+        <!-- Injected dynamically -->
+      </p>
+      <p class="footer-copy">&copy; 2026 Phạm Công Thành. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- --- TOAST NOTIFICATIONS --- -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- External JavaScript Logic -->
+  <script>
+// Embedded Static Data
+const embeddedResumeData = {
+  "personal_info": {
+    "name": "Phạm Công Thành",
+    "english_name": "Thanh Pham Cong",
+    "badge": "AI & Robotics Engineer",
+    "title": {
+      "vi": "AI Engineer | Kỹ sư Cơ điện tử & Trí tuệ Nhân tạo",
+      "en": "AI Engineer | Mechatronics & AI Engineering Specialist",
+      "tw": "AI 工程師 | 機電整合與人工智慧專家"
+    },
+    "tagline": {
+      "vi": "\"Kết nối thế giới vật lý và trí tuệ kỹ thuật số bằng các giải pháp AI & Robot tự động hóa.\"",
+      "en": "\"Bridging physical hardware and digital intelligence with automated AI & Robotic solutions.\"",
+      "tw": "「藉由自動化的 AI 與機器人解決方案，連結實體世界與數位智慧。」"
+    },
+    "email": "contact@peterpham.info.vn",
+    "location": {
+      "vi": "Hồ Chí Minh, Việt Nam",
+      "en": "Ho Chi Minh City, Vietnam",
+      "tw": "越南胡志明市"
+    },
+    "location_detailed": {
+      "vi": "Hồ Chí Minh & Làm việc Từ xa (Remote)",
+      "en": "Ho Chi Minh City & Remote",
+      "tw": "胡志明市 & 遠端工作"
+    },
+    "socials": {
+      "linkedin": "https://linkedin.com/in/peterpham-edtech",
+      "github": "https://github.com/Ranma-2000",
+      "website": "https://peterpham.info.vn"
+    }
+  },
+  "about": {
+    "paragraphs": [
+      {
+        "vi": "Tôi là một Kỹ sư Cơ điện tử và Kỹ sư AI đam mê kết nối giữa thế giới phần cứng vật lý và trí tuệ kỹ thuật số. Với nền tảng nghiên cứu và ứng dụng thực tế trong phát triển robot, hệ thống IoT, và tích hợp mô hình ngôn ngữ lớn (LLM), tôi kiến tạo các giải pháp thông minh tối ưu hóa năng suất và nâng cao trải nghiệm người dùng.",
+        "en": "I am a Mechatronics and AI Engineer passionate about bridging physical hardware and digital intelligence. With a background in robotics development, IoT systems, and LLM integrations, I build intelligent solutions that optimize efficiency and enhance user experience.",
+        "tw": "我編輯一位熱衷於連結實體硬體與數位智慧的機電整合與 AI 工程師。憑藉在機器人開發、IoT 系統以及大語言模型（LLM）整合方面的背景，我致力於打造能夠優化效率並提升使用者體驗的智慧型解決方案。"
+      },
+      {
+        "vi": "Tôi có kinh nghiệm phong phú trong việc giảng dạy robot STEM, chế tạo robot công nghiệp (Delta robot) và thiết kế hệ thống AI nhúng. Mục tiêu của tôi là phát triển các ứng dụng AI tiên tiến, từ các mô hình thị giác máy tính trong fintech đến các hệ thống tự động hóa công nghiệp quy mô lớn.",
+        "en": "I have rich experience in instructing STEM robotics, building industrial robots (Delta robots), and designing embedded AI systems. My goal is to develop cutting-edge AI applications, from computer vision models in fintech to large-scale industrial automation systems.",
+        "tw": "我在 STEM 機器人教學、工業機器人（Delta 機器人）開發以及嵌入式 AI 系統設計方面擁有豐富經驗。我的目標是開發前沿的 AI 應用，從金融科技中的電腦視覺模型到大規模的工業自動化系統。"
+      }
+    ],
+    "highlights": [
+      {
+        "title": {
+          "vi": "Cơ điện tử & Robot",
+          "en": "Mechatronics & Robotics",
+          "tw": "機電與機器人"
+        },
+        "icon": "fa-robot",
+        "color": "--accent",
+        "desc": {
+          "vi": "Tích hợp phần cứng điều khiển, kinematics robot và lập trình nhúng nhịp nhàng.",
+          "en": "Seamless integration of control hardware, robot kinematics, and embedded programming.",
+          "tw": "無縫整合硬體控制、機器人運動學與嵌入式程式設計。"
+        }
+      },
+      {
+        "title": {
+          "vi": "Trí tuệ Nhân tạo",
+          "en": "Artificial Intelligence",
+          "tw": "人工智慧"
+        },
+        "icon": "fa-brain",
+        "color": "--primary",
+        "desc": {
+          "vi": "Huấn luyện và triển khai mô hình học máy nhúng, thị giác máy tính và ứng dụng LLM.",
+          "en": "Training and deploying embedded machine learning, computer vision, and LLM applications.",
+          "tw": "訓練並部署嵌入式機器學習、電腦視覺與 LLM 應用。"
+        }
+      }
+    ]
+  },
+  "skills": [
+    {
+      "category": {
+        "vi": "Lập trình & Cơ sở dữ liệu",
+        "en": "Programming & Databases",
+        "tw": "程式設計與資料庫"
+      },
+      "icon": "fa-code",
+      "desc": {
+        "vi": "Các ngôn ngữ lập trình cốt lõi và hệ quản trị cơ sở dữ liệu.",
+        "en": "Core programming languages and database management systems.",
+        "tw": "核心程式設計語言與資料庫管理系統。"
+      },
+      "items": [
+        {
+          "vi": "Python",
+          "en": "Python",
+          "tw": "Python"
+        },
+        {
+          "vi": "SQL",
+          "en": "SQL",
+          "tw": "SQL"
+        },
+        {
+          "vi": "C/C++",
+          "en": "C/C++",
+          "tw": "C/C++"
+        }
+      ]
+    },
+    {
+      "category": {
+        "vi": "Công cụ AI & Mô hình LLM",
+        "en": "AI Tools & LLM Models",
+        "tw": "AI 工具與大語言模型"
+      },
+      "icon": "fa-brain",
+      "desc": {
+        "vi": "Sử dụng API của các mô hình hàng đầu và quy trình ComfyUI.",
+        "en": "Leveraging frontier model APIs and customized ComfyUI workflows.",
+        "tw": "運用前沿模型 API 與客製化 ComfyUI 工作流。"
+      },
+      "items": [
+        {
+          "vi": "OpenAI, Gemini & Deepseek",
+          "en": "OpenAI, Gemini & Deepseek",
+          "tw": "OpenAI、Gemini 與 Deepseek"
+        },
+        {
+          "vi": "Gemini API & Elevenlabs",
+          "en": "Gemini API & Elevenlabs",
+          "tw": "Gemini API 與 Elevenlabs"
+        },
+        {
+          "vi": "ComfyUI & Anthropic (Claude)",
+          "en": "ComfyUI & Anthropic (Claude)",
+          "tw": "ComfyUI 與 Anthropic (Claude)"
+        }
+      ]
+    },
+    {
+      "category": {
+        "vi": "Kỹ thuật Edge & Dữ liệu",
+        "en": "Edge Tech & Data Tools",
+        "tw": "邊緣運算與數據工具"
+      },
+      "icon": "fa-microchip",
+      "desc": {
+        "vi": "Triển khai phần cứng nhúng và trực quan hóa dữ liệu.",
+        "en": "Deploying embedded hardware solutions and data dashboards.",
+        "tw": "部署嵌入式硬體解決方案與數據看板。"
+      },
+      "items": [
+        {
+          "vi": "Raspberry Pi & Orange Pi",
+          "en": "Raspberry Pi & Orange Pi",
+          "tw": "Raspberry Pi 與 Orange Pi"
+        },
+        {
+          "vi": "Docker, MySQL & PostgreSQL",
+          "en": "Docker, MySQL & PostgreSQL",
+          "tw": "Docker、MySQL 與 PostgreSQL"
+        },
+        {
+          "vi": "PowerBI & Smart Edge Deploy",
+          "en": "PowerBI & Smart Edge Deploy",
+          "tw": "PowerBI 與智慧邊緣部署"
+        }
+      ]
+    },
+    {
+      "category": {
+        "vi": "Quản trị Dự án",
+        "en": "Project Management",
+        "tw": "專案管理"
+      },
+      "icon": "fa-list-check",
+      "desc": {
+        "vi": "Công cụ và phương thức quản lý công việc và kiểm soát phiên bản dữ liệu.",
+        "en": "Systems for version control, data tracking, and workflow management.",
+        "tw": "用於版本控制、數據追蹤和工作流程管理的系統。"
+      },
+      "items": [
+        {
+          "vi": "Jira & YouTrack",
+          "en": "Jira & YouTrack",
+          "tw": "Jira 與 YouTrack"
+        },
+        {
+          "vi": "Git & GitHub",
+          "en": "Git & GitHub",
+          "tw": "Git 與 GitHub"
+        },
+        {
+          "vi": "DVC (Data Version Control)",
+          "en": "DVC (Data Version Control)",
+          "tw": "DVC (Data Version Control)"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "job-1",
+      "role": {
+        "vi": "Người hướng dẫn & Trưởng nhóm Robot/Lego",
+        "en": "Educator & Robotics/Lego Leader",
+        "tw": "講師與機器人/樂高組長"
+      },
+      "company": "Stars Academy",
+      "company_icon": "fa-briefcase",
+      "date": {
+        "vi": "07/2024 - Hiện tại",
+        "en": "Jul 2024 - Present",
+        "tw": "2024年7月 - 至今"
+      },
+      "details": [
+        {
+          "vi": "Quản lý và cố vấn 20 giảng viên để duy trì các tiêu chuẩn sư phạm cao tại 15 lớp học câu lạc bộ, phục vụ hơn 600 học sinh tiểu học công lập.",
+          "en": "Supervised and mentored 20 instructors to maintain high pedagogical standards across 15 club-based classes serving 600+ public primary school students.",
+          "tw": "管理並指導 20 名講師，以維持 15 個社團班級（服務 600 多名公立小學生）的高品質教學標準。"
+        },
+        {
+          "vi": "Định hướng khung kỹ thuật và toàn bộ chu trình giải đấu khoa học cho hai đội tuyển robot của nhà trường.",
+          "en": "Directed the end-to-end technical framework and competition lifecycle for two school robotics teams.",
+          "tw": "指導兩支校園機器人代表隊的端到端技術架構與競賽生命週期。"
+        },
+        {
+          "vi": "Giảng dạy hiệu quả các lớp học STEM quy mô 60+ học sinh, viết giáo trình STEM/Robot và thiết kế các nguyên mẫu dự án.",
+          "en": "Facilitated high-engagement classroom for 60+ students, maintaining strict quality. Wrote STEM/Robotics curricula and developed project prototypes.",
+          "tw": "引導 60 名以上學生的互動課堂，獨立維持嚴格技術品質。編寫 STEM/機器人課程並開發專案原型。"
+        }
+      ],
+      "sub_timelines": [
+        {
+          "start": "2024",
+          "end": "Present",
+          "nodes": [
+            {
+              "id": "minor-job-1",
+              "left": "0%",
+              "tooltip": {
+                "vi": "07/2024 - 07/2025: Giảng viên STEM",
+                "en": "07/2024 - Jul 2025: STEM Instructor",
+                "tw": "07/2024 - 07/2025: STEM 講師"
+              },
+              "title": {
+                "vi": "Giảng viên STEM & Robot",
+                "en": "STEM & Robotics Instructor",
+                "tw": "STEM 與機器人講師"
+              },
+              "company": "Stars Academy",
+              "company_icon": "fa-chalkboard-user",
+              "date": "07/2024 - 07/2025",
+              "details": [
+                {
+                  "vi": "Trực tiếp giảng dạy lý thuyết và thực hành robotics cho trẻ em, viết giáo trình và làm nguyên mẫu bài giảng.",
+                  "en": "Taught programming and robotics structure to primary school students, wrote course materials and built educational prototypes.",
+                  "tw": "向小學生教授程式設計與機器人構造，編寫課程教材並製作教學原型。"
+                }
+              ]
+            },
+            {
+              "id": "minor-job-1b",
+              "left": "100%",
+              "tooltip": {
+                "vi": "07/2025 - Hiện tại: Trưởng nhóm Robot",
+                "en": "Jul 2025 - Present: Robotics Leader",
+                "tw": "07/2025 - 至今: 機器人組長"
+              },
+              "title": {
+                "vi": "Trưởng nhóm Robot / Lego Leader",
+                "en": "Robotics / Lego Leader",
+                "tw": "機器人 / 樂高組長"
+              },
+              "company": "Stars Academy",
+              "company_icon": "fa-people-group",
+              "date": "07/2025 - Present",
+              "details": [
+                {
+                  "vi": "Quản lý 20 giáo viên, điều phối 15 lớp học và phụ trách kỹ thuật cho các đội tuyển thi đấu Robocon trẻ.",
+                  "en": "Managed 20 instructors, coordinated 15 classes, and directed technical preparation for youth Robocon teams.",
+                  "tw": "管理 20 位講師、協調 15 個班級，並指導青年 Robocon 隊伍的技術準備。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "job-2",
+      "role": {
+        "vi": "Giảng viên Tin học Tiểu học",
+        "en": "Primary School IT Educator",
+        "tw": "小學電腦講師"
+      },
+      "company": "Tin học Đại Dương",
+      "company_icon": "fa-briefcase",
+      "date": {
+        "vi": "09/2023 - 07/2024",
+        "en": "Sep 2023 - Jul 2024",
+        "tw": "2023年9月 - 2024年7月"
+      },
+      "details": [
+        {
+          "vi": "Giảng dạy chuẩn tin học quốc tế IC3 (Internet and Computing Core Certification) cho học sinh tiểu học công lập.",
+          "en": "Taught the IC3 international standard to public primary school students.",
+          "tw": "向公立小學學生教授 IC3 國際標準電腦課程。"
+        },
+        {
+          "vi": "Đảm bảo 100% học sinh đáp ứng các tiêu chuẩn khắt khe để lấy chứng chỉ quốc tế.",
+          "en": "Ensured 100% of students met the rigorous requirements for certification.",
+          "tw": "確保 100% 的學生達到嚴格的認證要求。"
+        }
+      ]
+    },
+    {
+      "id": "job-3",
+      "role": {
+        "vi": "Kỹ sư Trí tuệ Nhân tạo (AI Engineer)",
+        "en": "AI Engineer",
+        "tw": "AI 工程師"
+      },
+      "company": "Greystone Data System Viet Nam",
+      "company_icon": "fa-briefcase",
+      "date": {
+        "vi": "09/2022 - 09/2023",
+        "en": "Sep 2022 - Sep 2023",
+        "tw": "2022年9月 - 2023年9月"
+      },
+      "details": [
+        {
+          "vi": "Nâng cấp các dòng sản phẩm của công ty bằng hệ thống chiếu sáng thông minh tích hợp AI, giúp tăng độ chính xác lắp ráp từ 60% lên 80% trên toàn bộ dây chuyền sản xuất phục vụ T-Mobile, FedEx.",
+          "en": "Upgraded company product lines with a new AI-integrated lighting system, enhancing assembly accuracy from 60% to 80% across manufacturing fleet for T-Mobile, FedEx.",
+          "tw": "使用新型 AI 整合照明系統升級產品線，使 T-Mobile 和 FedEx 的組裝精度 từ 60% 提升至 80%。"
+        },
+        {
+          "vi": "Kết nối các nhóm AI, phần cứng và lắp ráp bằng cách dịch các yêu cầu AI phức tạp thành thông số kỹ thuật phần cứng thực thi.",
+          "en": "Bridged AI, hardware, and assembly teams by translating complex AI requirements into actionable hardware specifications.",
+          "tw": "藉由將複雜的 AI 需求轉化為可執行的硬體規格，搭建 AI、硬體與組裝團隊之間的橋樑。"
+        },
+        {
+          "vi": "Dẫn dắt hoạt động kiểm thử nguyên mẫu, xác thực phần cứng và kiểm soát chất lượng (QC) trước khi xuất xưởng để đảm bảo triển khai mô hình AI tin cậy.",
+          "en": "Led prototype testing, hardware validation, and pre-shipment QC to ensure reliable AI model deployment.",
+          "tw": "主導原型測試、硬體驗證與出貨前 QC，以確保 AI 模型的穩定部署。"
+        }
+      ]
+    },
+    {
+      "id": "job-4",
+      "role": {
+        "vi": "Kỹ sư Trí tuệ Nhân tạo (AI Engineer)",
+        "en": "AI Engineer",
+        "tw": "AI 工程師"
+      },
+      "company": "Unicloud",
+      "company_icon": "fa-briefcase",
+      "date": {
+        "vi": "03/2022 - 06/2022",
+        "en": "Mar 2022 - Jun 2022",
+        "tw": "2022年3月 - 2022年6月"
+      },
+      "details": [
+        {
+          "vi": "Huấn luyện các mô hình AI cho ứng dụng Fintech và thị giác máy tính như phát hiện và nhận dạng biển số xe, nhận dạng thẻ căn cước phục vụ Kien Long Bank.",
+          "en": "Trained AI models for Fintech and machine vision applications, such as license plate detection/recognition and ID card recognition for Kien Long Bank.",
+          "tw": "為金融科技與電腦視覺應用訓練 AI 模型，例如 Kien Long Bank 的車牌偵測與辨識、身分證件辨識等。"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "ai-limit-tracker",
+      "tag": "Chrome Extension",
+      "title": "AI Limit Tracker",
+      "desc": {
+        "vi": "Tiện ích Chrome giúp theo dõi giới hạn và chi phí sử dụng API của các dịch vụ AI như OpenAI, Gemini theo thời gian thực.",
+        "en": "Chrome extension to track usage limits and costs of AI service APIs (OpenAI, Gemini) in real-time.",
+        "tw": "Chrome 擴充功能，即時追蹤 AI 服務（OpenAI、Gemini）的 API 使用限制與成本。"
+      },
+      "techs": [
+        "HTML",
+        "CSS",
+        "JS",
+        "Chrome Ext",
+        "JSZip"
+      ],
+      "modal": {
+        "desc_title": {
+          "vi": "Mô tả dự án",
+          "en": "Project Description",
+          "tw": "專案描述"
+        },
+        "paragraphs": [
+          {
+            "vi": "AI Limit Tracker là một tiện ích mở rộng trên trình duyệt được thiết kế để kiểm soát chi phí sử dụng các dịch vụ AI (như OpenAI API). Tiện ích cung cấp giao diện trực quan hiển thị số lượng request, số token tiêu thụ, lượng chi phí tương ứng và đưa ra cảnh báo khi sắp chạm ngưỡng giới hạn.",
+            "en": "AI Limit Tracker is a browser extension engineered to manage costs and limit usage for LLM services (e.g., OpenAI API). It provides a responsive UI displaying requests, token counts, matching budget indicators, and alerts users near their limits.",
+            "tw": "AI Limit Tracker 是一款旨在管理大模型服務（例如 OpenAI API）成本並限制其使用量的瀏覽器擴充功能。它提供了響應式介面，展示請求次數、Token 消耗量及相應預算，並在接近限制時提醒用戶。"
+          },
+          {
+            "vi": "Sử dụng các kịch bản nền (background scripts) để bắt các sự kiện mạng trình duyệt, đồng thời tích hợp thư viện JSZip để xử lý nhanh cấu hình và lưu trữ cục bộ một cách tối ưu.",
+            "en": "Leveraged background.js scripts to handle browser events, and integrated JSZip libraries for local configuration and data export caching.",
+            "tw": "利用 background.js 腳本處理瀏覽器事件，並整合 JSZip 函式庫以進行本地配置與數據導出快取。"
+          }
+        ],
+        "tech_specs_title": {
+          "vi": "Thông tin kỹ thuật",
+          "en": "Technical Specs",
+          "tw": "技術規格"
+        },
+        "specs": [
+          {
+            "label": {
+              "vi": "Công nghệ:",
+              "en": "Tech Stack:",
+              "tw": "使用技術："
+            },
+            "value": "Manifest V3, Chrome Extension API, HTML5, CSS3, ES6 JS, JSZip"
+          },
+          {
+            "label": {
+              "vi": "Mục đích:",
+              "en": "Main Goal:",
+              "tw": "主要目標："
+            },
+            "value": "Tối ưu ngân sách sử dụng API LLM và quản lý mức tiêu hao. / Optimization of LLM API budgets and consumption monitoring."
+          }
+        ],
+        "link_text": {
+          "vi": "Xem Mã Nguồn GitHub",
+          "en": "View GitHub Repo",
+          "tw": "檢視 GitHub 專案"
+        },
+        "link_url": "https://github.com/Ranma-2000/AI-Limit-Tracker"
+      }
+    },
+    {
+      "id": "local-comfyui",
+      "tag": "Generative AI",
+      "title": "Local ComfyUI Workflow",
+      "desc": {
+        "vi": "Quy trình kết hợp sức mạnh đám mây Google Colab và máy tính cá nhân để tạo và thử nghiệm nhanh ảnh/video chất lượng cao.",
+        "en": "Hybrid workflow pairing Google Colab cloud computing with local storage for rapid generative image/video tasks.",
+        "tw": "結合 Google Colab 雲端運算與本地儲存的混合工作流，用於快速生成圖像與影片。"
+      },
+      "techs": [
+        "ComfyUI",
+        "Google Colab",
+        "Python",
+        "Stable Diffusion"
+      ],
+      "modal": {
+        "desc_title": {
+          "vi": "Mô tả dự án",
+          "en": "Project Description",
+          "tw": "專案描述"
+        },
+        "paragraphs": [
+          {
+            "vi": "Giải pháp giải quyết bài toán thiếu phần cứng đồ họa mạnh tại địa phương bằng mô hình lai. Chúng tôi chạy các mô hình Stable Diffusion/ComfyUI nặng trên Google Colab để tận dụng GPU đám mây hiệu năng cao, sau đó đồng bộ hóa tức thì và lưu trữ ảnh/video kết quả tại ổ đĩa local PC.",
+            "en": "This project addresses local GPU limitations by building a hybrid generative design pipeline. Heavy Stable Diffusion nodes run on Google Colab to benefit from high-performance cloud GPUs, while rendering results and custom node structures are synchronized back to a local PC for storage and prototyping.",
+            "tw": "本專案透過建立混合生成式設計管線來解決本地 GPU 限制。在 Google Colab 上執行大型 Stable Diffusion 節點以利用高性能雲端 GPU，同時將渲染結果與自訂節點結構同步回本地 PC 進行儲存。"
+          },
+          {
+            "vi": "Đã xây dựng các workflow tự động hóa phức tạp trong ComfyUI giúp kiểm soát chặt chẽ các bước sinh ảnh, upscale và chuyển động video chất lượng cao.",
+            "en": "Engineered complex node networks and automated scripts in ComfyUI to streamline high-fidelity image composition and video generation.",
+            "tw": "在 ComfyUI 中設計了複雜的節點網路與自動化腳編，以簡化高保真圖像合成與影片生成。"
+          }
+        ],
+        "tech_specs_title": {
+          "vi": "Thông tin kỹ thuật",
+          "en": "Technical Specs",
+          "tw": "技術規格"
+        },
+        "specs": [
+          {
+            "label": {
+              "vi": "Nền tảng:",
+              "en": "Platforms:",
+              "tw": "平台與工具："
+            },
+            "value": "ComfyUI, Google Colab (A100/T4 GPUs), Stable Diffusion XL, Python scripts"
+          },
+          {
+            "label": {
+              "vi": "Loại hình:",
+              "en": "Type:",
+              "tw": "類型："
+            },
+            "value": "Dự án cá nhân / Side-Project (2025)"
+          }
+        ],
+        "link_text": {
+          "vi": "Xem Workflow Chi Tiết",
+          "en": "View Workflow Details",
+          "tw": "檢視工作流詳情"
+        },
+        "link_url": "https://github.com/Ranma-2000"
+      }
+    },
+    {
+      "id": "iot-ecg",
+      "tag": "IoT & AI Health",
+      "title": "IoT ECG Classifier",
+      "desc": {
+        "vi": "Thiết bị IoT kết hợp mô hình AI phân loại tín hiệu điện tâm đồ và bảng điều khiển theo dõi nhịp tim cho người dùng cuối.",
+        "en": "IoT ECG device integrated with AI classification models and dashboard monitoring for cardiac health.",
+        "tw": "整合 AI 分類模型與數據看板的 IoT 心電圖（ECG）監測設備。"
+      },
+      "techs": [
+        "Python",
+        "Jira",
+        "Embedded AI",
+        "Signal Processing"
+      ],
+      "modal": {
+        "desc_title": {
+          "vi": "Mô tả dự án",
+          "en": "Project Description",
+          "tw": "專案描述"
+        },
+        "paragraphs": [
+          {
+            "vi": "Dự án tốt nghiệp xuất sắc (Điểm số: 9.0/10) nghiên cứu thiết kế thiết bị nhúng IoT thu nhận tín hiệu điện tâm đồ (ECG) thời gian thực. Hệ thống sử dụng mô hình học máy để phân loại các dạng sóng điện tim (bình thường vs bất thường/rối loạn nhịp) và hiển thị kết quả trực quan cho bác sĩ hoặc người dùng cuối.",
+            "en": "A highly-rated graduation project (Grade: 9.0/10) focusing on building an embedded IoT hardware device to capture real-time ECG signals. The system deploys trained machine learning classifiers to screen normal vs. abnormal/arrhythmia heartbeats and visualizes telemetry data on a user dashboard.",
+            "tw": "獲得高評分的畢業專案（成績：9.0/10），專注於構建嵌入式 IoT 硬體設備以即時擷取心電圖（ECG）訊號。系統部署訓練好的機器學習分類器來篩選正常與異常/心律不整的心跳，並在用戶看板上可視化遙測數據。"
+          },
+          {
+            "vi": "Quy trình dự án được quản lý chuyên nghiệp bằng Jira. Tôi cũng đã đề xuất và thử nghiệm một giải pháp Học tập trọn đời (Continual Learning) giúp cập nhật mô hình AI liên tục khi tiếp nhận các mẫu ECG mới từ người dùng.",
+            "en": "Constructed the AI software workflow using Jira to track backlogs and tasks. Proposed and tested a continual learning implementation to update model weights dynamically as new ECG patterns are captured.",
+            "tw": "使用 Jira 追蹤待辦事項與任務以建立 AI 軟體工作流。提出並測試了持續學習（Continual Learning）實作，以便在擷取新 ECG 模式時動態更新模型權重。"
+          }
+        ],
+        "tech_specs_title": {
+          "vi": "Thông tin kỹ thuật",
+          "en": "Technical Specs",
+          "tw": "技術規格"
+        },
+        "specs": [
+          {
+            "label": {
+              "vi": "Thông số kỹ thuật:",
+              "en": "Specs:",
+              "tw": "技術規格："
+            },
+            "value": "Embedded Hardware, Signal Processing, Keras/TensorFlow, Jira Tracking"
+          },
+          {
+            "label": {
+              "vi": "Mã nguồn:",
+              "en": "Code Repo:",
+              "tw": "程式碼專案："
+            },
+            "value": "GitHub (DT77 FYP UTE 2023)"
+          }
+        ],
+        "link_text": {
+          "vi": "Xem Mã Nguồn GitHub",
+          "en": "View GitHub Repo",
+          "tw": "檢視 GitHub 專案"
+        },
+        "link_url": "https://github.com/Ranma-2000/DT77_FYP_UTE_2023"
+      }
+    },
+    {
+      "id": "delta-robot",
+      "tag": "Robotics",
+      "title": "Delta Robot Classifier",
+      "desc": {
+        "vi": "Thiết kế giáo án chế tạo robot Delta 3 trục song song tích hợp thị giác máy tính để phân loại sản phẩm trên băng chuyền.",
+        "en": "Design and creation of a 3-axis parallel Delta robot integrated with computer vision for product classification.",
+        "tw": "設計與製造三軸並聯 Delta 機器人，並結合電腦視覺進行產品分類。"
+      },
+      "techs": [
+        "MATLAB",
+        "PID Control",
+        "Computer Vision",
+        "Kinematics"
+      ],
+      "modal": {
+        "desc_title": {
+          "vi": "Mô tả dự án",
+          "en": "Project Description",
+          "tw": "專案描述"
+        },
+        "paragraphs": [
+          {
+            "vi": "Dự án tốt nghiệp xuất sắc nhóm 4 thành viên (Điểm số: 9.3/10). Chúng tôi đã tính toán động học thuận (Forward Kinematics) và động học nghịch (Inverse Kinematics) để điều khiển cánh tay song song Delta robot di chuyển gắp vật cực kỳ chính xác ở tốc độ cao.",
+            "en": "A team-based graduation project (4 members, Grade: 9.3/10). We calculated forward and inverse kinematics formulas to precisely actuate parallel delta robot arms for high-speed pick-and-place trajectories.",
+            "tw": "一項團隊畢業專案（4 名成員，成績：9.3/10）。我們計算了正向和逆向運動學公式，以精確驅動並聯 Delta 機器人手臂進行高速拾取與放置路徑。"
+          },
+          {
+            "vi": "Bộ điều khiển PID được mô phỏng chi tiết trên MATLAB, tối ưu hóa các tham số P, I, D bằng thuật toán di truyền (GA) để giảm thiểu rung lắc và sai số bám đường. Hệ thống tích hợp camera xử lý ảnh tự động nhận diện và gắp phân loại sản phẩm chạy trên băng chuyền.",
+            "en": "Simulated PID controllers on MATLAB, optimizing P, I, and D gains using Genetic Algorithms (GA) to minimize trajectory overshoot. Integrated machine vision processing to recognize and classify conveyor items in real-time.",
+            "tw": "在 MATLAB 上模擬 PID 控制器，使用遺傳演算法（GA）優化 P、I、D 增益，以最大程度地減少路徑超調。整合電腦視覺處理，以即時識別和分類傳送帶上的品項。"
+          }
+        ],
+        "tech_specs_title": {
+          "vi": "Thông tin kỹ thuật",
+          "en": "Technical Specs",
+          "tw": "技術規格"
+        },
+        "specs": [
+          {
+            "label": {
+              "vi": "Lĩnh vực nghiên cứu:",
+              "en": "Research Areas:",
+              "tw": "研究領域："
+            },
+            "value": "Robot Kinematics, PID Simulation, MATLAB, Genetic Algorithms, OpenCV"
+          },
+          {
+            "label": {
+              "vi": "Mã nguồn:",
+              "en": "Code Repo:",
+              "tw": "程式碼專案："
+            },
+            "value": "GitHub (DT13 KLTN UTE 2023)"
+          }
+        ],
+        "link_text": {
+          "vi": "Xem Mã Nguồn GitHub",
+          "en": "View GitHub Repo",
+          "tw": "檢視 GitHub 專案"
+        },
+        "link_url": "https://github.com/Ranma-2000/DT13_KLTN_UTE_2023"
+      }
+    },
+    {
+      "id": "otto-recommender",
+      "tag": "Data Science",
+      "title": "OTTO Recommender System",
+      "desc": {
+        "vi": "Xây dựng thuật toán xếp hạng đa mục tiêu gợi ý sản phẩm thương mại điện tử dựa trên hành vi duyệt web và ma trận đồng truy cập.",
+        "en": "Multi-objective recommendation system predicting e-commerce interactions using co-visitation matrices and rankers.",
+        "tw": "建立多目標推薦系統，使用共訪矩陣與排序器預測電子商務互動。"
+      },
+      "techs": [
+        "Python",
+        "Kaggle",
+        "LightGBM",
+        "Data Science"
+      ],
+      "modal": {
+        "desc_title": {
+          "vi": "Mô tả dự án",
+          "en": "Project Description",
+          "tw": "專案描述"
+        },
+        "paragraphs": [
+          {
+            "vi": "Tham gia cuộc thi Kaggle OTTO Recommender System. Dự án giải quyết bài toán đề xuất sản phẩm tối ưu (clicks, carts, orders) dựa trên lịch sử phiên duyệt web của người dùng.",
+            "en": "Competed in the Kaggle OTTO Multi-Objective Recommender System challenge. Built predictive pipelines to suggest click-throughs, cart additions, and checkout purchases based on session clickstreams.",
+            "tw": "參加了 Kaggle OTTO 多目標推薦系統挑戰賽。構建預測管線，根據會話點擊流建議點擊、購物車添加和結帳購買。"
+          },
+          {
+            "vi": "Thiết kế các trường dữ liệu hành vi (như phân khúc khách hàng RFM), áp dụng ma trận đồng truy cập (co-visitation matrix) để tìm các sản phẩm liên quan chéo, và tối ưu hóa mô hình xếp hạng LightGBM đạt thứ hạng cao trong tổng số hàng ngàn đội thi đấu.",
+            "en": "Engineered session-based features, constructed co-visitation matrices to catch purchase links, and fine-tuned LightGBM ranking models to secure top positions out of 2,615 competing teams.",
+            "tw": "設計基於會話的特徵，構建共訪矩陣以捕捉購買連結，並微調 LightGBM 排序模型，在 2,615 支參賽隊伍中獲得領先名次。"
+          }
+        ],
+        "tech_specs_title": {
+          "vi": "Thông tin kỹ thuật",
+          "en": "Technical Specs",
+          "tw": "技術規格"
+        },
+        "specs": [
+          {
+            "label": {
+              "vi": "Xếp hạng:",
+              "en": "Rank achieved:",
+              "tw": "獲得名次："
+            },
+            "value": "Public: 424/2615 | Private: 747/2615"
+          },
+          {
+            "label": {
+              "vi": "Kỹ thuật nổi bật:",
+              "en": "Key Methods:",
+              "tw": "關鍵技術："
+            },
+            "value": "Co-visitation Matrix, LightGBM Ranker, Session EDA, Feature Engineering"
+          }
+        ],
+        "link_text": {
+          "vi": "Xem Thông Tin Cuộc Thi",
+          "en": "View Kaggle Competition",
+          "tw": "檢視 Kaggle 競賽"
+        },
+        "link_url": "https://www.kaggle.com/competitions/otto-recommender-system"
+      }
+    }
+  ]
+};
+const embeddedChatbotData = {
+  "vi": {
+    "start": {
+      "botText": "Xin chào! Mình là Trợ lý AI của anh Phạm Công Thành. Bạn muốn khám phá điều gì về năng lực và kinh nghiệm của anh Thành?",
+      "options": [
+        {
+          "text": "Kinh nghiệm làm Kỹ sư AI (Greystone & Unicloud)",
+          "nextNode": "ai_experience"
+        },
+        {
+          "text": "Các dự án nổi bật (Delta Robot, IoT ECG, AI Tracker)",
+          "nextNode": "featured_projects"
+        }
+      ]
+    },
+    "ai_experience": {
+      "botText": "Anh Thành có kinh nghiệm làm Kỹ sư AI tại <strong>Greystone Data System</strong> (nâng độ chính xác lắp ráp từ 60% lên 80% nhờ hệ thống chiếu sáng AI) và <strong>Unicloud</strong> (huấn luyện AI nhận dạng biển số xe, thẻ căn cước cho Kien Long Bank). Bạn muốn tìm hiểu kỹ hơn về dự án nào?",
+      "options": [
+        {
+          "text": "Dự án tại Greystone Data System",
+          "nextNode": "greystone_details"
+        },
+        {
+          "text": "Dự án tại Unicloud",
+          "nextNode": "unicloud_details"
+        }
+      ]
+    },
+    "greystone_details": {
+      "botText": "Tại Greystone, anh Thành đóng vai trò cầu nối giữa AI, phần cứng và lắp ráp. Anh thiết kế đặc tả phần cứng từ yêu cầu AI, chạy thử nguyên mẫu và kiểm soát chất lượng (QC) để triển khai mô hình AI tin cậy cho khách hàng như T-Mobile và FedEx. Bạn muốn xem tiếp thông tin gì?",
+      "options": [
+        {
+          "text": "Xem kinh nghiệm tại Unicloud",
+          "nextNode": "unicloud_details"
+        },
+        {
+          "text": "Tìm hiểu về học vấn & trường Đại học",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "unicloud_details": {
+      "botText": "Tại Unicloud, anh Thành huấn luyện các mô hình thị giác máy tính cho ứng dụng Fintech của ngân hàng Kien Long Bank, xử lý nhận diện biển số xe và thẻ ID. Đây là nền tảng giúp anh thành thạo Python, OpenCV, và Keras/TensorFlow. Bạn muốn xem tiếp thông tin gì?",
+      "options": [
+        {
+          "text": "Xem các dự án nổi bật của anh Thành",
+          "nextNode": "featured_projects"
+        },
+        {
+          "text": "Xem học vấn & trường Đại học",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "featured_projects": {
+      "botText": "Anh Thành sở hữu nhiều dự án ấn tượng kết hợp Cơ điện tử và AI:<br>1. **AI Limit Tracker** (Chrome Extension theo dõi chi phí API)<br>2. **Delta Robot Classifier** (Robot gắp sản phẩm băng chuyền)<br>3. **IoT ECG Classifier** (Thiết bị theo dõi tim mạch AI)<br>Bạn muốn xem chi tiết dự án nào?",
+      "options": [
+        {
+          "text": "Dự án AI Limit Tracker (Chrome Ext)",
+          "nextNode": "project_tracker"
+        },
+        {
+          "text": "Dự án Delta Robot & IoT ECG",
+          "nextNode": "project_hardware"
+        }
+      ]
+    },
+    "project_tracker": {
+      "botText": "AI Limit Tracker giúp lập trình viên quản lý ngân sách LLM API thời gian thực. Anh Thành đã xây dựng background scripts để bắt sự kiện mạng trình duyệt và tích hợp JSZip để xuất dữ liệu cấu hình. Bạn muốn chuyển hướng xem học vấn hay kỹ năng?",
+      "options": [
+        {
+          "text": "Xem thông tin Học vấn (University)",
+          "nextNode": "education_details"
+        },
+        {
+          "text": "Hỏi lại từ đầu",
+          "nextNode": "start"
+        }
+      ]
+    },
+    "project_hardware": {
+      "botText": "Cả hai đồ án tốt nghiệp của anh Thành đều đạt điểm xuất sắc: <strong>Delta Robot</strong> (9.3/10, tính động học, tối ưu PID trên MATLAB bằng thuật toán di truyền GA) và <strong>IoT ECG</strong> (9.0/10, thu tín hiệu điện tim và phân loại nhịp tim bằng AI). Bạn muốn xem kỹ năng lập trình hay học vấn?",
+      "options": [
+        {
+          "text": "Xem danh sách Kỹ năng chính",
+          "nextNode": "skills_details"
+        },
+        {
+          "text": "Xem thông tin Học vấn (University)",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "skills_details": {
+      "botText": "Kỹ năng chính của anh Thành gồm:<br>- **Ngôn ngữ**: Python, C/C++, SQL<br>- **Công cụ AI**: OpenAI, Gemini API, Deepseek, Claude, Elevenlabs, ComfyUI<br>- **Thiết bị Edge**: Raspberry Pi, Orange Pi<br>- **Quản trị**: Git, Docker, DVC, Jira, PowerBI. Bạn muốn liên hệ với anh ấy?",
+      "options": [
+        {
+          "text": "Xem cách liên hệ với anh Thành",
+          "nextNode": "contact_details"
+        },
+        {
+          "text": "Hỏi lại từ đầu",
+          "nextNode": "start"
+        }
+      ]
+    },
+    "education_details": {
+      "botText": "Anh Thành tốt nghiệp chuyên ngành **Kỹ thuật Cơ điện tử (Mechatronic Engineering)** tại **Đại học Sư phạm Kỹ thuật TP.HCM** (Aug 2018 - Mar 2023), tạo nền tảng vững chắc cho việc thiết kế robot vật lý và lập trình nhúng. Bạn muốn xem tiếp thông tin nào?",
+      "options": [
+        {
+          "text": "Xem các dự án nổi bật",
+          "nextNode": "featured_projects"
+        },
+        {
+          "text": "Xem thông tin liên hệ",
+          "nextNode": "contact_details"
+        }
+      ]
+    },
+    "contact_details": {
+      "botText": "Bạn có thể gửi email trực tiếp cho anh Thành tại **contact@peterpham.info.vn** hoặc kết nối qua GitHub (Ranma-2000) / LinkedIn. Rất cảm ơn bạn đã quan tâm đến hồ sơ của anh Thành!",
+      "options": [
+        {
+          "text": "Hỏi lại từ đầu",
+          "nextNode": "start"
+        }
+      ]
+    }
+  },
+  "en": {
+    "start": {
+      "botText": "Hello! I am Thanh Pham Cong's AI Assistant. What would you like to discover about Thanh's background and achievements?",
+      "options": [
+        {
+          "text": "AI Engineer Work Experience (Greystone & Unicloud)",
+          "nextNode": "ai_experience"
+        },
+        {
+          "text": "Featured Projects (Delta Robot, IoT ECG, AI Tracker)",
+          "nextNode": "featured_projects"
+        }
+      ]
+    },
+    "ai_experience": {
+      "botText": "Thanh worked as an AI Engineer at <strong>Greystone Data System</strong> (improving line assembly accuracy from 60% to 80% using an AI lighting system) and <strong>Unicloud</strong> (training computer vision models to detect license plates/ID cards). Which company experience interests you?",
+      "options": [
+        {
+          "text": "Greystone Data System project",
+          "nextNode": "greystone_details"
+        },
+        {
+          "text": "Unicloud project",
+          "nextNode": "unicloud_details"
+        }
+      ]
+    },
+    "greystone_details": {
+      "botText": "At Greystone, Thanh bridged the gap between AI developers, hardware architects, and assembly crews. He translated complex AI requirements into actionable hardware specs, validating prototypes and leading pre-shipment QCs for clients like T-Mobile/FedEx. What should we explore next?",
+      "options": [
+        {
+          "text": "Explore Unicloud experience",
+          "nextNode": "unicloud_details"
+        },
+        {
+          "text": "View Education & University details",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "unicloud_details": {
+      "botText": "At Unicloud, Thanh trained deep learning models for Kien Long Bank's Fintech features, recognizing license plates and national ID cards. This experience solidified his Python, OpenCV, and Keras/TensorFlow skills. What would you like to check next?",
+      "options": [
+        {
+          "text": "View featured projects",
+          "nextNode": "featured_projects"
+        },
+        {
+          "text": "Check Education & University details",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "featured_projects": {
+      "botText": "Thanh has built several hardware-AI projects:<br>1. **AI Limit Tracker**: Browser extension monitoring API costs.<br>2. **Delta Robot Classifier**: Product sorting conveyor arm.<br>3. **IoT ECG Classifier**: Heartbeat telemetry IoT device.<br>Which one would you like to inspect?",
+      "options": [
+        {
+          "text": "AI Limit Tracker (Chrome Ext)",
+          "nextNode": "project_tracker"
+        },
+        {
+          "text": "Delta Robot & IoT ECG Hardware",
+          "nextNode": "project_hardware"
+        }
+      ]
+    },
+    "project_tracker": {
+      "botText": "AI Limit Tracker logs LLM API token use in real-time. Thanh coded browser background.js hooks to intercept network queries, using JSZip to wrap exports. Would you like to check his education or core skills?",
+      "options": [
+        {
+          "text": "Check Education & University",
+          "nextNode": "education_details"
+        },
+        {
+          "text": "Restart Assistant",
+          "nextNode": "start"
+        }
+      ]
+    },
+    "project_hardware": {
+      "botText": "Both of Thanh's graduation projects received high grades: <strong>Delta Robot</strong> (9.3/10, kinematic models and MATLAB PID tune using Genetic Algorithms) and <strong>IoT ECG</strong> (9.0/10, heart telemetry and neural classification). Would you like to see skills or education?",
+      "options": [
+        {
+          "text": "Show Technical Skills list",
+          "nextNode": "skills_details"
+        },
+        {
+          "text": "Check Education & University",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "skills_details": {
+      "botText": "Thanh's key skills include:<br>- **Languages**: Python, C/C++, SQL<br>- **AI tools**: OpenAI, Gemini API, Deepseek, Claude, Elevenlabs, ComfyUI<br>- **Edge Hardware**: Raspberry Pi, Orange Pi<br>- **DevOps/Management**: Git, Docker, DVC, Jira, PowerBI. How would you like to connect?",
+      "options": [
+        {
+          "text": "How to contact Thanh",
+          "nextNode": "contact_details"
+        },
+        {
+          "text": "Restart Assistant",
+          "nextNode": "start"
+        }
+      ]
+    },
+    "education_details": {
+      "botText": "Thanh graduated with a **B.S. in Mechatronic Engineering** from the **University of Technology and Education** (Aug 2018 - Mar 2023), establishing a solid grounding in controller kinematics and embedded software. What is next?",
+      "options": [
+        {
+          "text": "View featured projects",
+          "nextNode": "featured_projects"
+        },
+        {
+          "text": "Check contact details",
+          "nextNode": "contact_details"
+        }
+      ]
+    },
+    "contact_details": {
+      "botText": "You can reach Thanh via email at **contact@peterpham.info.vn**, or connect through GitHub (Ranma-2000) or LinkedIn. Thank you for your interest!",
+      "options": [
+        {
+          "text": "Restart Assistant",
+          "nextNode": "start"
+        }
+      ]
+    }
+  },
+  "tw": {
+    "start": {
+      "botText": "您好！我是成港泰（Thanh Pham Cong）的 AI 助理。您想了解關於阿成的哪些經歷與專業能力呢？",
+      "options": [
+        {
+          "text": "AI 工程師工作經歷 (Greystone & Unicloud)",
+          "nextNode": "ai_experience"
+        },
+        {
+          "text": "精選專案作品 (Delta 機器人、IoT 心電圖、AI 追蹤器)",
+          "nextNode": "featured_projects"
+        }
+      ]
+    },
+    "ai_experience": {
+      "botText": "阿成曾在 <strong>Greystone Data System</strong> 擔任 AI 工程師（使用 AI 整合照明系統將生產線組裝精度從 60% 提升至 80%），並在 <strong>Unicloud</strong> 實習（為 Kien Long 銀行訓練車牌與身分證件辨識模型）。您想深入了解哪段經歷？",
+      "options": [
+        {
+          "text": "Greystone Data System 專案細節",
+          "nextNode": "greystone_details"
+        },
+        {
+          "text": "Unicloud 專案細節",
+          "nextNode": "unicloud_details"
+        }
+      ]
+    },
+    "greystone_details": {
+      "botText": "在 Greystone 期間，阿成主要負責連結 AI 開發與硬體組裝團隊。他將複雜的 AI 演算規格轉化為可執行的硬體參數，主導原型測試與出貨前 QC，服務 T-Mobile 和 FedEx 等大客戶。接下來想看什麼？",
+      "options": [
+        {
+          "text": "檢視 Unicloud 經歷",
+          "nextNode": "unicloud_details"
+        },
+        {
+          "text": "檢視學歷與大學資訊",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "unicloud_details": {
+      "botText": "在 Unicloud 實習時，阿成專注於金融科技產品的電腦視覺模型開發，負責辨識車牌與身分證。這段經歷讓他精通 Python、OpenCV 和 Keras/TensorFlow. 接下來想檢視什麼？",
+      "options": [
+        {
+          "text": "檢視精選專案作品",
+          "nextNode": "featured_projects"
+        },
+        {
+          "text": "檢視學歷與大學資訊",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "featured_projects": {
+      "botText": "阿成有多項結合機電整合與 AI 的專案作品：<br>1. **AI Limit Tracker**：追蹤 API 額度的瀏覽器插件<br>2. **Delta Robot Classifier**：傳送帶分類並聯機器人<br>3. **IoT ECG Classifier**：AI 心電數據遙測硬體<br>您想了解哪一項？",
+      "options": [
+        {
+          "text": "AI Limit Tracker 插件細節",
+          "nextNode": "project_tracker"
+        },
+        {
+          "text": "並聯機器人與心電圖硬體",
+          "nextNode": "project_hardware"
+        }
+      ]
+    },
+    "project_tracker": {
+      "botText": "AI Limit Tracker 讓開發者即時管控 LLM API 的 Token 與成本。阿成在 Chrome 插件中設計了背景監聽腳本，並整合 JSZip 匯出設定。接下來想看學歷還是技能？",
+      "options": [
+        {
+          "text": "檢視學歷與大學資訊",
+          "nextNode": "education_details"
+        },
+        {
+          "text": "重新開始對話",
+          "nextNode": "start"
+        }
+      ]
+    },
+    "project_hardware": {
+      "botText": "阿成的兩個畢業專案皆獲得了優秀的評分：<strong>並聯 Delta 機器人</strong>（9.3/10，計算運動學並以遺傳演算法 GA 優化 MATLAB PID 控制參數）與 <strong>IoT 心電圖</strong>（9.0/10，心電波形擷取與神經網路分類）。想了解技能還是學歷？",
+      "options": [
+        {
+          "text": "檢視技術技能清單",
+          "nextNode": "skills_details"
+        },
+        {
+          "text": "檢視學歷與大學資訊",
+          "nextNode": "education_details"
+        }
+      ]
+    },
+    "skills_details": {
+      "botText": "阿成的核心技能包括：<br>- **程式語言**：Python, C/C++, SQL<br>- **AI 工具**：OpenAI, Gemini API, Deepseek, Claude, Elevenlabs, ComfyUI<br>- **邊緣硬體**：Raspberry Pi, Orange Pi<br>- **專案管理**：Git, Docker, DVC, Jira, PowerBI. 您想與他聯絡嗎？",
+      "options": [
+        {
+          "text": "如何與阿成聯絡",
+          "nextNode": "contact_details"
+        },
+        {
+          "text": "重新開始對話",
+          "nextNode": "start"
+        }
+      ]
+    },
+    "education_details": {
+      "botText": "阿成畢業於**胡志明市師範科技大學** **機電整合工程學系**（2018年8月 - 2023年3月），為機器人控制與嵌入式系統開發打下堅實基礎。接下來想了解？",
+      "options": [
+        {
+          "text": "檢視精選專案作品",
+          "nextNode": "featured_projects"
+        },
+        {
+          "text": "檢視聯絡資訊",
+          "nextNode": "contact_details"
+        }
+      ]
+    },
+    "contact_details": {
+      "botText": "您可以寄信至 **contact@peterpham.info.vn** 與阿成聯絡，或造訪他的 GitHub (Ranma-2000) 或 LinkedIn. 感謝您花時間檢視阿成的履歷！",
+      "options": [
+        {
+          "text": "重新開始對話",
+          "nextNode": "start"
+        }
+      ]
+    }
+  }
+};
+
+// API Base URL
+const API_URL = "http://127.0.0.1:8000/api";
+
+let resumeData = null;
+let currentChatNode = null;
+
+// --- 1. Navigation Menu Controls (Mobile Responsive Toggle) ---
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+const header = document.getElementById('header');
+
+navToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  const icon = navToggle.querySelector('i');
+  if (navMenu.classList.contains('active')) {
+    icon.className = 'fa-solid fa-xmark';
+  } else {
+    icon.className = 'fa-solid fa-bars';
+  }
+});
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    navToggle.querySelector('i').className = 'fa-solid fa-bars';
+  });
+});
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// --- 2. Scroll Spy Highlight Menu ---
+const sections = document.querySelectorAll('section');
+window.addEventListener('scroll', () => {
+  let currentSection = '';
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120;
+    const sectionHeight = section.clientHeight;
+    if (window.pageYOffset >= sectionTop) {
+      currentSection = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${currentSection}`) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// --- 3. Language Translation System ---
+const placeholders = {
+  vi: {
+    name: "Nguyễn Văn A",
+    email: "email@viethoc.edu.vn",
+    subject: "Hợp tác thiết kế bài giảng AI / STEM",
+    msg: "Xin chào Thành, mình quan tâm đến..."
+  },
+  en: {
+    name: "John Doe",
+    email: "john.doe@edtech.com",
+    subject: "AI / STEM Curriculum Partnership",
+    msg: "Hello Thanh, I am interested in..."
+  },
+  tw: {
+    name: "王小明",
+    email: "xiaoming@edtech.tw",
+    subject: "AI / STEM 課程合作洽談",
+    msg: "你好，成，我對您的專案有興趣..."
+  }
+};
+
+function switchLanguage(lang) {
+  document.body.setAttribute('data-lang', lang);
+  
+  document.getElementById('formName').placeholder = placeholders[lang].name;
+  document.getElementById('formEmail').placeholder = placeholders[lang].email;
+  document.getElementById('formSubject').placeholder = placeholders[lang].subject;
+  document.getElementById('formMessage').placeholder = placeholders[lang].msg;
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('data-lang-trigger') === lang) {
+      btn.classList.add('active');
+    }
+  });
+
+  // Re-render language-dependent dynamic parts
+  if (resumeData) {
+    renderResumeDynamicParts(lang);
+  }
+  
+  resetChatbot();
+}
+
+// --- 4. Fetch Resume Data and Render Dynamic Contents ---
+async function loadResumeData() {
+  try {
+    resumeData = embeddedResumeData;
+    
+    // Initial rendering with default language (vi)
+    const activeLang = document.body.getAttribute('data-lang') || 'vi';
+    renderResumeDynamicParts(activeLang);
+    
+  } catch (error) {
+    console.error("Error loading embedded resume data:", error);
+    showToast("Không thể tải dữ liệu CV.");
+  }
+}
+
+function renderResumeDynamicParts(lang) {
+  if (!resumeData) return;
+  
+  // 1. Hero Content
+  document.getElementById('heroBadge').textContent = resumeData.personal_info.badge;
+  document.getElementById('heroTitle').innerHTML = `
+    <span lang="${lang}">${resumeData.personal_info.name}</span>
+  `;
+  document.getElementById('heroSubtitle').innerHTML = `
+    <span lang="${lang}">${resumeData.personal_info.title[lang]}</span>
+  `;
+  document.getElementById('heroTagline').innerHTML = `
+    <span lang="${lang}">${resumeData.personal_info.tagline[lang]}</span>
+  `;
+  
+  // 2. About Info Box Contacts
+  const contactDetailsContainer = document.getElementById('aboutContactDetails');
+  contactDetailsContainer.innerHTML = `
+    <div class="about-info-item">
+      <i class="fa-solid fa-envelope"></i>
+      <span>${resumeData.personal_info.email}</span>
+    </div>
+    <div class="about-info-item">
+      <i class="fa-solid fa-location-dot"></i>
+      <span lang="${lang}">${resumeData.personal_info.location[lang]}</span>
+    </div>
+    <div class="about-info-item">
+      <i class="fa-brands fa-linkedin"></i>
+      <span><a href="https://${resumeData.personal_info.socials.linkedin.replace('https://', '')}" target="_blank">${resumeData.personal_info.socials.linkedin.replace('https://', '')}</a></span>
+    </div>
+    <div class="about-info-item">
+      <i class="fa-brands fa-github"></i>
+      <span><a href="https://${resumeData.personal_info.socials.github.replace('https://', '')}" target="_blank">${resumeData.personal_info.socials.github.replace('https://', '')}</a></span>
+    </div>
+  `;
+  
+  // 3. About Paragraphs
+  const paragraphsContainer = document.getElementById('aboutParagraphs');
+  paragraphsContainer.innerHTML = resumeData.about.paragraphs.map(p => `
+    <p class="about-text-p lang-${lang}">${p[lang]}</p>
+  `).join('');
+  
+  // 4. About Highlights
+  const highlightsContainer = document.getElementById('aboutHighlights');
+  highlightsContainer.innerHTML = resumeData.about.highlights.map(h => `
+    <div class="highlight-card glass-card" style="border-left: 4px solid var(${h.color});">
+      <h4>
+        <i class="fa-solid ${h.icon}" style="color: var(${h.color});"></i>
+        <span>${h.title[lang]}</span>
+      </h4>
+      <p>${h.desc[lang]}</p>
+    </div>
+  `).join('');
+  
+  // 5. Skills Section
+  const skillsGrid = document.getElementById('skillsGrid');
+  skillsGrid.innerHTML = resumeData.skills.map(skill => `
+    <div class="skill-card glass-card">
+      <div class="skill-card-header">
+        <i class="fa-solid ${skill.icon}"></i>
+        <h3>${skill.category[lang]}</h3>
+      </div>
+      <p class="skill-card-desc">${skill.desc[lang]}</p>
+      <ul class="skill-items-list">
+        ${skill.items.map(item => `<li>${item[lang]}</li>`).join('')}
+      </ul>
+    </div>
+  `).join('');
+
+  // 6. Experience Timeline
+  const experienceTimeline = document.getElementById('experienceTimeline');
+  experienceTimeline.innerHTML = resumeData.experience.map(job => `
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card glass-card">
+        <div class="timeline-header">
+          <div class="timeline-title">
+            <h3>${job.role[lang]}</h3>
+            <div class="timeline-company">
+              <i class="fa-solid ${job.company_icon}"></i>
+              <span>${job.company}</span>
+            </div>
+          </div>
+          <span class="timeline-date">${job.date[lang]}</span>
+        </div>
+
+        <div class="timeline-details">
+          <ul>
+            ${job.details.map(detail => `<li>${detail[lang]}</li>`).join('')}
+          </ul>
+
+          ${job.sub_timelines ? job.sub_timelines.map(sub => `
+            <div class="sub-timeline">
+              <h4 class="sub-timeline-title" onclick="toggleSubTimeline(this)">
+                <i class="fa-solid fa-network-wired"></i>
+                <span lang="vi">Dự án & công việc phụ cùng kỳ</span>
+                <span lang="en">Concurrent Projects & Side Roles</span>
+                <span lang="tw">同期的兼職與獨立專案</span>
+                <i class="fa-solid fa-chevron-down sub-timeline-toggle-icon"></i>
+              </h4>
+              
+              <div class="sub-timeline-content">
+                <div class="sub-timeline-track-container">
+                  <div class="sub-timeline-line">
+                    <div class="sub-timeline-progress" style="width: 0%;"></div>
+                    ${sub.nodes.map(node => `
+                      <div class="sub-timeline-node" style="left: ${node.left};" onclick="toggleSubJob('${node.id}', this)">
+                        <span class="sub-tooltip">
+                          <span>${node.tooltip[lang]}</span>
+                        </span>
+                      </div>
+                    `).join('')}
+                  </div>
+                  <div class="sub-timeline-label start">${sub.start}</div>
+                  <div class="sub-timeline-label end">${sub.end}</div>
+                </div>
+
+                <div class="sub-job-details-container">
+                  ${sub.nodes.map(node => `
+                    <div class="sub-job-card" id="details-${node.id}">
+                      <div class="sub-job-card-header">
+                        <div class="sub-job-card-title">
+                          <h4>${node.title[lang]}</h4>
+                          <div class="sub-job-card-company">
+                            <i class="fa-solid ${node.company_icon}"></i>
+                            <span>${node.company}</span>
+                          </div>
+                        </div>
+                        <span class="sub-job-card-date">${node.date}</span>
+                      </div>
+                      <div class="sub-job-card-details">
+                        <ul>
+                          ${node.details.map(det => `<li>${det[lang]}</li>`).join('')}
+                        </ul>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `).join('') : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Auto-initialize first sub-job dot for each sub-timeline
+  document.querySelectorAll('.sub-timeline').forEach(subTimeline => {
+    const firstDot = subTimeline.querySelector('.sub-timeline-node');
+    if (firstDot) {
+      firstDot.click();
+    }
+  });
+
+  // 7. Projects Section
+  const projectsGrid = document.getElementById('projectsGrid');
+  projectsGrid.innerHTML = resumeData.projects.map(proj => {
+    // Generate simple SVG icons for cards based on project type
+    let cardIconSvg = '';
+    if (proj.id === 'ai-limit-tracker') {
+      cardIconSvg = `
+        <rect width="100" height="100" fill="url(#p1-grad)" opacity="0.15"/>
+        <rect x="20" y="25" width="60" height="50" rx="6" stroke="#2563eb" stroke-width="2" fill="white"/>
+        <rect x="20" y="25" width="60" height="12" fill="#2563eb" rx="2"/>
+        <circle cx="26" cy="31" r="2" fill="white"/>
+        <circle cx="32" cy="31" r="2" fill="white"/>
+        <circle cx="38" cy="31" r="2" fill="white"/>
+        <path d="M30 55 H70 M30 63 H50" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="65" cy="59" r="6" stroke="#2563eb" stroke-width="1.5" fill="none"/>
+        <path d="M69 63 L74 68" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="p1-grad" x1="0" y1="0" x2="100" y2="100">
+            <stop stop-color="#2563eb"/><stop offset="1" stop-color="#0ea5e9"/>
+          </linearGradient>
+        </defs>
+      `;
+    } else if (proj.id === 'local-comfyui') {
+      cardIconSvg = `
+        <rect width="100" height="100" fill="url(#p2-grad)" opacity="0.15"/>
+        <rect x="15" y="25" width="22" height="16" rx="3" stroke="#a855f7" stroke-width="1.5" fill="white"/>
+        <line x1="37" y1="33" x2="48" y2="33" stroke="#9333ea" stroke-width="1.5"/>
+        <rect x="48" y="25" width="22" height="16" rx="3" stroke="#a855f7" stroke-width="1.5" fill="white"/>
+        <line x1="70" y1="33" x2="78" y2="48" stroke="#9333ea" stroke-width="1.5"/>
+        <rect x="48" y="55" width="22" height="16" rx="3" stroke="#06b6d4" stroke-width="1.5" fill="white"/>
+        <line x1="70" y1="63" x2="78" y2="48" stroke="#06b6d4" stroke-width="1.5"/>
+        <rect x="78" y="40" width="16" height="16" rx="3" fill="#2563eb"/>
+        <defs>
+          <linearGradient id="p2-grad" x1="0" y1="0" x2="100" y2="100">
+            <stop stop-color="#a855f7"/><stop offset="1" stop-color="#0ea5e9"/>
+          </linearGradient>
+        </defs>
+      `;
+    } else if (proj.id === 'iot-ecg') {
+      cardIconSvg = `
+        <rect width="100" height="100" fill="url(#p3-grad)" opacity="0.15"/>
+        <path d="M15 50 H30 L35 30 L40 70 L45 45 L50 55 L55 50 H85" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M57 25 C54 22, 47 22, 44 26 C41 22, 34 22, 31 26 C27 30, 27 38, 31 42 L44 55 L57 42 C61 38, 61 30, 57 26 Z" fill="#ef4444" opacity="0.2"/>
+        <defs>
+          <linearGradient id="p3-grad" x1="0" y1="0" x2="100" y2="100">
+            <stop stop-color="#ef4444"/><stop offset="1" stop-color="#f97316"/>
+          </linearGradient>
+        </defs>
+      `;
+    } else if (proj.id === 'delta-robot') {
+      cardIconSvg = `
+        <rect width="100" height="100" fill="url(#p4-grad)" opacity="0.15"/>
+        <line x1="50" y1="20" x2="30" y2="55" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+        <line x1="50" y1="20" x2="50" y2="55" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+        <line x1="50" y1="20" x2="70" y2="55" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+        <rect x="25" y="55" width="50" height="8" rx="2" fill="#047857"/>
+        <circle cx="50" cy="72" r="6" fill="#0ea5e9"/>
+        <path d="M47 63 L47 70 M53 63 L53 70" stroke="#047857" stroke-width="1.5"/>
+        <defs>
+          <linearGradient id="p4-grad" x1="0" y1="0" x2="100" y2="100">
+            <stop stop-color="#10b981"/><stop offset="1" stop-color="#06b6d4"/>
+          </linearGradient>
+        </defs>
+      `;
+    } else {
+      cardIconSvg = `
+        <rect width="100" height="100" fill="url(#p5-grad)" opacity="0.15"/>
+        <circle cx="50" cy="30" r="12" stroke="#f59e0b" stroke-width="2" fill="white"/>
+        <path d="M44 32 Q50 36 56 32" stroke="#f59e0b" stroke-width="1.5" fill="none"/>
+        <circle cx="46" cy="27" r="1.5" fill="#f59e0b"/>
+        <circle cx="54" cy="27" r="1.5" fill="#f59e0b"/>
+        <line x1="50" y1="42" x2="25" y2="70" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <line x1="50" y1="42" x2="50" y2="70" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="50" y1="42" x2="75" y2="70" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <rect x="15" y="70" width="20" height="15" rx="3" fill="#ec4899"/>
+        <rect x="40" y="70" width="20" height="15" rx="3" fill="#f59e0b"/>
+        <rect x="65" y="70" width="20" height="15" rx="3" fill="#ec4899"/>
+        <defs>
+          <linearGradient id="p5-grad" x1="0" y1="0" x2="100" y2="100">
+            <stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ec4899"/>
+          </linearGradient>
+        </defs>
+      `;
+    }
+    
+    return `
+      <div class="project-card glass-card" onclick="openProjectModal('${proj.id}')">
+        <div class="project-img-wrapper">
+          <div class="project-img-placeholder">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              ${cardIconSvg}
+            </svg>
+          </div>
+        </div>
+        <div class="project-body">
+          <span class="project-tag">${proj.tag}</span>
+          <h3>${proj.title}</h3>
+          <p class="project-desc">${proj.desc[lang]}</p>
+          <div class="project-techs">
+            ${proj.techs.map(t => `<span class="tech-pill">${t}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // 8. Contact Form Static Placeholders / Values
+  document.getElementById('contactEmailText').textContent = resumeData.personal_info.email;
+  document.getElementById('contactLocationText').textContent = resumeData.personal_info.location_detailed[lang];
+  
+  // Contact Form Social Buttons
+  const socialGroup = document.getElementById('contactSocialsGroup');
+  socialGroup.innerHTML = `
+    <a href="${resumeData.personal_info.socials.linkedin}" target="_blank" class="social-btn" aria-label="LinkedIn">
+      <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+    <a href="${resumeData.personal_info.socials.github}" target="_blank" class="social-btn" aria-label="GitHub">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <a href="${resumeData.personal_info.socials.website}" target="_blank" class="social-btn" aria-label="Website">
+      <i class="fa-solid fa-globe"></i>
+    </a>
+  `;
+  
+  // 9. Footer Content
+  document.getElementById('footerLogoName').textContent = resumeData.personal_info.name;
+  document.getElementById('footerTagline').textContent = resumeData.personal_info.tagline[lang];
+}
+
+// --- 5. Interactive Sub-timeline (Nested Minor Jobs) Toggle ---
+function toggleSubJob(subJobId, dotEl) {
+  if (!dotEl) return;
+  
+  const subTimeline = dotEl.closest('.sub-timeline');
+  if (!subTimeline) return;
+
+  subTimeline.querySelectorAll('.sub-timeline-node').forEach(node => {
+    node.classList.remove('active');
+  });
+  dotEl.classList.add('active');
+
+  const leftPercent = dotEl.style.left || '0%';
+  const progressLine = subTimeline.querySelector('.sub-timeline-progress');
+  if (progressLine) {
+    progressLine.style.width = leftPercent;
+  }
+
+  subTimeline.querySelectorAll('.sub-job-card').forEach(card => {
+    card.classList.remove('active');
+  });
+  
+  const targetCard = subTimeline.querySelector(`#details-${subJobId}`);
+  if (targetCard) {
+    targetCard.classList.add('active');
+  }
+}
+
+function toggleSubTimeline(titleEl) {
+  if (!titleEl) return;
+  const subTimeline = titleEl.closest('.sub-timeline');
+  if (!subTimeline) return;
+  
+  subTimeline.classList.toggle('expanded');
+}
+
+// --- 6. Dynamic Project Modal System ---
+const overlay = document.getElementById('projectModalOverlay');
+const modalContainer = document.getElementById('projectModalContainer');
+
+function openProjectModal(projectId) {
+  const lang = document.body.getAttribute('data-lang') || 'vi';
+  const proj = resumeData.projects.find(p => p.id === projectId);
+  if (!proj) return;
+  
+  overlay.classList.add('active');
+  modalContainer.style.display = 'block';
+  
+  // Generate showcase HTML based on project type (supports SVG and dynamic webp/images)
+  let showcaseHtml = '';
+  if (proj.id === 'ai-limit-tracker') {
+    showcaseHtml = `
+      <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="120" rx="8" fill="#1e293b"/>
+        <rect width="200" height="15" fill="#0f172a" rx="4"/>
+        <circle cx="10" cy="7.5" r="2.5" fill="#ef4444"/>
+        <circle cx="18" cy="7.5" r="2.5" fill="#eab308"/>
+        <circle cx="26" cy="7.5" r="2.5" fill="#22c55e"/>
+        <text x="15" y="40" font-family="Outfit" font-size="9" fill="#94a3b8" font-weight="bold">API LIMIT MONITOR</text>
+        <text x="15" y="55" font-family="Outfit" font-size="14" fill="#ffffff" font-weight="bold">$18.42 / $25.00</text>
+        <rect x="15" y="65" width="170" height="8" rx="4" fill="#334155"/>
+        <rect x="15" y="65" width="125" height="8" rx="4" fill="#3b82f6"/>
+        <text x="15" y="88" font-family="Outfit" font-size="8" fill="#cbd5e1">Active Session Hooks: 12 requests captured today</text>
+        <text x="15" y="100" font-family="Outfit" font-size="8" fill="#f43f5e" font-weight="bold">Warn threshold reached at 70% budget usage.</text>
+      </svg>
+    `;
+  } else if (proj.id === 'local-comfyui') {
+    showcaseHtml = `
+      <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="120" rx="8" fill="#0f172a"/>
+        <rect x="10" y="15" width="70" height="35" rx="5" fill="#1e293b" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="20" y="30" font-family="Outfit" font-size="8" fill="#ffffff" font-weight="bold">Google Colab</text>
+        <text x="20" y="42" font-family="Outfit" font-size="6" fill="#a855f7">Cloud GPU (A100)</text>
+        <path d="M80 32 H120" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 2"/>
+        <path d="M115 28 L120 32 L115 36" fill="#cbd5e1"/>
+        <text x="88" y="25" font-family="Outfit" font-size="6" fill="#0ea5e9" font-weight="bold">Sync API</text>
+        <rect x="120" y="15" width="70" height="35" rx="5" fill="#1e293b" stroke="#0ea5e9" stroke-width="1.5"/>
+        <text x="130" y="30" font-family="Outfit" font-size="8" fill="#ffffff" font-weight="bold">Local Storage</text>
+        <text x="130" y="42" font-family="Outfit" font-size="6" fill="#0ea5e9">Fast Caching</text>
+        <rect x="15" y="65" width="50" height="45" rx="4" fill="#3b82f6" opacity="0.8"/>
+        <text x="20" y="77" font-family="Outfit" font-size="7" fill="white" font-weight="bold">KSampler</text>
+        <rect x="75" y="65" width="50" height="45" rx="4" fill="#9333ea" opacity="0.8"/>
+        <text x="80" y="77" font-family="Outfit" font-size="7" fill="white" font-weight="bold">VAE Decode</text>
+        <rect x="135" y="65" width="50" height="45" rx="4" fill="#10b981" opacity="0.8"/>
+        <text x="140" y="77" font-family="Outfit" font-size="7" fill="white" font-weight="bold">Save Image</text>
+      </svg>
+    `;
+  } else if (proj.id === 'iot-ecg') {
+    showcaseHtml = `
+      <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="120" rx="8" fill="#1e293b"/>
+        <path d="M0 20 H200 M0 40 H200 M0 60 H200 M0 80 H200 M0 100 H200 M20 0 V120 M40 0 V120 M60 0 V120 M80 0 V120 M100 0 V120 M120 0 V120 M140 0 V120 M160 0 V120 M180 0 V120" stroke="#334155" stroke-width="0.5"/>
+        <path d="M10 60 H50 L55 45 L60 85 L65 30 L70 95 L75 55 L80 65 L85 60 H130 L135 45 L140 85 L145 30 L150 95 L155 55 L160 65 L165 60 H190" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="10" y="10" width="70" height="18" rx="4" fill="#0f172a" stroke="#f97316" stroke-width="1"/>
+        <text x="16" y="21" font-family="Outfit" font-size="7" fill="#f97316" font-weight="bold">AI: NORMAL ECG</text>
+        <text x="145" y="21" font-family="Outfit" font-size="9" fill="#ffffff" font-weight="bold">BPM: 74</text>
+        <circle cx="138" cy="18" r="3.5" fill="#ef4444"/>
+      </svg>
+    `;
+  } else if (proj.id === 'delta-robot') {
+    showcaseHtml = `
+      <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="120" rx="8" fill="#0f172a"/>
+        <line x1="100" y1="15" x2="60" y2="70" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+        <line x1="100" y1="15" x2="100" y2="70" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+        <line x1="100" y1="15" x2="140" y2="70" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="100" cy="15" r="5" fill="#cbd5e1"/>
+        <rect x="50" y="70" width="100" height="10" rx="3" fill="#047857"/>
+        <path d="M90 80 L90 92 M110 80 L110 92" stroke="#047857" stroke-width="2"/>
+        <circle cx="100" cy="98" r="7" fill="#f59e0b"/>
+        <rect x="10" y="108" width="180" height="6" rx="3" fill="#475569"/>
+        <text x="15" y="25" font-family="Outfit" font-size="8" fill="#06b6d4" font-weight="bold">MATLAB PID Simulation</text>
+        <text x="15" y="37" font-family="Outfit" font-size="6" fill="#94a3b8">GA Optimized Parameters</text>
+      </svg>
+    `;
+  } else {
+    showcaseHtml = `
+      <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="120" rx="8" fill="#1e293b"/>
+        <circle cx="30" cy="60" r="16" stroke="#f59e0b" stroke-width="2" fill="#0f172a"/>
+        <text x="24" y="63" font-family="Outfit" font-size="8" fill="#f59e0b" font-weight="bold">USER</text>
+        <line x1="46" y1="60" x2="100" y2="30" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="46" y1="60" x2="100" y2="60" stroke="#94a3b8" stroke-width="2" stroke-dasharray="2 2"/>
+        <line x1="46" y1="60" x2="100" y2="90" stroke="#94a3b8" stroke-width="1.5"/>
+        <rect x="100" y="18" width="80" height="24" rx="4" fill="#0f172a" stroke="#ec4899" stroke-width="1.5"/>
+        <text x="108" y="33" font-family="Outfit" font-size="8" fill="#ffffff">Clicks: Product 1042</text>
+        <rect x="100" y="48" width="80" height="24" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="108" y="63" font-family="Outfit" font-size="8" fill="#ffffff">Carts: Product 0891</text>
+        <rect x="100" y="78" width="80" height="24" rx="4" fill="#0f172a" stroke="#ec4899" stroke-width="1.5"/>
+        <text x="108" y="93" font-family="Outfit" font-size="8" fill="#ffffff">Orders: Product 3350</text>
+      </svg>
+    `;
+  }
+
+  // Check if we need chatbot box
+  const chatbotDemoHtml = (proj.id === 'ai-limit-tracker') ? `
+    <div style="margin-top: 1.5rem;">
+      <h4 style="margin-bottom: 0.75rem;">
+        <i class="fa-solid fa-comments"></i> 
+        <span lang="vi">Trải nghiệm Trợ lý AI (Demo Live)</span>
+        <span lang="en">Try the AI Portfolio Assistant (Live Demo)</span>
+        <span lang="tw">體驗個人 AI 助理 (線上展示)</span>
+      </h4>
+      <div class="chatbot-demo-box">
+        <div class="chatbot-header">
+          <div class="chatbot-avatar"><i class="fa-solid fa-robot"></i></div>
+          <div class="chatbot-info">
+            <h5>
+              <span lang="vi">Trợ lý AI của Thành</span>
+              <span lang="en">Thanh's AI Assistant</span>
+              <span lang="tw">阿成的 AI 助理</span>
+            </h5>
+            <span>
+              <span lang="vi">Đang hoạt động • Hỏi đáp năng lực</span>
+              <span lang="en">Active • Ask about my skills</span>
+              <span lang="tw">線上 • 詢問我的專業能力</span>
+            </span>
+          </div>
+          <button class="chatbot-reset-btn" onclick="resetChatbot()">
+            <i class="fa-solid fa-rotate-right"></i> 
+            <span lang="vi">Làm mới</span>
+            <span lang="en">Reset</span>
+            <span lang="tw">重設</span>
+          </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <!-- Injected dynamically -->
+        </div>
+        <div class="chat-options-container">
+          <div class="chat-options-title">
+            <span lang="vi">Chọn câu hỏi của bạn:</span>
+            <span lang="en">Choose your question:</span>
+            <span lang="tw">請選擇您的問題：</span>
+          </div>
+          <div class="chat-options-grid" id="chatOptions">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  ` : '';
+
+  // Render modal structure
+  modalContainer.innerHTML = `
+    <div class="modal-header">
+      <div class="modal-title">
+        <h3>${proj.title}</h3>
+      </div>
+      <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-showcase">
+        ${showcaseHtml}
+      </div>
+      <div class="modal-info-grid">
+        <div class="modal-desc-col">
+          <h4>${proj.modal.desc_title[lang]}</h4>
+          ${proj.modal.paragraphs.map(p => `<p class="modal-desc-text">${p[lang]}</p>`).join('')}
+          ${chatbotDemoHtml}
+        </div>
+        <div class="modal-meta-col">
+          <h4>${proj.modal.tech_specs_title[lang]}</h4>
+          <div class="meta-list">
+            ${proj.modal.specs.map(spec => `
+              <div class="meta-item">
+                <span class="meta-label">${spec.label[lang]}</span>
+                <span class="meta-value">${spec.value}</span>
+              </div>
+            `).join('')}
+          </div>
+          <a href="${proj.modal.link_url}" target="_blank" class="btn btn-primary" style="margin-top: 1rem; width: 100%; font-size: 0.9rem; padding: 0.6rem;">
+            <i class="fa-brands fa-github"></i>
+            <span>${proj.modal.link_text[lang]}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  if (projectId === 'ai-limit-tracker') {
+    resetChatbot();
+  }
+}
+
+function closeProjectModal() {
+  overlay.classList.remove('active');
+  modalContainer.style.display = 'none';
+  modalContainer.innerHTML = '';
+}
+
+// --- 7. Socratic Chatbot Logic calling Backend API ---
+function resetChatbot() {
+  const messagesContainer = document.getElementById('chatMessages');
+  if (messagesContainer) {
+    messagesContainer.innerHTML = '';
+    goToChatNode('start');
+  }
+}
+
+async function goToChatNode(nodeId) {
+  const activeLang = document.body.getAttribute('data-lang') || 'vi';
+  const messagesContainer = document.getElementById('chatMessages');
+  if (!messagesContainer) return;
+  
+  currentChatNode = nodeId;
+
+  // Add temporary typing bubble
+  const botBubble = document.createElement('div');
+  botBubble.className = 'chat-bubble bot';
+  
+  let typingMsg = "Gia sư đang gõ...";
+  if (activeLang === 'en') typingMsg = "Tutor is typing...";
+  if (activeLang === 'tw') typingMsg = "助教正在輸入...";
+
+  botBubble.innerHTML = `<i class="fa-solid fa-spinner fa-spin" style="margin-right:5px"></i> ${typingMsg}`;
+  messagesContainer.appendChild(botBubble);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+  try {
+    const langScript = embeddedChatbotData[activeLang];
+    if (!langScript || !langScript[nodeId]) {
+      throw new Error("Chat node not found: " + nodeId);
+    }
+    const node = langScript[nodeId];
+    
+    setTimeout(() => {
+      botBubble.innerHTML = node.botText;
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      renderChatOptions(node.options);
+    }, 600);
+    
+  } catch (error) {
+    console.error("Chatbot error:", error);
+    setTimeout(() => {
+      botBubble.innerHTML = activeLang === 'en' ? "Error loading chat node." : "Lỗi khi tải dữ liệu đối thoại.";
+    }, 600);
+  }
+}
+
+function renderChatOptions(options) {
+  const optionsContainer = document.getElementById('chatOptions');
+  if (!optionsContainer) return;
+  optionsContainer.innerHTML = '';
+  
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'chat-opt-btn';
+    btn.textContent = opt.text;
+    btn.onclick = () => handleUserSelection(opt.text, opt.nextNode);
+    optionsContainer.appendChild(btn);
+  });
+}
+
+function handleUserSelection(text, nextNodeId) {
+  const messagesContainer = document.getElementById('chatMessages');
+  if (!messagesContainer) return;
+  
+  const userBubble = document.createElement('div');
+  userBubble.className = 'chat-bubble user';
+  userBubble.textContent = text;
+  messagesContainer.appendChild(userBubble);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+  const buttons = document.querySelectorAll('.chat-opt-btn');
+  buttons.forEach(b => b.disabled = true);
+
+  goToChatNode(nextNodeId);
+}
+
+// --- 8. Contact Form submission calling Backend API ---
+async function handleFormSubmit(event) {
+  event.preventDefault();
+  
+  const form = document.getElementById('contactForm');
+  const name = document.getElementById('formName').value;
+  const email = document.getElementById('formEmail').value;
+  const subject = document.getElementById('formSubject').value;
+  const message = document.getElementById('formMessage').value;
+
+  if (name && email && subject && message) {
+    const activeLang = document.body.getAttribute('data-lang') || 'vi';
+    
+    const toastMsgs = {
+      vi: `Cảm ơn ${name}! Tin nhắn của bạn đã gửi thành công.`,
+      en: `Thank you ${name}! Your message has been sent successfully.`,
+      tw: `感謝您的聯絡，${name}！您的訊息已成功送出。`
+    };
+
+    showToast(toastMsgs[activeLang]);
+    console.log("Form submission saved client-side:", { name, email, subject, message });
+    form.reset();
+  }
+}
+
+function showToast(message) {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span class="toast-message">${message}</span>
+  `;
+  
+  container.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.classList.add('show');
+  }, 50);
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => {
+      toast.remove();
+    }, 400);
+  }, 4000);
+}
+
+// --- 9. Initial Load on Mount ---
+document.addEventListener('DOMContentLoaded', () => {
+  // Try loading resume data from API
+  loadResumeData();
+  
+  // Set default active language
+  switchLanguage('vi');
+});
+</script>
+</body>
+</html>
