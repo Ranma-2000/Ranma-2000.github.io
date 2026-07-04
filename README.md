@@ -38,7 +38,7 @@ To edit content (name, experience, projects, skills, chatbot text...), edit [`pu
 
 ## Deployment (Ubuntu 24 VPS)
 
-The site runs as a small Nginx container, fronted by a host-level Nginx that terminates TLS.
+The site runs as a small Nginx container, fronted by a host-level Nginx that terminates TLS. See [`docs/VPS_SETUP.md`](docs/VPS_SETUP.md) for the full, annotated setup log (including Docker install fallback, firewall, and hardening steps) as actually run on the production server.
 
 ### One-time server setup
 
