@@ -290,46 +290,21 @@ function renderResumeDynamicParts(lang) {
           </linearGradient>
         </defs>
       `;
-    } else if (proj.id === 'local-comfyui') {
-      cardIconSvg = `
-        <rect width="100" height="100" fill="url(#p2-grad)" opacity="0.15"/>
-        <rect x="15" y="25" width="22" height="16" rx="3" stroke="#a855f7" stroke-width="1.5" fill="white"/>
-        <line x1="37" y1="33" x2="48" y2="33" stroke="#9333ea" stroke-width="1.5"/>
-        <rect x="48" y="25" width="22" height="16" rx="3" stroke="#a855f7" stroke-width="1.5" fill="white"/>
-        <line x1="70" y1="33" x2="78" y2="48" stroke="#9333ea" stroke-width="1.5"/>
-        <rect x="48" y="55" width="22" height="16" rx="3" stroke="#06b6d4" stroke-width="1.5" fill="white"/>
-        <line x1="70" y1="63" x2="78" y2="48" stroke="#06b6d4" stroke-width="1.5"/>
-        <rect x="78" y="40" width="16" height="16" rx="3" fill="#2563eb"/>
-        <defs>
-          <linearGradient id="p2-grad" x1="0" y1="0" x2="100" y2="100">
-            <stop stop-color="#a855f7"/><stop offset="1" stop-color="#0ea5e9"/>
-          </linearGradient>
-        </defs>
-      `;
-    } else if (proj.id === 'iot-ecg') {
-      cardIconSvg = `
-        <rect width="100" height="100" fill="url(#p3-grad)" opacity="0.15"/>
-        <path d="M15 50 H30 L35 30 L40 70 L45 45 L50 55 L55 50 H85" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M57 25 C54 22, 47 22, 44 26 C41 22, 34 22, 31 26 C27 30, 27 38, 31 42 L44 55 L57 42 C61 38, 61 30, 57 26 Z" fill="#ef4444" opacity="0.2"/>
-        <defs>
-          <linearGradient id="p3-grad" x1="0" y1="0" x2="100" y2="100">
-            <stop stop-color="#ef4444"/><stop offset="1" stop-color="#f97316"/>
-          </linearGradient>
-        </defs>
-      `;
-    } else if (proj.id === 'delta-robot') {
+    } else if (proj.id === 'robot-differential-drive') {
       cardIconSvg = `
         <rect width="100" height="100" fill="url(#p4-grad)" opacity="0.15"/>
-        <line x1="50" y1="20" x2="30" y2="55" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
-        <line x1="50" y1="20" x2="50" y2="55" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
-        <line x1="50" y1="20" x2="70" y2="55" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
-        <rect x="25" y="55" width="50" height="8" rx="2" fill="#047857"/>
-        <circle cx="50" cy="72" r="6" fill="#0ea5e9"/>
-        <path d="M47 63 L47 70 M53 63 L53 70" stroke="#047857" stroke-width="1.5"/>
+        <rect x="20" y="40" width="60" height="30" rx="6" stroke="#10b981" stroke-width="2" fill="white"/>
+        <circle cx="20" cy="55" r="10" fill="#047857"/>
+        <circle cx="80" cy="55" r="10" fill="#0ea5e9"/>
+        <path d="M40 30 L60 30 M50 30 V40" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+        <path d="M65 75 Q80 80 85 65" stroke="#0ea5e9" stroke-width="2" fill="none" stroke-dasharray="3 3" marker-end="url(#arrow)"/>
         <defs>
           <linearGradient id="p4-grad" x1="0" y1="0" x2="100" y2="100">
             <stop stop-color="#10b981"/><stop offset="1" stop-color="#06b6d4"/>
           </linearGradient>
+          <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0 0 L6 3 L0 6 Z" fill="#0ea5e9"/>
+          </marker>
         </defs>
       `;
     } else {
@@ -463,53 +438,19 @@ function openProjectModal(projectId) {
         <text x="15" y="100" font-family="Outfit" font-size="8" fill="#f43f5e" font-weight="bold">Warn threshold reached at 70% budget usage.</text>
       </svg>
     `;
-  } else if (proj.id === 'local-comfyui') {
+  } else if (proj.id === 'robot-differential-drive') {
     showcaseHtml = `
       <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="200" height="120" rx="8" fill="#0f172a"/>
-        <rect x="10" y="15" width="70" height="35" rx="5" fill="#1e293b" stroke="#a855f7" stroke-width="1.5"/>
-        <text x="20" y="30" font-family="Outfit" font-size="8" fill="#ffffff" font-weight="bold">Google Colab</text>
-        <text x="20" y="42" font-family="Outfit" font-size="6" fill="#a855f7">Cloud GPU (A100)</text>
-        <path d="M80 32 H120" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 2"/>
-        <path d="M115 28 L120 32 L115 36" fill="#cbd5e1"/>
-        <text x="88" y="25" font-family="Outfit" font-size="6" fill="#0ea5e9" font-weight="bold">Sync API</text>
-        <rect x="120" y="15" width="70" height="35" rx="5" fill="#1e293b" stroke="#0ea5e9" stroke-width="1.5"/>
-        <text x="130" y="30" font-family="Outfit" font-size="8" fill="#ffffff" font-weight="bold">Local Storage</text>
-        <text x="130" y="42" font-family="Outfit" font-size="6" fill="#0ea5e9">Fast Caching</text>
-        <rect x="15" y="65" width="50" height="45" rx="4" fill="#3b82f6" opacity="0.8"/>
-        <text x="20" y="77" font-family="Outfit" font-size="7" fill="white" font-weight="bold">KSampler</text>
-        <rect x="75" y="65" width="50" height="45" rx="4" fill="#9333ea" opacity="0.8"/>
-        <text x="80" y="77" font-family="Outfit" font-size="7" fill="white" font-weight="bold">VAE Decode</text>
-        <rect x="135" y="65" width="50" height="45" rx="4" fill="#10b981" opacity="0.8"/>
-        <text x="140" y="77" font-family="Outfit" font-size="7" fill="white" font-weight="bold">Save Image</text>
-      </svg>
-    `;
-  } else if (proj.id === 'iot-ecg') {
-    showcaseHtml = `
-      <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="200" height="120" rx="8" fill="#1e293b"/>
-        <path d="M0 20 H200 M0 40 H200 M0 60 H200 M0 80 H200 M0 100 H200 M20 0 V120 M40 0 V120 M60 0 V120 M80 0 V120 M100 0 V120 M120 0 V120 M140 0 V120 M160 0 V120 M180 0 V120" stroke="#334155" stroke-width="0.5"/>
-        <path d="M10 60 H50 L55 45 L60 85 L65 30 L70 95 L75 55 L80 65 L85 60 H130 L135 45 L140 85 L145 30 L150 95 L155 55 L160 65 L165 60 H190" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="10" y="10" width="70" height="18" rx="4" fill="#0f172a" stroke="#f97316" stroke-width="1"/>
-        <text x="16" y="21" font-family="Outfit" font-size="7" fill="#f97316" font-weight="bold">AI: NORMAL ECG</text>
-        <text x="145" y="21" font-family="Outfit" font-size="9" fill="#ffffff" font-weight="bold">BPM: 74</text>
-        <circle cx="138" cy="18" r="3.5" fill="#ef4444"/>
-      </svg>
-    `;
-  } else if (proj.id === 'delta-robot') {
-    showcaseHtml = `
-      <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="200" height="120" rx="8" fill="#0f172a"/>
-        <line x1="100" y1="15" x2="60" y2="70" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-        <line x1="100" y1="15" x2="100" y2="70" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-        <line x1="100" y1="15" x2="140" y2="70" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="100" cy="15" r="5" fill="#cbd5e1"/>
-        <rect x="50" y="70" width="100" height="10" rx="3" fill="#047857"/>
-        <path d="M90 80 L90 92 M110 80 L110 92" stroke="#047857" stroke-width="2"/>
-        <circle cx="100" cy="98" r="7" fill="#f59e0b"/>
-        <rect x="10" y="108" width="180" height="6" rx="3" fill="#475569"/>
-        <text x="15" y="25" font-family="Outfit" font-size="8" fill="#06b6d4" font-weight="bold">MATLAB PID Simulation</text>
-        <text x="15" y="37" font-family="Outfit" font-size="6" fill="#94a3b8">GA Optimized Parameters</text>
+        <rect x="70" y="45" width="60" height="30" rx="6" stroke="#10b981" stroke-width="2" fill="#1e293b"/>
+        <circle cx="70" cy="60" r="12" fill="#047857"/>
+        <circle cx="130" cy="60" r="12" fill="#0ea5e9"/>
+        <path d="M100 45 V25" stroke="#10b981" stroke-width="2"/>
+        <circle cx="100" cy="20" r="4" fill="#cbd5e1"/>
+        <path d="M100 60 Q140 30 170 55" stroke="#0ea5e9" stroke-width="2" fill="none" stroke-dasharray="4 3"/>
+        <path d="M164 50 L172 55 L165 61" stroke="#0ea5e9" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="15" y="20" font-family="Outfit" font-size="8" fill="#10b981" font-weight="bold">DIFFERENTIAL DRIVE</text>
+        <text x="15" y="100" font-family="Outfit" font-size="7" fill="#94a3b8">Left wheel speed ≠ Right wheel speed → turn</text>
       </svg>
     `;
   } else {
@@ -607,10 +548,11 @@ function openProjectModal(projectId) {
               </div>
             `).join('')}
           </div>
+          ${proj.modal.link_url ? `
           <a href="${proj.modal.link_url}" target="_blank" class="btn btn-primary" style="margin-top: 1rem; width: 100%; font-size: 0.9rem; padding: 0.6rem;">
             <i class="fa-brands fa-github"></i>
             <span>${proj.modal.link_text[lang]}</span>
-          </a>
+          </a>` : ''}
         </div>
       </div>
     </div>

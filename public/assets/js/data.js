@@ -435,259 +435,92 @@ const embeddedResumeData = {
       }
     },
     {
-      "id": "local-comfyui",
-      "tag": "Generative AI",
-      "title": "Local ComfyUI Workflow",
+      "id": "robot-differential-drive",
+      "tag": "Robotics Education",
+      "title": "Điều khiển robot rẽ hướng",
       "desc": {
-        "vi": "Quy trình kết hợp sức mạnh đám mây Google Colab và máy tính cá nhân để tạo và thử nghiệm nhanh ảnh/video chất lượng cao.",
-        "en": "Hybrid workflow pairing Google Colab cloud computing with local storage for rapid generative image/video tasks.",
-        "tw": "結合 Google Colab 雲端運算與本地儲存的混合工作流，用於快速生成圖像與影片。"
+        "vi": "Từ \"robot chạy sai hướng\" đến tự điều hướng đường đi: hành trình 2 buổi của học sinh lớp hè Robot.",
+        "en": "From \"the robot went the wrong way\" to steering on its own: a 2-session journey with summer robotics students.",
+        "tw": "從「機器人走錯方向」到能自主轉向：機器人夏令營學生的兩堂課旅程。"
       },
       "techs": [
-        "ComfyUI",
-        "Google Colab",
-        "Python",
-        "Stable Diffusion"
+        "Differential Drive",
+        "STEM Robotics",
+        "Socratic AI Tutor",
+        "Simulation"
       ],
       "modal": {
         "desc_title": {
-          "vi": "Mô tả dự án",
-          "en": "Project Description",
-          "tw": "專案描述"
+          "vi": "Mô tả case study",
+          "en": "Case Study Description",
+          "tw": "案例描述"
         },
         "paragraphs": [
           {
-            "vi": "Giải pháp giải quyết bài toán thiếu phần cứng đồ họa mạnh tại địa phương bằng mô hình lai. Chúng tôi chạy các mô hình Stable Diffusion/ComfyUI nặng trên Google Colab để tận dụng GPU đám mây hiệu năng cao, sau đó đồng bộ hóa tức thì và lưu trữ ảnh/video kết quả tại ổ đĩa local PC.",
-            "en": "This project addresses local GPU limitations by building a hybrid generative design pipeline. Heavy Stable Diffusion nodes run on Google Colab to benefit from high-performance cloud GPUs, while rendering results and custom node structures are synchronized back to a local PC for storage and prototyping.",
-            "tw": "本專案透過建立混合生成式設計管線來解決本地 GPU 限制。在 Google Colab 上執行大型 Stable Diffusion 節點以利用高性能雲端 GPU，同時將渲染結果與自訂節點結構同步回本地 PC 進行儲存。"
+            "vi": "<strong>Đối tượng:</strong> học sinh khối 4 và khối 5, chưa từng học lập trình robot bài bản. Mục tiêu của buổi học không chỉ dừng ở việc điều khiển robot hoàn thành thử thách, mà hướng tới 4 kỹ năng nền tảng: (1) dự đoán hướng di chuyển của robot trước khi chạy, (2) chia nhiệm vụ lớn thành các bước nhỏ, (3) kiểm tra từng lệnh thay vì sửa ngẫu nhiên, (4) giải thích được vì sao robot chạy đúng hoặc sai.",
+            "en": "<strong>Audience:</strong> 4th and 5th grade students with no prior formal robot-programming experience. The lesson's goal went beyond completing the robot challenge, targeting 4 core skills: (1) predicting the robot's direction before running it, (2) breaking a large task into small steps, (3) checking each command instead of editing at random, (4) explaining why the robot moved correctly or incorrectly.",
+            "tw": "<strong>對象：</strong>四、五年級學生，先前未曾正式學過機器人程式設計。課程目標不只是讓機器人完成挑戰，更著重培養 4 項核心能力：（1）在執行前預測機器人的行進方向、（2）將大任務拆解成小步驟、（3）逐一檢查指令而非隨機修改、（4）能解釋機器人正確或錯誤運行的原因。"
           },
           {
-            "vi": "Đã xây dựng các workflow tự động hóa phức tạp trong ComfyUI giúp kiểm soát chặt chẽ các bước sinh ảnh, upscale và chuyển động video chất lượng cao.",
-            "en": "Engineered complex node networks and automated scripts in ComfyUI to streamline high-fidelity image composition and video generation.",
-            "tw": "在 ComfyUI 中設計了複雜的節點網路與自動化腳編，以簡化高保真圖像合成與影片生成。"
+            "vi": "<strong>Tiết 1 — Nền tảng điều khiển vi sai:</strong> giới thiệu lịch sử bánh xe phương tiện giao thông và các loại bánh đặc biệt (bánh xích, bánh xoay đa hướng...), sau đó tập trung vào nhóm robot không thể bẻ lái mà phải điều khiển tốc độ 2 bánh độc lập (điều khiển vi sai). Học sinh dùng phần mềm mô phỏng để thử nghiệm, đồng thời được hướng dẫn hỏi đáp với AI học tập theo phương pháp Socratic của Google trước khi hoàn thành phiếu bài tập.",
+            "en": "<strong>Session 1 — Differential drive fundamentals:</strong> introduced the history of vehicle wheels and special wheel types (tank treads, omni-directional wheels...), then focused on robots that can't steer directly and must control two independent wheel speeds (differential drive). Students experimented with a simulation tool and practiced questioning a Google Socratic-method AI tutor before completing a worksheet.",
+            "tw": "<strong>第一堂課 — 差速驅動基礎：</strong>介紹交通工具輪子的演進史與特殊輪型（履帶、萬向輪等），接著聚焦於無法直接轉向、須靠控制兩側獨立輪速（差速驅動）的機器人類型。學生透過模擬軟體實驗，並在完成學習單前練習以 Google 蘇格拉底式提問法與 AI 學習助教互動。"
+          },
+          {
+            "vi": "<strong>Kết quả phiếu bài tập (10 câu, 21 học sinh):</strong> tỷ lệ đúng trung bình đạt <strong>~75%</strong> (158/210 lượt trả lời đúng). Câu dễ nhất là câu 1 với 95,2% đúng, cho thấy học sinh nắm khá tốt khái niệm cơ bản về điều khiển vi sai ngay sau phần giới thiệu. Câu khó nhất là câu 10 với chỉ 57,1% đúng, phản ánh học sinh vẫn còn lúng túng khi phải suy luận nhiều bước hoặc áp dụng kiến thức vào tình huống phức tạp hơn — đây là nhóm kỹ năng (dự đoán và giải thích nguyên nhân) sẽ được củng cố thêm ở tiết 2.",
+            "en": "<strong>Worksheet results (10 questions, 21 students):</strong> the average accuracy was <strong>~75%</strong> (158 of 210 answers correct). Question 1 was the easiest at 95.2% correct, showing students grasped the basic differential-drive concept right after the introduction. Question 10 was the hardest at only 57.1% correct, showing students still struggled with multi-step reasoning or applying the concept to more complex scenarios — the prediction and cause-and-effect skills reinforced further in Session 2.",
+            "tw": "<strong>學習單結果（10 題，21 名學生）：</strong>平均正確率約 <strong>75%</strong>（210 次作答中 158 次正確）。第 1 題最容易，正確率 95.2%，顯示學生在課程介紹後便掌握了差速驅動的基本概念。第 10 題最難，正確率僅 57.1%，反映學生在多步驟推理或應用於更複雜情境時仍感吃力 —— 這正是第二堂課要加強的預測與因果解釋能力。"
+          },
+          {
+            "vi": "<strong>Tiết 2 — Thực hành rẽ hướng:</strong> sau khi ôn lại kiến thức tiết 1, học sinh vận dụng để điều khiển tốc độ và thời gian chạy của mỗi động cơ, thực hiện thử thách rẽ hướng trên sa bàn ngã 3 thực tế — chuyển từ mô phỏng sang phần cứng thật.",
+            "en": "<strong>Session 2 — Turning practice:</strong> after reviewing Session 1, students applied the concept to control each motor's speed and run time, completing a turning challenge on a real three-way junction board — moving from simulation to physical hardware.",
+            "tw": "<strong>第二堂課 — 轉向實作：</strong>複習第一堂課內容後，學生運用所學控制各馬達的轉速與運行時間，在實體三岔路測試板上完成轉向挑戰 —— 從模擬走向真實硬體。"
+          },
+          {
+            "vi": "<strong>Kết luận:</strong> chỉ sau 2 buổi, học sinh khối 4-5 chưa từng lập trình robot đã có thể tự dự đoán, chia nhỏ, kiểm tra và giải thích được hành vi rẽ hướng của robot thay vì thử sai ngẫu nhiên — cho thấy cách tiếp cận kết hợp mô phỏng, AI hỏi-đáp kiểu Socratic và thực hành trên sa bàn thật giúp hình thành tư duy điều khiển vi sai một cách vững chắc trong thời gian ngắn.",
+            "en": "<strong>Conclusion:</strong> after just 2 sessions, 4th-5th graders with no prior robot-programming experience could predict, decompose, verify, and explain differential-drive turning behavior instead of trial-and-error guessing — showing that combining simulation, Socratic AI questioning, and hands-on hardware practice builds solid differential-drive reasoning in a short time.",
+            "tw": "<strong>結論：</strong>僅僅兩堂課，原本沒有機器人程式基礎的四、五年級學生便能預測、拆解、驗證並解釋機器人的轉向行為，而非隨機試錯 —— 顯示模擬、蘇格拉底式 AI 問答與實體硬體實作三者結合，能在短時間內建立扎實的差速驅動思維。"
           }
         ],
         "tech_specs_title": {
-          "vi": "Thông tin kỹ thuật",
-          "en": "Technical Specs",
-          "tw": "技術規格"
+          "vi": "Thông tin buổi học",
+          "en": "Session Details",
+          "tw": "課程資訊"
         },
         "specs": [
           {
             "label": {
-              "vi": "Nền tảng:",
-              "en": "Platforms:",
-              "tw": "平台與工具："
+              "vi": "Đối tượng:",
+              "en": "Audience:",
+              "tw": "對象："
             },
-            "value": "ComfyUI, Google Colab (A100/T4 GPUs), Stable Diffusion XL, Python scripts"
+            "value": "Học sinh khối 4-5 / Grade 4-5 students"
           },
           {
             "label": {
-              "vi": "Loại hình:",
-              "en": "Type:",
-              "tw": "類型："
+              "vi": "Thời lượng:",
+              "en": "Duration:",
+              "tw": "課程長度："
             },
-            "value": "Dự án cá nhân / Side-Project (2025)"
-          }
-        ],
-        "link_text": {
-          "vi": "Xem Workflow Chi Tiết",
-          "en": "View Workflow Details",
-          "tw": "檢視工作流詳情"
-        },
-        "link_url": "https://github.com/Ranma-2000"
-      }
-    },
-    {
-      "id": "iot-ecg",
-      "tag": "IoT & AI Health",
-      "title": "IoT ECG Classifier",
-      "desc": {
-        "vi": "Thiết bị IoT kết hợp mô hình AI phân loại tín hiệu điện tâm đồ và bảng điều khiển theo dõi nhịp tim cho người dùng cuối.",
-        "en": "IoT ECG device integrated with AI classification models and dashboard monitoring for cardiac health.",
-        "tw": "整合 AI 分類模型與數據看板的 IoT 心電圖（ECG）監測設備。"
-      },
-      "techs": [
-        "Python",
-        "Jira",
-        "Embedded AI",
-        "Signal Processing"
-      ],
-      "modal": {
-        "desc_title": {
-          "vi": "Mô tả dự án",
-          "en": "Project Description",
-          "tw": "專案描述"
-        },
-        "paragraphs": [
-          {
-            "vi": "Dự án tốt nghiệp xuất sắc (Điểm số: 9.0/10) nghiên cứu thiết kế thiết bị nhúng IoT thu nhận tín hiệu điện tâm đồ (ECG) thời gian thực. Hệ thống sử dụng mô hình học máy để phân loại các dạng sóng điện tim (bình thường vs bất thường/rối loạn nhịp) và hiển thị kết quả trực quan cho bác sĩ hoặc người dùng cuối.",
-            "en": "A highly-rated graduation project (Grade: 9.0/10) focusing on building an embedded IoT hardware device to capture real-time ECG signals. The system deploys trained machine learning classifiers to screen normal vs. abnormal/arrhythmia heartbeats and visualizes telemetry data on a user dashboard.",
-            "tw": "獲得高評分的畢業專案（成績：9.0/10），專注於構建嵌入式 IoT 硬體設備以即時擷取心電圖（ECG）訊號。系統部署訓練好的機器學習分類器來篩選正常與異常/心律不整的心跳，並在用戶看板上可視化遙測數據。"
-          },
-          {
-            "vi": "Quy trình dự án được quản lý chuyên nghiệp bằng Jira. Tôi cũng đã đề xuất và thử nghiệm một giải pháp Học tập trọn đời (Continual Learning) giúp cập nhật mô hình AI liên tục khi tiếp nhận các mẫu ECG mới từ người dùng.",
-            "en": "Constructed the AI software workflow using Jira to track backlogs and tasks. Proposed and tested a continual learning implementation to update model weights dynamically as new ECG patterns are captured.",
-            "tw": "使用 Jira 追蹤待辦事項與任務以建立 AI 軟體工作流。提出並測試了持續學習（Continual Learning）實作，以便在擷取新 ECG 模式時動態更新模型權重。"
-          }
-        ],
-        "tech_specs_title": {
-          "vi": "Thông tin kỹ thuật",
-          "en": "Technical Specs",
-          "tw": "技術規格"
-        },
-        "specs": [
-          {
-            "label": {
-              "vi": "Thông số kỹ thuật:",
-              "en": "Specs:",
-              "tw": "技術規格："
-            },
-            "value": "Embedded Hardware, Signal Processing, Keras/TensorFlow, Jira Tracking"
+            "value": "2 tiết học / 2 sessions"
           },
           {
             "label": {
-              "vi": "Mã nguồn:",
-              "en": "Code Repo:",
-              "tw": "程式碼專案："
+              "vi": "Phương pháp:",
+              "en": "Method:",
+              "tw": "教學方法："
             },
-            "value": "GitHub (DT77 FYP UTE 2023)"
-          }
-        ],
-        "link_text": {
-          "vi": "Xem Mã Nguồn GitHub",
-          "en": "View GitHub Repo",
-          "tw": "檢視 GitHub 專案"
-        },
-        "link_url": "https://github.com/Ranma-2000/DT77_FYP_UTE_2023"
-      }
-    },
-    {
-      "id": "delta-robot",
-      "tag": "Robotics",
-      "title": "Delta Robot Classifier",
-      "desc": {
-        "vi": "Thiết kế giáo án chế tạo robot Delta 3 trục song song tích hợp thị giác máy tính để phân loại sản phẩm trên băng chuyền.",
-        "en": "Design and creation of a 3-axis parallel Delta robot integrated with computer vision for product classification.",
-        "tw": "設計與製造三軸並聯 Delta 機器人，並結合電腦視覺進行產品分類。"
-      },
-      "techs": [
-        "MATLAB",
-        "PID Control",
-        "Computer Vision",
-        "Kinematics"
-      ],
-      "modal": {
-        "desc_title": {
-          "vi": "Mô tả dự án",
-          "en": "Project Description",
-          "tw": "專案描述"
-        },
-        "paragraphs": [
-          {
-            "vi": "Dự án tốt nghiệp xuất sắc nhóm 4 thành viên (Điểm số: 9.3/10). Chúng tôi đã tính toán động học thuận (Forward Kinematics) và động học nghịch (Inverse Kinematics) để điều khiển cánh tay song song Delta robot di chuyển gắp vật cực kỳ chính xác ở tốc độ cao.",
-            "en": "A team-based graduation project (4 members, Grade: 9.3/10). We calculated forward and inverse kinematics formulas to precisely actuate parallel delta robot arms for high-speed pick-and-place trajectories.",
-            "tw": "一項團隊畢業專案（4 名成員，成績：9.3/10）。我們計算了正向和逆向運動學公式，以精確驅動並聯 Delta 機器人手臂進行高速拾取與放置路徑。"
-          },
-          {
-            "vi": "Bộ điều khiển PID được mô phỏng chi tiết trên MATLAB, tối ưu hóa các tham số P, I, D bằng thuật toán di truyền (GA) để giảm thiểu rung lắc và sai số bám đường. Hệ thống tích hợp camera xử lý ảnh tự động nhận diện và gắp phân loại sản phẩm chạy trên băng chuyền.",
-            "en": "Simulated PID controllers on MATLAB, optimizing P, I, and D gains using Genetic Algorithms (GA) to minimize trajectory overshoot. Integrated machine vision processing to recognize and classify conveyor items in real-time.",
-            "tw": "在 MATLAB 上模擬 PID 控制器，使用遺傳演算法（GA）優化 P、I、D 增益，以最大程度地減少路徑超調。整合電腦視覺處理，以即時識別和分類傳送帶上的品項。"
-          }
-        ],
-        "tech_specs_title": {
-          "vi": "Thông tin kỹ thuật",
-          "en": "Technical Specs",
-          "tw": "技術規格"
-        },
-        "specs": [
-          {
-            "label": {
-              "vi": "Lĩnh vực nghiên cứu:",
-              "en": "Research Areas:",
-              "tw": "研究領域："
-            },
-            "value": "Robot Kinematics, PID Simulation, MATLAB, Genetic Algorithms, OpenCV"
+            "value": "Mô phỏng điều khiển vi sai + AI Socratic Tutor / Differential-drive simulation + Socratic AI tutor"
           },
           {
             "label": {
-              "vi": "Mã nguồn:",
-              "en": "Code Repo:",
-              "tw": "程式碼專案："
+              "vi": "Kết quả:",
+              "en": "Result:",
+              "tw": "成果："
             },
-            "value": "GitHub (DT13 KLTN UTE 2023)"
+            "value": "Tỷ lệ đúng trung bình ~75% (10 câu), hoàn thành thử thách rẽ hướng thực tế / ~75% average accuracy (10 questions), completed real-world turning challenge"
           }
-        ],
-        "link_text": {
-          "vi": "Xem Mã Nguồn GitHub",
-          "en": "View GitHub Repo",
-          "tw": "檢視 GitHub 專案"
-        },
-        "link_url": "https://github.com/Ranma-2000/DT13_KLTN_UTE_2023"
-      }
-    },
-    {
-      "id": "otto-recommender",
-      "tag": "Data Science",
-      "title": "OTTO Recommender System",
-      "desc": {
-        "vi": "Xây dựng thuật toán xếp hạng đa mục tiêu gợi ý sản phẩm thương mại điện tử dựa trên hành vi duyệt web và ma trận đồng truy cập.",
-        "en": "Multi-objective recommendation system predicting e-commerce interactions using co-visitation matrices and rankers.",
-        "tw": "建立多目標推薦系統，使用共訪矩陣與排序器預測電子商務互動。"
-      },
-      "techs": [
-        "Python",
-        "Kaggle",
-        "LightGBM",
-        "Data Science"
-      ],
-      "modal": {
-        "desc_title": {
-          "vi": "Mô tả dự án",
-          "en": "Project Description",
-          "tw": "專案描述"
-        },
-        "paragraphs": [
-          {
-            "vi": "Tham gia cuộc thi Kaggle OTTO Recommender System. Dự án giải quyết bài toán đề xuất sản phẩm tối ưu (clicks, carts, orders) dựa trên lịch sử phiên duyệt web của người dùng.",
-            "en": "Competed in the Kaggle OTTO Multi-Objective Recommender System challenge. Built predictive pipelines to suggest click-throughs, cart additions, and checkout purchases based on session clickstreams.",
-            "tw": "參加了 Kaggle OTTO 多目標推薦系統挑戰賽。構建預測管線，根據會話點擊流建議點擊、購物車添加和結帳購買。"
-          },
-          {
-            "vi": "Thiết kế các trường dữ liệu hành vi (như phân khúc khách hàng RFM), áp dụng ma trận đồng truy cập (co-visitation matrix) để tìm các sản phẩm liên quan chéo, và tối ưu hóa mô hình xếp hạng LightGBM đạt thứ hạng cao trong tổng số hàng ngàn đội thi đấu.",
-            "en": "Engineered session-based features, constructed co-visitation matrices to catch purchase links, and fine-tuned LightGBM ranking models to secure top positions out of 2,615 competing teams.",
-            "tw": "設計基於會話的特徵，構建共訪矩陣以捕捉購買連結，並微調 LightGBM 排序模型，在 2,615 支參賽隊伍中獲得領先名次。"
-          }
-        ],
-        "tech_specs_title": {
-          "vi": "Thông tin kỹ thuật",
-          "en": "Technical Specs",
-          "tw": "技術規格"
-        },
-        "specs": [
-          {
-            "label": {
-              "vi": "Xếp hạng:",
-              "en": "Rank achieved:",
-              "tw": "獲得名次："
-            },
-            "value": "Public: 424/2615 | Private: 747/2615"
-          },
-          {
-            "label": {
-              "vi": "Kỹ thuật nổi bật:",
-              "en": "Key Methods:",
-              "tw": "關鍵技術："
-            },
-            "value": "Co-visitation Matrix, LightGBM Ranker, Session EDA, Feature Engineering"
-          }
-        ],
-        "link_text": {
-          "vi": "Xem Thông Tin Cuộc Thi",
-          "en": "View Kaggle Competition",
-          "tw": "檢視 Kaggle 競賽"
-        },
-        "link_url": "https://www.kaggle.com/competitions/otto-recommender-system"
+        ]
       }
     }
   ]
@@ -702,7 +535,7 @@ const embeddedChatbotData = {
           "nextNode": "ai_experience"
         },
         {
-          "text": "Các dự án nổi bật (Delta Robot, IoT ECG, AI Tracker)",
+          "text": "Các dự án nổi bật (AI Limit Tracker, case study Robot)",
           "nextNode": "featured_projects"
         }
       ]
@@ -747,14 +580,14 @@ const embeddedChatbotData = {
       ]
     },
     "featured_projects": {
-      "botText": "Anh Thành sở hữu nhiều dự án ấn tượng kết hợp Cơ điện tử và AI:<br>1. **AI Limit Tracker** (Chrome Extension theo dõi chi phí API)<br>2. **Delta Robot Classifier** (Robot gắp sản phẩm băng chuyền)<br>3. **IoT ECG Classifier** (Thiết bị theo dõi tim mạch AI)<br>Bạn muốn xem chi tiết dự án nào?",
+      "botText": "Anh Thành sở hữu nhiều dự án ấn tượng kết hợp Cơ điện tử, AI và giáo dục:<br>1. **AI Limit Tracker** (Chrome Extension theo dõi chi phí API)<br>2. **Case study: Điều khiển robot rẽ hướng** (dạy điều khiển vi sai cho học sinh khối 4-5)<br>Bạn muốn xem chi tiết dự án nào?",
       "options": [
         {
           "text": "Dự án AI Limit Tracker (Chrome Ext)",
           "nextNode": "project_tracker"
         },
         {
-          "text": "Dự án Delta Robot & IoT ECG",
+          "text": "Case study Robot rẽ hướng",
           "nextNode": "project_hardware"
         }
       ]
@@ -773,7 +606,7 @@ const embeddedChatbotData = {
       ]
     },
     "project_hardware": {
-      "botText": "Cả hai đồ án tốt nghiệp của anh Thành đều đạt điểm xuất sắc: <strong>Delta Robot</strong> (9.3/10, tính động học, tối ưu PID trên MATLAB bằng thuật toán di truyền GA) và <strong>IoT ECG</strong> (9.0/10, thu tín hiệu điện tim và phân loại nhịp tim bằng AI). Bạn muốn xem kỹ năng lập trình hay học vấn?",
+      "botText": "Case study <strong>\"Điều khiển robot rẽ hướng\"</strong> là buổi dạy STEM cho học sinh khối 4-5 chưa từng lập trình robot: chỉ sau 2 tiết học kết hợp mô phỏng điều khiển vi sai và AI hỏi-đáp kiểu Socratic, học sinh đạt tỷ lệ đúng trung bình ~75% trên phiếu bài tập và tự hoàn thành thử thách rẽ hướng trên sa bàn thực tế. Bạn muốn xem kỹ năng lập trình hay học vấn?",
       "options": [
         {
           "text": "Xem danh sách Kỹ năng chính",
@@ -830,7 +663,7 @@ const embeddedChatbotData = {
           "nextNode": "ai_experience"
         },
         {
-          "text": "Featured Projects (Delta Robot, IoT ECG, AI Tracker)",
+          "text": "Featured Projects (AI Limit Tracker, Robot case study)",
           "nextNode": "featured_projects"
         }
       ]
@@ -875,14 +708,14 @@ const embeddedChatbotData = {
       ]
     },
     "featured_projects": {
-      "botText": "Thanh has built several hardware-AI projects:<br>1. **AI Limit Tracker**: Browser extension monitoring API costs.<br>2. **Delta Robot Classifier**: Product sorting conveyor arm.<br>3. **IoT ECG Classifier**: Heartbeat telemetry IoT device.<br>Which one would you like to inspect?",
+      "botText": "Thanh has built several impressive projects across hardware, AI and education:<br>1. **AI Limit Tracker**: Browser extension monitoring API costs.<br>2. **Case study: Robot Turning Control**: Teaching differential drive to 4th-5th graders.<br>Which one would you like to inspect?",
       "options": [
         {
           "text": "AI Limit Tracker (Chrome Ext)",
           "nextNode": "project_tracker"
         },
         {
-          "text": "Delta Robot & IoT ECG Hardware",
+          "text": "Robot Turning Control case study",
           "nextNode": "project_hardware"
         }
       ]
@@ -901,7 +734,7 @@ const embeddedChatbotData = {
       ]
     },
     "project_hardware": {
-      "botText": "Both of Thanh's graduation projects received high grades: <strong>Delta Robot</strong> (9.3/10, kinematic models and MATLAB PID tune using Genetic Algorithms) and <strong>IoT ECG</strong> (9.0/10, heart telemetry and neural classification). Would you like to see skills or education?",
+      "botText": "The <strong>\"Robot Turning Control\"</strong> case study is a STEM lesson for 4th-5th graders with no prior robot-programming experience: in just 2 sessions combining a differential-drive simulation with a Socratic-method AI tutor, students reached ~75% average accuracy on the worksheet and completed a real hardware turning challenge. Would you like to see skills or education?",
       "options": [
         {
           "text": "Show Technical Skills list",
@@ -958,7 +791,7 @@ const embeddedChatbotData = {
           "nextNode": "ai_experience"
         },
         {
-          "text": "精選專案作品 (Delta 機器人、IoT 心電圖、AI 追蹤器)",
+          "text": "精選專案作品 (AI 追蹤器、機器人教學案例)",
           "nextNode": "featured_projects"
         }
       ]
@@ -1003,14 +836,14 @@ const embeddedChatbotData = {
       ]
     },
     "featured_projects": {
-      "botText": "阿成有多項結合機電整合與 AI 的專案作品：<br>1. **AI Limit Tracker**：追蹤 API 額度的瀏覽器插件<br>2. **Delta Robot Classifier**：傳送帶分類並聯機器人<br>3. **IoT ECG Classifier**：AI 心電數據遙測硬體<br>您想了解哪一項？",
+      "botText": "阿成有多項結合機電整合、AI 與教育的專案作品：<br>1. **AI Limit Tracker**：追蹤 API 額度的瀏覽器插件<br>2. **案例：機器人轉向控制教學**：教四、五年級學生差速驅動原理<br>您想了解哪一項？",
       "options": [
         {
           "text": "AI Limit Tracker 插件細節",
           "nextNode": "project_tracker"
         },
         {
-          "text": "並聯機器人與心電圖硬體",
+          "text": "機器人轉向控制教學案例",
           "nextNode": "project_hardware"
         }
       ]
@@ -1029,7 +862,7 @@ const embeddedChatbotData = {
       ]
     },
     "project_hardware": {
-      "botText": "阿成的兩個畢業專案皆獲得了優秀的評分：<strong>並聯 Delta 機器人</strong>（9.3/10，計算運動學並以遺傳演算法 GA 優化 MATLAB PID 控制參數）與 <strong>IoT 心電圖</strong>（9.0/10，心電波形擷取與神經網路分類）。想了解技能還是學歷？",
+      "botText": "<strong>「機器人轉向控制教學」</strong>是為四、五年級（未曾正式學過機器人程式設計）學生設計的 STEM 課程：僅兩堂課結合差速驅動模擬與蘇格拉底式 AI 問答，學生在學習單上達到約 75% 的平均正確率，並在實體測試板上完成轉向挑戰。想了解技能還是學歷？",
       "options": [
         {
           "text": "檢視技術技能清單",
