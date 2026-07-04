@@ -126,3 +126,17 @@ sudo docker compose -f deploy/docker-compose.yml up -d --build
 ```
 
 Once the repository secrets listed in the main [README](../README.md#continuous-deployment) are configured, this step runs automatically on every push to `main`.
+
+## Simulation backend (`sim-backend`)
+
+`deploy/docker-compose.yml` also runs a `sim-backend` container (FastAPI, `backend/`) bound to `127.0.0.1:8090`, powering the interactive robot simulation embedded in the portfolio. It's rebuilt automatically alongside `web` by the same `docker compose up -d --build` command above.
+
+The host Nginx needs one extra location block to proxy `/api/sim/` (WebSocket) to it — already present in `deploy/nginx.host.conf.example`. If your host Nginx config predates this feature, re-apply it once:
+
+```bash
+cd /srv/peterpham-cv
+sudo cp deploy/nginx.host.conf.example /etc/nginx/sites-available/peterpham.info.vn
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+This is a manual step because CI only rebuilds the Docker containers — it does not touch the host-level Nginx config.

@@ -2,6 +2,18 @@
 let resumeData = null;
 let currentChatNode = null;
 
+// Per-category presentation metadata (hybrid project template system)
+const categoryMeta = {
+  'demo-class': {
+    icon: 'fa-chalkboard-user',
+    label: {
+      vi: 'Case study lớp học',
+      en: 'Class Case Study',
+      tw: '課堂案例'
+    }
+  }
+};
+
 // --- 1. Navigation Menu Controls (Mobile Responsive Toggle) ---
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
@@ -328,6 +340,8 @@ function renderResumeDynamicParts(lang) {
       `;
     }
     
+    const catMeta = categoryMeta[proj.category];
+
     return `
       <div class="project-card glass-card" onclick="openProjectModal('${proj.id}')">
         <div class="project-img-wrapper">
@@ -336,6 +350,12 @@ function renderResumeDynamicParts(lang) {
               ${cardIconSvg}
             </svg>
           </div>
+          ${catMeta ? `
+            <span class="category-badge category-${proj.category}">
+              <i class="fa-solid ${catMeta.icon}"></i>
+              <span>${catMeta.label[lang]}</span>
+            </span>
+          ` : ''}
         </div>
         <div class="project-body">
           <span class="project-tag">${proj.tag}</span>
@@ -534,19 +554,16 @@ function openProjectModal(projectId) {
       </div>
       <div class="modal-info-grid">
         <div class="modal-desc-col">
-          <h4>${proj.modal.desc_title[lang]}</h4>
-          ${proj.modal.paragraphs.map(p => `<p class="modal-desc-text">${p[lang]}</p>`).join('')}
+          ${proj.modal.sessions
+            ? renderSessionsAndConclusion(proj, lang)
+            : `<h4>${proj.modal.desc_title[lang]}</h4>${proj.modal.paragraphs.map(p => `<p class="modal-desc-text">${p[lang]}</p>`).join('')}`
+          }
           ${chatbotDemoHtml}
         </div>
         <div class="modal-meta-col">
           <h4>${proj.modal.tech_specs_title[lang]}</h4>
           <div class="meta-list">
-            ${proj.modal.specs.map(spec => `
-              <div class="meta-item">
-                <span class="meta-label">${spec.label[lang]}</span>
-                <span class="meta-value">${spec.value}</span>
-              </div>
-            `).join('')}
+            ${proj.modal.specs.map(spec => renderMetaSpec(spec, lang)).join('')}
           </div>
           ${proj.modal.link_url ? `
           <a href="${proj.modal.link_url}" target="_blank" class="btn btn-primary" style="margin-top: 1rem; width: 100%; font-size: 0.9rem; padding: 0.6rem;">
@@ -561,12 +578,184 @@ function openProjectModal(projectId) {
   if (projectId === 'ai-limit-tracker') {
     resetChatbot();
   }
+
+  if (proj.modal.sessions) {
+    requestAnimationFrame(() => {
+      modalContainer.querySelectorAll('.dc-bar-fill').forEach(bar => {
+        bar.style.width = `${bar.dataset.pct}%`;
+      });
+    });
+  }
+
+  if (proj.modal.sessions && proj.modal.sessions.some(s => s.simulation) && typeof initSimulationWidget === 'function') {
+    initSimulationWidget();
+  }
 }
 
 function closeProjectModal() {
   overlay.classList.remove('active');
   modalContainer.style.display = 'none';
   modalContainer.innerHTML = '';
+
+  if (typeof teardownSimulationWidget === 'function') {
+    teardownSimulationWidget();
+  }
+}
+
+// --- 6b. Meta Sidebar Spec Renderer (shared across all project categories) ---
+function renderMetaSpec(spec, lang) {
+  if (spec.type === 'list') {
+    return `
+      <div class="meta-item">
+        <span class="meta-label">${spec.label[lang]}</span>
+        <ul class="meta-list-items">
+          ${spec.items.map(item => `<li>${item[lang]}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  if (spec.type === 'result') {
+    return `
+      <div class="meta-item">
+        <span class="meta-label">${spec.label[lang]}</span>
+        <span class="meta-value">${spec.summary[lang]}</span>
+        <div class="meta-result-stat">${spec.stat}</div>
+        <button type="button" class="meta-result-btn" onclick="scrollToModalSection('${spec.target}')">
+          <span>${spec.cta[lang]}</span>
+          <i class="fa-solid fa-arrow-down"></i>
+        </button>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="meta-item">
+      <span class="meta-label">${spec.label[lang]}</span>
+      <span class="meta-value">${spec.value}</span>
+    </div>
+  `;
+}
+
+// --- 6c. "demo-class" Category Renderer: Sessions + Conclusion ---
+function renderSessionsAndConclusion(proj, lang) {
+  const sessionsHtml = proj.modal.sessions.map(session => `
+    <div class="dc-session dc-session--${session.accent}" id="${session.id}">
+      <div class="dc-session-header">
+        <span class="dc-session-badge">${session.badge[lang]}</span>
+        <div class="dc-session-title">
+          <i class="fa-solid ${session.icon}"></i>
+          <h5>${session.title[lang]}</h5>
+        </div>
+      </div>
+      ${session.paragraphs.map(p => `<p class="modal-desc-text">${p[lang]}</p>`).join('')}
+      ${session.simulation ? renderSimulationWidget() : ''}
+      ${session.worksheet ? renderWorksheetGallery(session.worksheet, lang) : ''}
+      ${session.media ? renderMediaBlock(session.media, lang) : ''}
+      ${session.results ? renderSessionResults(session.results, lang) : ''}
+    </div>
+  `).join('');
+
+  const conclusion = proj.modal.conclusion;
+
+  return `
+    <h4>${proj.modal.desc_title[lang]}</h4>
+    ${sessionsHtml}
+    <div class="dc-conclusion">
+      <i class="fa-solid ${conclusion.icon}"></i>
+      <div>
+        <h5>${conclusion.title[lang]}</h5>
+        <p>${conclusion.content[lang]}</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderSessionResults(results, lang) {
+  return `
+    <div class="dc-results" id="${results.id}">
+      <div class="dc-results-header">
+        <h6>${results.title[lang]}</h6>
+        <div class="dc-results-stat">
+          <span class="dc-results-stat-value">${results.stat_value}</span>
+          <span class="dc-results-stat-label">${results.stat_label[lang]}</span>
+        </div>
+      </div>
+      ${results.bars.map(bar => `
+        <div class="dc-bar-item">
+          <div class="dc-bar-info">
+            <span class="dc-bar-label">${bar.label[lang]}</span>
+            <span class="dc-bar-pct">${bar.pct}%</span>
+          </div>
+          <div class="dc-bar-track">
+            <div class="dc-bar-fill" data-pct="${bar.pct}"></div>
+          </div>
+          <p class="dc-bar-note">${bar.note[lang]}</p>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderMediaBlock(mediaArr, lang) {
+  if (!mediaArr || !mediaArr.length) {
+    return `
+      <div class="dc-media-placeholder">
+        <i class="fa-solid fa-image"></i>
+        <span lang="vi">Ảnh/Video minh hoạ sẽ được cập nhật tại đây</span>
+        <span lang="en">Photos/Video will be added here</span>
+        <span lang="tw">照片/影片將於此處更新</span>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="dc-media-grid">
+      ${mediaArr.map(m => m.type === 'video'
+        ? `<video controls src="${m.src}" ${m.poster ? `poster="${m.poster}"` : ''}></video>`
+        : `<img src="${m.src}" alt="${(m.alt && m.alt[lang]) || ''}" loading="lazy" onclick="openLightbox('${m.src}')">`
+      ).join('')}
+    </div>
+  `;
+}
+
+function renderWorksheetGallery(worksheet, lang) {
+  return `
+    <div class="dc-worksheet">
+      <h6>${worksheet.title[lang]}</h6>
+      <div class="dc-worksheet-grid">
+        ${worksheet.pages.map(p => `
+          <img src="${p.thumb}" alt="${(p.alt && p.alt[lang]) || ''}" loading="lazy" onclick="openLightbox('${p.full}')">
+        `).join('')}
+      </div>
+      <a href="${worksheet.file}" target="_blank" rel="noopener" class="btn btn-primary dc-worksheet-cta">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>${worksheet.cta[lang]}</span>
+      </a>
+    </div>
+  `;
+}
+
+function scrollToModalSection(targetId) {
+  const target = document.getElementById(targetId);
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function openLightbox(src) {
+  const lightbox = document.getElementById('lightboxOverlay');
+  const lightboxImg = document.getElementById('lightboxImg');
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = src;
+  lightbox.classList.add('active');
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightboxOverlay');
+  if (lightbox) {
+    lightbox.classList.remove('active');
+  }
 }
 
 // --- 7. Socratic Chatbot Logic calling Backend API ---

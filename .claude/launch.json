@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "5173", "--directory", "public"],
       "port": 5173
+    },
+    {
+      "name": "sim-backend",
+      "runtimeExecutable": "C:\\Users\\ADMIN\\AppData\\Local\\Programs\\Python\\Launcher\\py.exe",
+      "runtimeArgs": ["-3", "-m", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"],
+      "port": 8000
     }
   ]
 }

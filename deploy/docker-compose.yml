@@ -8,3 +8,13 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:8080:80"
+
+  sim-backend:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    image: peterpham-sim-backend:latest
+    container_name: peterpham-sim-backend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8090:8000"

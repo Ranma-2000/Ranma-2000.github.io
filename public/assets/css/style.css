@@ -1307,6 +1307,617 @@
       color: var(--text-muted);
     }
 
+    /* --- Category Badge (project card, hybrid category system) --- */
+    .project-img-wrapper {
+      position: relative;
+    }
+
+    .category-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--primary-dark);
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(4px);
+    }
+
+    .category-badge.category-demo-class {
+      color: var(--success);
+    }
+
+    /* --- Enriched Sidebar Spec Items (list / result types) --- */
+    .meta-list-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+
+    .meta-list-items li {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .meta-list-items li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .meta-result-stat {
+      font-family: var(--font-headings);
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 0.35rem 0;
+    }
+
+    .meta-result-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      border-radius: 10px;
+      background: white;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .meta-result-btn i {
+      transition: var(--transition-fast);
+    }
+
+    .meta-result-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .meta-result-btn:hover i {
+      transform: translateY(2px);
+    }
+
+    /* --- "demo-class" Category: Session Blocks --- */
+    @keyframes dcFadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dc-session {
+      scroll-margin-top: 90px;
+      border-radius: 18px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border-color);
+      animation: dcFadeInUp var(--transition-slow) both;
+    }
+
+    .dc-session--primary {
+      background: linear-gradient(160deg, var(--primary-light) 0%, rgba(255, 255, 255, 0.4) 100%);
+      border-left: 4px solid var(--primary);
+      animation-delay: 0.05s;
+    }
+
+    .dc-session--accent {
+      background: linear-gradient(160deg, rgba(6, 182, 212, 0.08) 0%, rgba(255, 255, 255, 0.4) 100%);
+      border-left: 4px solid var(--accent);
+      animation-delay: 0.15s;
+    }
+
+    .dc-session-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .dc-session-badge {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: white;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    }
+
+    .dc-session-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dc-session-title i {
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+    }
+
+    .dc-session--accent .dc-session-title i {
+      color: var(--accent);
+    }
+
+    .dc-session-title h5 {
+      font-family: var(--font-headings);
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+
+    /* --- Media Placeholder / Gallery --- */
+    .dc-media-placeholder {
+      margin-top: 1rem;
+      border: 2px dashed var(--accent);
+      border-radius: 14px;
+      padding: 1.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .dc-media-placeholder i {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .dc-media-grid {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .dc-media-grid img,
+    .dc-media-grid video {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dc-media-grid img:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* --- Worksheet Results / Animated Bars --- */
+    .dc-results {
+      margin-top: 1.25rem;
+      padding: 1.25rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border-color);
+    }
+
+    .dc-results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .dc-results-header h6 {
+      font-family: var(--font-headings);
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .dc-results-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .dc-results-stat-value {
+      font-family: var(--font-headings);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .dc-results-stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      max-width: 220px;
+    }
+
+    .dc-bar-item {
+      margin-bottom: 1rem;
+    }
+
+    .dc-bar-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .dc-bar-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .dc-bar-pct {
+      color: var(--primary-dark);
+    }
+
+    .dc-bar-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--border-color);
+      overflow: hidden;
+    }
+
+    .dc-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      transition: width 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dc-bar-note {
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* --- Conclusion Callout --- */
+    .dc-conclusion {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+    }
+
+    .dc-conclusion i {
+      font-size: 1.5rem;
+      margin-top: 0.15rem;
+    }
+
+    .dc-conclusion h5 {
+      font-family: var(--font-headings);
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .dc-conclusion p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    /* --- Media Lightbox --- */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+
+    .lightbox-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-overlay img {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* --- Worksheet Gallery (Tiết 1) --- */
+    .dc-worksheet {
+      margin-top: 1.25rem;
+    }
+
+    .dc-worksheet h6 {
+      font-family: var(--font-headings);
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .dc-worksheet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .dc-worksheet-grid img {
+      width: 100%;
+      aspect-ratio: 3 / 4.25;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dc-worksheet-grid img:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+
+    .dc-worksheet-cta {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 0.65rem;
+    }
+
+    /* --- Interactive Differential-Drive Simulation Widget --- */
+    .sim-widget {
+      margin-top: 1.25rem;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .sim-stage-wrap {
+      position: relative;
+      background: var(--bg-page);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .sim-stage-wrap svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .sim-badge {
+      position: absolute;
+      top: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+
+    .sim-badge-mode { left: 10px; }
+    .sim-badge-radius { right: 10px; display: none; }
+
+    .sim-badge-status {
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      border-color: rgba(37, 99, 235, 0.2);
+    }
+
+    .sim-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .sim-slider-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .sim-slider-row label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .sim-slider-row span {
+      font-size: 0.8rem;
+      font-weight: 600;
+      min-width: 32px;
+      text-align: right;
+      color: var(--text-dark);
+    }
+
+    .sim-widget input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border-color);
+      outline: none;
+    }
+
+    .sim-widget input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+    }
+
+    .sim-widget input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: none;
+      cursor: pointer;
+    }
+
+    .sim-button-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+
+    .sim-widget button {
+      flex: 1;
+      min-width: 100px;
+      font-size: 0.78rem;
+      font-family: var(--font-body);
+      padding: 0.5rem 0.6rem;
+      background: white;
+      color: var(--text-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .sim-widget button:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .sim-widget button:active {
+      transform: scale(0.98);
+    }
+
+    .sim-record-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .sim-record-row button {
+      flex: 0 0 auto;
+      min-width: 0;
+    }
+
+    .sim-rec-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: #c0392b;
+      font-weight: 600;
+    }
+
+    .sim-rec-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c0392b;
+      animation: simBlink 1s step-start infinite;
+    }
+
+    @keyframes simBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .sim-widget button.recording {
+      background: #c0392b;
+      color: white;
+      border-color: #c0392b;
+    }
+
+    .sim-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+
+    .sim-stat-card {
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 0.6rem 0.75rem;
+    }
+
+    .sim-stat-card p:first-child {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin: 0 0 0.2rem;
+    }
+
+    .sim-stat-card p:last-child {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      .sim-slider-row label {
+        width: 64px;
+        font-size: 0.72rem;
+      }
+      .sim-widget button {
+        min-width: 0;
+        font-size: 0.7rem;
+      }
+    }
+
     /* --- Interactive Socratic Chatbot Demo --- */
     .chatbot-demo-box {
       border: 1px solid var(--border-color);
@@ -1756,6 +2367,15 @@
 
       .modal-meta-col {
         order: -1;
+      }
+
+      .dc-results-header {
+        align-items: flex-start;
+      }
+
+      .dc-results-stat {
+        align-items: flex-start;
+        text-align: left;
       }
     }
 

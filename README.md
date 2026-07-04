@@ -15,11 +15,15 @@ Static, multi-language (VI/EN/TW) interactive portfolio site.
 │       └── js/
 │           ├── data.js      # Resume content (personal info, experience, projects...)
 │           └── app.js       # Rendering, navigation, language switching, chatbot UI
+├── backend/                  # FastAPI simulation backend (robot differential-drive physics)
+│   ├── main.py               # WebSocket endpoint + pose/turn-mode kinematics
+│   ├── requirements.txt
+│   └── Dockerfile
 ├── deploy/                  # Deployment configuration
 │   ├── Dockerfile
-│   ├── docker-compose.yml
+│   ├── docker-compose.yml   # "web" (static site) + "sim-backend" (FastAPI) services
 │   ├── nginx.container.conf # Nginx config baked into the container
-│   └── nginx.host.conf.example # Sample host-level reverse proxy + TLS
+│   └── nginx.host.conf.example # Sample host-level reverse proxy + TLS + /api/sim/ proxy
 ├── .github/workflows/deploy.yml # CI/CD: deploy to VPS on push to main
 └── docs/                    # Repo assets (README preview image)
 ```
@@ -35,6 +39,17 @@ python -m http.server 5173 --directory public
 Then open http://localhost:5173.
 
 To edit content (name, experience, projects, skills, chatbot text...), edit [`public/assets/js/data.js`](public/assets/js/data.js). Page structure lives in [`public/index.html`](public/index.html), styling in [`public/assets/css/style.css`](public/assets/css/style.css), and behavior in [`public/assets/js/app.js`](public/assets/js/app.js).
+
+### Simulation backend
+
+The interactive differential-drive robot demo (embedded in the "Điều khiển robot rẽ hướng" case study) is served by a small FastAPI app in [`backend/`](backend/main.py) that owns the pose-integration/turn-mode kinematics — the browser client ([`public/assets/js/simulation.js`](public/assets/js/simulation.js)) only renders SVG from data pushed over a WebSocket. Run it locally with:
+
+```bash
+pip install -r backend/requirements.txt
+uvicorn backend.main:app --port 8000
+```
+
+The frontend auto-detects `localhost`/`127.0.0.1` and connects directly to `ws://localhost:8000/ws` in that case; in production it connects to the same-origin `wss://<domain>/api/sim/ws`, proxied by the host Nginx (see below).
 
 ## Deployment (Ubuntu 24 VPS)
 
@@ -64,9 +79,11 @@ sudo nginx -t && sudo systemctl reload nginx
 sudo certbot --nginx -d peterpham.info.vn -d www.peterpham.info.vn
 ```
 
+> **Note:** if you already have a VPS deployed from before the simulation backend was added, `deploy/nginx.host.conf.example` gained a new `/api/sim/` location block. CI only rebuilds the Docker containers — the host Nginx config must be re-copied and reloaded manually once: `sudo cp deploy/nginx.host.conf.example /etc/nginx/sites-available/peterpham.info.vn && sudo nginx -t && sudo systemctl reload nginx`.
+
 ### Continuous deployment
 
-[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) SSHes into the VPS on every push to `main`, pulls the latest commit, and rebuilds the container. Configure these repository secrets:
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) SSHes into the VPS on every push to `main`, pulls the latest commit, and rebuilds the containers (`web` + `sim-backend`). Configure these repository secrets:
 
 | Secret | Description |
 | --- | --- |

@@ -436,6 +436,7 @@ const embeddedResumeData = {
     },
     {
       "id": "robot-differential-drive",
+      "category": "demo-class",
       "tag": "Robotics Education",
       "title": "Điều khiển robot rẽ hướng",
       "desc": {
@@ -451,37 +452,146 @@ const embeddedResumeData = {
       ],
       "modal": {
         "desc_title": {
-          "vi": "Mô tả case study",
-          "en": "Case Study Description",
-          "tw": "案例描述"
+          "vi": "Nội dung buổi học",
+          "en": "Session Content",
+          "tw": "課程內容"
         },
-        "paragraphs": [
+        "sessions": [
           {
-            "vi": "<strong>Đối tượng:</strong> học sinh khối 4 và khối 5, chưa từng học lập trình robot bài bản. Mục tiêu của buổi học không chỉ dừng ở việc điều khiển robot hoàn thành thử thách, mà hướng tới 4 kỹ năng nền tảng: (1) dự đoán hướng di chuyển của robot trước khi chạy, (2) chia nhiệm vụ lớn thành các bước nhỏ, (3) kiểm tra từng lệnh thay vì sửa ngẫu nhiên, (4) giải thích được vì sao robot chạy đúng hoặc sai.",
-            "en": "<strong>Audience:</strong> 4th and 5th grade students with no prior formal robot-programming experience. The lesson's goal went beyond completing the robot challenge, targeting 4 core skills: (1) predicting the robot's direction before running it, (2) breaking a large task into small steps, (3) checking each command instead of editing at random, (4) explaining why the robot moved correctly or incorrectly.",
-            "tw": "<strong>對象：</strong>四、五年級學生，先前未曾正式學過機器人程式設計。課程目標不只是讓機器人完成挑戰，更著重培養 4 項核心能力：（1）在執行前預測機器人的行進方向、（2）將大任務拆解成小步驟、（3）逐一檢查指令而非隨機修改、（4）能解釋機器人正確或錯誤運行的原因。"
+            "id": "session-1",
+            "badge": {
+              "vi": "Tiết 1",
+              "en": "Session 1",
+              "tw": "第一堂"
+            },
+            "title": {
+              "vi": "Nền tảng điều khiển vi sai",
+              "en": "Differential Drive Fundamentals",
+              "tw": "差速驅動基礎"
+            },
+            "icon": "fa-gears",
+            "accent": "primary",
+            "paragraphs": [
+              {
+                "vi": "Giới thiệu lịch sử bánh xe phương tiện giao thông và các loại bánh đặc biệt (bánh xích, bánh xoay đa hướng...), sau đó tập trung vào nhóm robot không thể bẻ lái mà phải điều khiển tốc độ 2 bánh độc lập (điều khiển vi sai). Học sinh dùng phần mềm mô phỏng để thử nghiệm, đồng thời được hướng dẫn hỏi đáp với AI học tập theo phương pháp Socratic của Google trước khi hoàn thành phiếu bài tập.",
+                "en": "Introduced the history of vehicle wheels and special wheel types (tank treads, omni-directional wheels...), then focused on robots that can't steer directly and must control two independent wheel speeds (differential drive). Students experimented with a simulation tool and practiced questioning a Google Socratic-method AI tutor before completing a worksheet.",
+                "tw": "介紹交通工具輪子的演進史與特殊輪型（履帶、萬向輪等），接著聚焦於無法直接轉向、須靠控制兩側獨立輪速（差速驅動）的機器人類型。學生透過模擬軟體實驗，並在完成學習單前練習以 Google 蘇格拉底式提問法與 AI 學習助教互動。"
+              }
+            ],
+            "simulation": true,
+            "worksheet": {
+              "title": {
+                "vi": "Phiếu học tập",
+                "en": "Worksheet",
+                "tw": "學習單"
+              },
+              "file": "/assets/docs/phieu-hoc-tap-dieu-khien-vi-sai.pdf",
+              "cta": {
+                "vi": "Xem phiếu học tập đầy đủ (PDF)",
+                "en": "View full worksheet (PDF)",
+                "tw": "查看完整學習單 (PDF)"
+              },
+              "pages": [
+                {
+                  "thumb": "/assets/img/projects/robot-differential-drive/worksheet-page-1-thumb.jpg",
+                  "full": "/assets/img/projects/robot-differential-drive/worksheet-page-1.jpg",
+                  "alt": {
+                    "vi": "Phiếu học tập - trang 1",
+                    "en": "Worksheet - page 1",
+                    "tw": "學習單 - 第1頁"
+                  }
+                },
+                {
+                  "thumb": "/assets/img/projects/robot-differential-drive/worksheet-page-2-thumb.jpg",
+                  "full": "/assets/img/projects/robot-differential-drive/worksheet-page-2.jpg",
+                  "alt": {
+                    "vi": "Phiếu học tập - trang 2",
+                    "en": "Worksheet - page 2",
+                    "tw": "學習單 - 第2頁"
+                  }
+                }
+              ]
+            },
+            "results": {
+              "id": "session-1-results",
+              "title": {
+                "vi": "Kết quả phiếu bài tập",
+                "en": "Worksheet Results",
+                "tw": "學習單成果"
+              },
+              "stat_value": "75%",
+              "stat_label": {
+                "vi": "Tỷ lệ đúng trung bình (10 câu, 21 học sinh — 158/210 lượt trả lời đúng)",
+                "en": "Average accuracy (10 questions, 21 students — 158/210 answers correct)",
+                "tw": "平均正確率（10 題，21 名學生 — 210 次作答中 158 次正確）"
+              },
+              "bars": [
+                {
+                  "pct": 95.2,
+                  "label": {
+                    "vi": "Câu 1 — dễ nhất",
+                    "en": "Question 1 — easiest",
+                    "tw": "第 1 題 — 最簡單"
+                  },
+                  "note": {
+                    "vi": "Học sinh nắm khá tốt khái niệm cơ bản ngay sau phần giới thiệu.",
+                    "en": "Students grasped the basic concept well right after the introduction.",
+                    "tw": "學生在課程介紹後便掌握了基本概念。"
+                  }
+                },
+                {
+                  "pct": 57.1,
+                  "label": {
+                    "vi": "Câu 10 — khó nhất",
+                    "en": "Question 10 — hardest",
+                    "tw": "第 10 題 — 最難"
+                  },
+                  "note": {
+                    "vi": "Học sinh còn lúng túng khi suy luận nhiều bước hoặc áp dụng vào tình huống phức tạp hơn — sẽ được củng cố thêm ở tiết 2.",
+                    "en": "Students still struggled with multi-step reasoning or applying the concept to more complex scenarios — reinforced further in Session 2.",
+                    "tw": "學生在多步驟推理或應用於更複雜情境時仍感吃力 —— 這正是第二堂課要加強的能力。"
+                  }
+                }
+              ]
+            }
           },
           {
-            "vi": "<strong>Tiết 1 — Nền tảng điều khiển vi sai:</strong> giới thiệu lịch sử bánh xe phương tiện giao thông và các loại bánh đặc biệt (bánh xích, bánh xoay đa hướng...), sau đó tập trung vào nhóm robot không thể bẻ lái mà phải điều khiển tốc độ 2 bánh độc lập (điều khiển vi sai). Học sinh dùng phần mềm mô phỏng để thử nghiệm, đồng thời được hướng dẫn hỏi đáp với AI học tập theo phương pháp Socratic của Google trước khi hoàn thành phiếu bài tập.",
-            "en": "<strong>Session 1 — Differential drive fundamentals:</strong> introduced the history of vehicle wheels and special wheel types (tank treads, omni-directional wheels...), then focused on robots that can't steer directly and must control two independent wheel speeds (differential drive). Students experimented with a simulation tool and practiced questioning a Google Socratic-method AI tutor before completing a worksheet.",
-            "tw": "<strong>第一堂課 — 差速驅動基礎：</strong>介紹交通工具輪子的演進史與特殊輪型（履帶、萬向輪等），接著聚焦於無法直接轉向、須靠控制兩側獨立輪速（差速驅動）的機器人類型。學生透過模擬軟體實驗，並在完成學習單前練習以 Google 蘇格拉底式提問法與 AI 學習助教互動。"
-          },
-          {
-            "vi": "<strong>Kết quả phiếu bài tập (10 câu, 21 học sinh):</strong> tỷ lệ đúng trung bình đạt <strong>~75%</strong> (158/210 lượt trả lời đúng). Câu dễ nhất là câu 1 với 95,2% đúng, cho thấy học sinh nắm khá tốt khái niệm cơ bản về điều khiển vi sai ngay sau phần giới thiệu. Câu khó nhất là câu 10 với chỉ 57,1% đúng, phản ánh học sinh vẫn còn lúng túng khi phải suy luận nhiều bước hoặc áp dụng kiến thức vào tình huống phức tạp hơn — đây là nhóm kỹ năng (dự đoán và giải thích nguyên nhân) sẽ được củng cố thêm ở tiết 2.",
-            "en": "<strong>Worksheet results (10 questions, 21 students):</strong> the average accuracy was <strong>~75%</strong> (158 of 210 answers correct). Question 1 was the easiest at 95.2% correct, showing students grasped the basic differential-drive concept right after the introduction. Question 10 was the hardest at only 57.1% correct, showing students still struggled with multi-step reasoning or applying the concept to more complex scenarios — the prediction and cause-and-effect skills reinforced further in Session 2.",
-            "tw": "<strong>學習單結果（10 題，21 名學生）：</strong>平均正確率約 <strong>75%</strong>（210 次作答中 158 次正確）。第 1 題最容易，正確率 95.2%，顯示學生在課程介紹後便掌握了差速驅動的基本概念。第 10 題最難，正確率僅 57.1%，反映學生在多步驟推理或應用於更複雜情境時仍感吃力 —— 這正是第二堂課要加強的預測與因果解釋能力。"
-          },
-          {
-            "vi": "<strong>Tiết 2 — Thực hành rẽ hướng:</strong> sau khi ôn lại kiến thức tiết 1, học sinh vận dụng để điều khiển tốc độ và thời gian chạy của mỗi động cơ, thực hiện thử thách rẽ hướng trên sa bàn ngã 3 thực tế — chuyển từ mô phỏng sang phần cứng thật.",
-            "en": "<strong>Session 2 — Turning practice:</strong> after reviewing Session 1, students applied the concept to control each motor's speed and run time, completing a turning challenge on a real three-way junction board — moving from simulation to physical hardware.",
-            "tw": "<strong>第二堂課 — 轉向實作：</strong>複習第一堂課內容後，學生運用所學控制各馬達的轉速與運行時間，在實體三岔路測試板上完成轉向挑戰 —— 從模擬走向真實硬體。"
-          },
-          {
-            "vi": "<strong>Kết luận:</strong> chỉ sau 2 buổi, học sinh khối 4-5 chưa từng lập trình robot đã có thể tự dự đoán, chia nhỏ, kiểm tra và giải thích được hành vi rẽ hướng của robot thay vì thử sai ngẫu nhiên — cho thấy cách tiếp cận kết hợp mô phỏng, AI hỏi-đáp kiểu Socratic và thực hành trên sa bàn thật giúp hình thành tư duy điều khiển vi sai một cách vững chắc trong thời gian ngắn.",
-            "en": "<strong>Conclusion:</strong> after just 2 sessions, 4th-5th graders with no prior robot-programming experience could predict, decompose, verify, and explain differential-drive turning behavior instead of trial-and-error guessing — showing that combining simulation, Socratic AI questioning, and hands-on hardware practice builds solid differential-drive reasoning in a short time.",
-            "tw": "<strong>結論：</strong>僅僅兩堂課，原本沒有機器人程式基礎的四、五年級學生便能預測、拆解、驗證並解釋機器人的轉向行為，而非隨機試錯 —— 顯示模擬、蘇格拉底式 AI 問答與實體硬體實作三者結合，能在短時間內建立扎實的差速驅動思維。"
+            "id": "session-2",
+            "badge": {
+              "vi": "Tiết 2",
+              "en": "Session 2",
+              "tw": "第二堂"
+            },
+            "title": {
+              "vi": "Thực hành rẽ hướng trên sa bàn",
+              "en": "Hands-on Turning Practice",
+              "tw": "轉向實作"
+            },
+            "icon": "fa-route",
+            "accent": "accent",
+            "paragraphs": [
+              {
+                "vi": "Sau khi ôn lại kiến thức tiết 1, học sinh vận dụng để điều khiển tốc độ và thời gian chạy của mỗi động cơ, thực hiện thử thách rẽ hướng trên sa bàn ngã 3 thực tế — chuyển từ mô phỏng sang phần cứng thật.",
+                "en": "After reviewing Session 1, students applied the concept to control each motor's speed and run time, completing a turning challenge on a real three-way junction board — moving from simulation to physical hardware.",
+                "tw": "複習第一堂課內容後，學生運用所學控制各馬達的轉速與運行時間，在實體三岔路測試板上完成轉向挑戰 —— 從模擬走向真實硬體。"
+              }
+            ],
+            "media": []
           }
         ],
+        "conclusion": {
+          "title": {
+            "vi": "Kết luận",
+            "en": "Conclusion",
+            "tw": "結論"
+          },
+          "icon": "fa-flag-checkered",
+          "content": {
+            "vi": "Chỉ sau 2 buổi, học sinh khối 4-5 chưa từng lập trình robot đã có thể tự dự đoán, chia nhỏ, kiểm tra và giải thích được hành vi rẽ hướng của robot thay vì thử sai ngẫu nhiên — cho thấy cách tiếp cận kết hợp mô phỏng, AI hỏi-đáp kiểu Socratic và thực hành trên sa bàn thật giúp hình thành tư duy điều khiển vi sai một cách vững chắc trong thời gian ngắn.",
+            "en": "After just 2 sessions, 4th-5th graders with no prior robot-programming experience could predict, decompose, verify, and explain differential-drive turning behavior instead of trial-and-error guessing — showing that combining simulation, Socratic AI questioning, and hands-on hardware practice builds solid differential-drive reasoning in a short time.",
+            "tw": "僅僅兩堂課，原本沒有機器人程式基礎的四、五年級學生便能預測、拆解、驗證並解釋機器人的轉向行為，而非隨機試錯 —— 顯示模擬、蘇格拉底式 AI 問答與實體硬體實作三者結合，能在短時間內建立扎實的差速驅動思維。"
+          }
+        },
         "tech_specs_title": {
           "vi": "Thông tin buổi học",
           "en": "Session Details",
@@ -497,28 +607,82 @@ const embeddedResumeData = {
             "value": "Học sinh khối 4-5 / Grade 4-5 students"
           },
           {
+            "type": "list",
+            "label": {
+              "vi": "Mục tiêu:",
+              "en": "Objectives:",
+              "tw": "學習目標："
+            },
+            "items": [
+              {
+                "vi": "Dự đoán hướng di chuyển của robot trước khi chạy",
+                "en": "Predict the robot's direction before running it",
+                "tw": "執行前預測機器人的行進方向"
+              },
+              {
+                "vi": "Chia nhiệm vụ lớn thành các bước nhỏ",
+                "en": "Break a large task into small steps",
+                "tw": "將大任務拆解成小步驟"
+              },
+              {
+                "vi": "Kiểm tra từng lệnh thay vì sửa ngẫu nhiên",
+                "en": "Check each command instead of editing at random",
+                "tw": "逐一檢查指令而非隨機修改"
+              },
+              {
+                "vi": "Giải thích được vì sao robot chạy đúng hoặc sai",
+                "en": "Explain why the robot moved correctly or incorrectly",
+                "tw": "解釋機器人正確或錯誤運行的原因"
+              }
+            ]
+          },
+          {
             "label": {
               "vi": "Thời lượng:",
               "en": "Duration:",
               "tw": "課程長度："
             },
-            "value": "2 tiết học / 2 sessions"
+            "value": "2 buổi - 2 tiếng / 2 sessions - 2 hours"
           },
           {
+            "type": "list",
             "label": {
               "vi": "Phương pháp:",
               "en": "Method:",
               "tw": "教學方法："
             },
-            "value": "Mô phỏng điều khiển vi sai + AI Socratic Tutor / Differential-drive simulation + Socratic AI tutor"
+            "items": [
+              {
+                "vi": "Mô phỏng điều khiển vi sai",
+                "en": "Differential-drive simulation",
+                "tw": "差速驅動模擬"
+              },
+              {
+                "vi": "AI Socratic Tutor hỏi-đáp",
+                "en": "Socratic-method AI tutor",
+                "tw": "蘇格拉底式 AI 問答"
+              }
+            ]
           },
           {
+            "type": "result",
             "label": {
               "vi": "Kết quả:",
               "en": "Result:",
               "tw": "成果："
             },
-            "value": "Tỷ lệ đúng trung bình ~75% (10 câu), hoàn thành thử thách rẽ hướng thực tế / ~75% average accuracy (10 questions), completed real-world turning challenge"
+            "summary": {
+              "vi": "Học sinh nắm được kiến thức cơ bản về điều khiển vi sai và vận dụng vào bài thực hành trên sa bàn.",
+              "en": "Students grasped the differential-drive fundamentals and applied them in the hands-on turning challenge.",
+              "tw": "學生掌握了差速驅動的基本概念，並將其應用於實體轉向挑戰中。"
+            },
+            "stat": "~75%",
+            "cta": {
+              "vi": "Xem chi tiết",
+              "en": "View details",
+              "tw": "查看詳情"
+            },
+            "target": "session-1-results"
           }
         ]
       }
