@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: peterpham-cv:latest
+    container_name: peterpham-cv
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"

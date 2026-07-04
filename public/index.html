@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phạm Công Thành - AI Learning Engineer Portfolio</title>
+  <meta name="description" content="Portfolio tương tác của Phạm Công Thành - AI Learning Engineer và Nhà thiết kế Trải nghiệm Học tập Sư phạm AI. Khám phá kỹ năng, dự án và kinh nghiệm của tôi.">
+
+  <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body data-lang="vi">
+
+  <!-- --- HEADER & NAVIGATION --- -->
+  <header id="header">
+    <div class="container nav-container">
+      <a href="#hero" class="logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Peter Pham</span>
+      </a>
+      
+      <div class="nav-right">
+        <nav class="nav-menu" id="navMenu">
+          <a href="#hero" class="nav-link active">
+            <span lang="vi">Giới thiệu</span>
+            <span lang="en">Intro</span>
+            <span lang="tw">介紹</span>
+          </a>
+          <a href="#about" class="nav-link">
+            <span lang="vi">Về tôi</span>
+            <span lang="en">About Me</span>
+            <span lang="tw">關於我</span>
+          </a>
+          <a href="#skills" class="nav-link">
+            <span lang="vi">Kỹ năng</span>
+            <span lang="en">Skills</span>
+            <span lang="tw">專業技能</span>
+          </a>
+          <a href="#experience" class="nav-link">
+            <span lang="vi">Kinh nghiệm</span>
+            <span lang="en">Experience</span>
+            <span lang="tw">工作經歷</span>
+          </a>
+          <a href="#projects" class="nav-link">
+            <span lang="vi">Dự án</span>
+            <span lang="en">Projects</span>
+            <span lang="tw">專案作品</span>
+          </a>
+          <a href="#contact" class="nav-link">
+            <span lang="vi">Liên hệ</span>
+            <span lang="en">Contact</span>
+            <span lang="tw">聯絡我</span>
+          </a>
+        </nav>
+        
+        <!-- Language Switcher Button Group -->
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang-trigger="vi" onclick="switchLanguage('vi')">VI</button>
+          <button class="lang-btn" data-lang-trigger="en" onclick="switchLanguage('en')">EN</button>
+          <button class="lang-btn" data-lang-trigger="tw" onclick="switchLanguage('tw')">繁中</button>
+        </div>
+        
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- --- HERO SECTION --- -->
+  <section id="hero">
+    <div class="container hero-wrapper">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fa-solid fa-bolt"></i>
+          <span id="heroBadge">EdTech & AI Specialist</span>
+        </div>
+        <h1 class="hero-title" id="heroTitle">
+          <!-- Injected dynamically -->
+        </h1>
+        <p class="hero-subtitle" id="heroSubtitle">
+          <!-- Injected dynamically -->
+        </p>
+        <p class="hero-tagline" id="heroTagline">
+          <!-- Injected dynamically -->
+        </p>
+        
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">
+            <span lang="vi">Khám phá dự án</span>
+            <span lang="en">Explore Projects</span>
+            <span lang="tw">探索專案</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <button class="btn btn-secondary" onclick="window.print()">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span lang="vi">Tải CV PDF</span>
+            <span lang="en">Download CV PDF</span>
+            <span lang="tw">下載 PDF 履歷</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="avatar-frame">
+          <div class="avatar-inner">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="45" fill="url(#hero-gradient)" opacity="0.1"/>
+              <path d="M25 45 L40 30 M40 30 L55 35 M55 35 L75 40 M25 45 L35 60 M35 60 L60 65 M60 65 L75 40" stroke="#0ea5e9" stroke-width="0.75" stroke-dasharray="3 3"/>
+              <circle cx="25" cy="45" r="3" fill="#2563eb"/>
+              <circle cx="40" cy="30" r="4" fill="#0ea5e9"/>
+              <circle cx="55" cy="35" r="3" fill="#06b6d4"/>
+              <circle cx="75" cy="40" r="4.5" fill="#2563eb"/>
+              <circle cx="35" cy="60" r="3.5" fill="#0ea5e9"/>
+              <circle cx="60" cy="65" r="3" fill="#06b6d4"/>
+              
+              <path d="M50 25 C41 25 36 32 36 40 C36 46 41 49 43 52 C45 55 45 58 47 61 L53 61 C55 58 55 55 57 52 C59 49 64 46 64 40 C64 32 59 25 50 25 Z" fill="#ffffff" stroke="#2563eb" stroke-width="2.5"/>
+              <path d="M47 65 H53 V67 H47 Z M48 69 H52 V70 H48 Z" fill="#475569" stroke="#2563eb" stroke-width="1.5"/>
+              <path d="M50 32 V48 M42 40 H58" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="50" cy="40" r="8" fill="#eff6ff" stroke="#0ea5e9" stroke-width="1.5"/>
+              
+              <text x="47" y="44" font-family="'Outfit', sans-serif" font-size="11" font-weight="bold" fill="#2563eb">?</text>
+              <circle cx="75" cy="25" r="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1"/>
+              <text x="73.5" y="28" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" fill="#2563eb">AI</text>
+
+              <defs>
+                <linearGradient id="hero-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563eb"/>
+                  <stop offset="1" stop-color="#06b6d4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- ABOUT SECTION --- -->
+  <section id="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Về tôi</span>
+          <span lang="en">About Me</span>
+          <span lang="tw">關於我</span>
+        </h2>
+        <p>
+          <span lang="vi">Định hướng thiết kế công nghệ lấy người học làm trung tâm và thúc đẩy tư duy phản biện</span>
+          <span lang="en">Learner-centric tech design and fostering critical thinking</span>
+          <span lang="tw">以學習者為中心的科技設計，培養批判性思考</span>
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-info-box glass-card">
+          <div class="about-info-title">
+            <i class="fa-solid fa-address-card"></i>
+            <h3>
+              <span lang="vi">Thông tin liên hệ</span>
+              <span lang="en">Contact Details</span>
+              <span lang="tw">聯絡資訊</span>
+            </h3>
+          </div>
+          <div class="about-info-list" id="aboutContactDetails">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+        <div class="about-text-content">
+          <div id="aboutParagraphs">
+            <!-- Injected dynamically -->
+          </div>
+
+          <div class="highlight-card-row" id="aboutHighlights">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SKILLS SECTION --- -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Năng lực chuyên môn</span>
+          <span lang="en">Professional Expertise</span>
+          <span lang="tw">專業技能</span>
+        </h2>
+        <p>
+          <span lang="vi">Sự giao thoa giữa Khoa học Giáo dục và Kỹ thuật Trí tuệ Nhân tạo</span>
+          <span lang="en">The intersection of Cognitive Science and Artificial Intelligence</span>
+          <span lang="tw">教育科學與人工智慧技術的結合</span>
+        </p>
+      </div>
+
+      <div class="skills-grid-horizontal" id="skillsGrid">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- --- EXPERIENCE TIMELINE --- -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Hành trình nghề nghiệp</span>
+          <span lang="en">Professional Journey</span>
+          <span lang="tw">職涯經歷</span>
+        </h2>
+        <p>
+          <span lang="vi">Kinh nghiệm được xếp chồng theo niên đại. Nhấp chọn các node phụ để hiện thông tin chi tiết.</span>
+          <span lang="en">Milestones stacked chronologically. Click on minor nodes to reveal their detailed achievements.</span>
+          <span lang="tw">按時間順序堆疊職涯經歷。點擊次要節點以顯示詳細工作內容。</span>
+        </p>
+      </div>
+
+      <!-- Timeline Legend / Annotations -->
+      <div class="timeline-legend">
+        <div class="legend-item">
+          <span class="legend-dot major"></span>
+          <span class="legend-text">
+            <span lang="vi">Vai trò chính (Luôn hiển thị)</span>
+            <span lang="en">Primary Role (Always visible)</span>
+            <span lang="tw">主要職責 (持續顯示)</span>
+          </span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot minor"></span>
+          <span class="legend-text">
+            <span lang="vi">Dự án song hành (Nhấp để xem)</span>
+            <span lang="en">Concurrent project (Click to view)</span>
+            <span lang="tw">同期兼職專案 (點擊切換)</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="timeline" id="experienceTimeline">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- --- PROJECTS GRID --- -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Dự án nổi bật</span>
+          <span lang="en">Featured Projects</span>
+          <span lang="tw">專案作品</span>
+        </h2>
+        <p>
+          <span lang="vi">Các giải pháp công nghệ giáo dục sáng tạo đã được đưa vào ứng dụng thực tế</span>
+          <span lang="en">Innovative educational technology solutions deployed in real-world environments</span>
+          <span lang="tw">已投入實際應用且具創新性的教育科技解決方案</span>
+        </p>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- --- PROJECT DETAILED MODALS --- -->
+  <div class="modal-overlay" id="projectModalOverlay" onclick="closeProjectModal()">
+    <div class="modal-container" id="projectModalContainer" onclick="event.stopPropagation()">
+      <!-- Injected dynamically based on clicked project -->
+    </div>
+  </div>
+
+  <!-- --- CONTACT & FOOTER --- -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>
+          <span lang="vi">Kết nối với tôi</span>
+          <span lang="en">Connect With Me</span>
+          <span lang="tw">與我聯絡</span>
+        </h2>
+        <p>
+          <span lang="vi">Bắt đầu trao đổi về các giải pháp học tập tích hợp công nghệ sáng tạo</span>
+          <span lang="en">Start discussing creative technology-integrated learning solutions</span>
+          <span lang="tw">開啟關於創新教育科技與教學設計的交流</span>
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-card glass-card">
+            <div class="contact-detail-row">
+              <div class="contact-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="contact-content">
+                <h4 lang="vi">Gửi email tại</h4>
+                <h4 lang="en">Email me at</h4>
+                <h4 lang="tw">電子郵件聯絡</h4>
+                <p id="contactEmailText">contact@peterpham.info.vn</p>
+              </div>
+            </div>
+
+            <div class="contact-detail-row">
+              <div class="contact-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="contact-content">
+                <h4 lang="vi">Địa điểm làm việc</h4>
+                <h4 lang="en">Work Location</h4>
+                <h4 lang="tw">工作地點</h4>
+                <p id="contactLocationText">
+                  <!-- Injected dynamically -->
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-detail-row" style="flex-direction: column; align-items: flex-start; gap: 0.75rem;">
+              <h4 style="margin-top: 0.5rem; text-transform: uppercase; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.05em; font-weight: 700;">
+                <span lang="vi">Tìm tôi trên mạng xã hội</span>
+                <span lang="en">Find me on social media</span>
+                <span lang="tw">社群媒體連結</span>
+              </h4>
+              <div class="contact-socials-group" id="contactSocialsGroup">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-card glass-card">
+          <form id="contactForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="formName" class="form-label">
+                  <span lang="vi">Họ và Tên *</span>
+                  <span lang="en">Full Name *</span>
+                  <span lang="tw">姓名 *</span>
+                </label>
+                <input type="text" id="formName" class="form-input" placeholder="Nguyễn Văn A" required>
+              </div>
+              <div class="form-group">
+                <label for="formEmail" class="form-label">
+                  <span lang="vi">Địa chỉ Email *</span>
+                  <span lang="en">Email Address *</span>
+                  <span lang="tw">電子郵件信箱 *</span>
+                </label>
+                <input type="email" id="formEmail" class="form-input" placeholder="email@viethoc.edu.vn" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="formSubject" class="form-label">
+                  <span lang="vi">Chủ đề thảo luận *</span>
+                  <span lang="en">Discussion Subject *</span>
+                  <span lang="tw">主題 *</span>
+                </label>
+                <input type="text" id="formSubject" class="form-input" placeholder="Hợp tác thiết kế bài giảng AI / STEM" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="formMessage" class="form-label">
+                  <span lang="vi">Nội dung chi tiết *</span>
+                  <span lang="en">Message Details *</span>
+                  <span lang="tw">訊息內容 *</span>
+                </label>
+                <textarea id="formMessage" class="form-input" placeholder="Xin chào Thành, mình quan tâm đến..." required></textarea>
+              </div>
+              <div class="form-group full-width" style="margin-top: 0.5rem;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  <i class="fa-solid fa-paper-plane"></i>
+                  <span lang="vi">Gửi tin nhắn liên hệ</span>
+                  <span lang="en">Send Message</span>
+                  <span lang="tw">送出訊息</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- FOOTER --- -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span id="footerLogoName">Phạm Công Thành</span>
+      </div>
+      <p class="footer-tagline" id="footerTagline">
+        <!-- Injected dynamically -->
+      </p>
+      <p class="footer-copy">&copy; 2026 Phạm Công Thành. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- --- TOAST NOTIFICATIONS --- -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Resume data -->
+  <script src="/assets/js/data.js"></script>
+
+  <!-- Application logic -->
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Host-level Nginx reverse proxy for the dockerized site.
+# Install on the VPS at /etc/nginx/sites-available/peterpham.info.vn,
+# then: ln -s ../sites-available/peterpham.info.vn /etc/nginx/sites-enabled/
+# and run certbot --nginx -d peterpham.info.vn -d www.peterpham.info.vn
+
+server {
+    listen 80;
+    server_name peterpham.info.vn www.peterpham.info.vn;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
